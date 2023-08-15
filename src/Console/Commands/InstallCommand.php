@@ -17,8 +17,8 @@ class InstallCommand extends Command
 		$this->comment('Installation started. Please wait...');
 		$this->info('Version: ' . $metadata->version);
 		$this
-//			->executeCommand('migrate')
-//			->executeCommand('storage:link')
+			->executeCommand('migrate')
+			->executeCommand('storage:link')
 			->showMeLove();
 
 		$this->info('Completed!');
