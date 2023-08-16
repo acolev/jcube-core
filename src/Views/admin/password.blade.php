@@ -1,4 +1,4 @@
-<x-dynamic-component :component="$layoutComponent">
+<x-dynamic-component :component="$layoutComponent" :page-title="@$pageTitle">
     <div class="row mb-none-30">
         <div class="col-lg-3 col-md-3 mb-30">
             <div class="card overflow-hidden">

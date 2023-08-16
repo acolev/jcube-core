@@ -1,4 +1,4 @@
-<x-dynamic-component :component="$layoutComponent">
+<x-dynamic-component :component="$layoutComponent" :page-title="@$pageTitle">
     <div class="row mb-none-30">
         <div class="col-md-12 mb-30">
             <div class="card bl--5-primary">

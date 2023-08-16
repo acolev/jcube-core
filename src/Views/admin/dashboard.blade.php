@@ -1,4 +1,4 @@
-<x-dynamic-component :component="$layoutComponent">
+<x-dynamic-component :component="$layoutComponent" :page-title="@$pageTitle">
     <x-tabs>
         <x-slot name="actions">
             <x-admin::back/>

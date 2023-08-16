@@ -1,8 +1,8 @@
 @php
-$adminNotificationCount = 0;
-$adminNotifications = [];
+    if(!isset($adminNotificationCount)) $adminNotificationCount = 0;
+    if(!isset($adminNotifications)) $adminNotifications = [];
 @endphp
-        <!-- navbar-wrapper start -->
+<!-- navbar-wrapper start -->
 <nav class="navbar-wrapper">
     <div class="navbar__left">
         <button type="button" class="res-sidebar-open-btn me-3"><i class="las la-bars"></i></button>

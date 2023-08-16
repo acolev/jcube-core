@@ -11,13 +11,7 @@
         <div class="sidebar__menu-wrapper" id="sidebar__menuWrapper">
             <ul class="sidebar__menu">
                @foreach($menus as $menu)
-                   @if(isset($menu['access']))
-                        @if($admin->access($menu['access']))
-                            <x-admin::menu :item="$menu" :admin="$admin"/>
-                        @endif
-                   @else
-                        <x-admin::menu :item="$menu" :admin="$admin"/>
-                   @endif
+                    <x-admin::menu :item="$menu" :admin="$admin"/>
                @endforeach
             </ul>
             <div class="text-center mb-3 text-uppercase">

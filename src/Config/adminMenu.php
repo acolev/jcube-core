@@ -59,4 +59,48 @@ return [
 			],
 		],
 	],
+	[
+		"name" => "Others",
+		"link" => [
+			"type" => "title",
+		],
+		"children" => [
+			[
+				"name" => "System",
+				"access" => "Others",
+				"link" => [
+					"type" => "link",
+					"name" => "admin.setting.index",
+					"active" => ['admin.system*', 3],
+				],
+				"icon" => 'la la-server',
+				"children" => [
+					[
+						"name" => "Application",
+						"link" => [
+							"type" => "link",
+							"name" => "admin.system.info",
+							"active" => ['admin.system.info'],
+						],
+					],
+					[
+						"name" => "Server",
+						"link" => [
+							"type" => "link",
+							"name" => "admin.system.server.info",
+							"active" => ['admin.system.server.info'],
+						],
+					],
+					[
+						"name" => "Cache",
+						"link" => [
+							"type" => "link",
+							"name" => "admin.system.optimize",
+							"active" => ['admin.system.optimize'],
+						],
+					],
+				],
+			],
+		],
+	],
 ];

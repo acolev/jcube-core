@@ -1,3 +1,3 @@
-<x-admin::layout>
+<x-dynamic-component :component="$layoutComponent" :page-title="@$pageTitle">
     @yield('panel')
-</x-admin::layout>
+</x-dynamic-component>

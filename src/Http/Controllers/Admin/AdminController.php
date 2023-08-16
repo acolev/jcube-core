@@ -81,7 +81,7 @@ class AdminController extends Controller
 
 	public function notifications()
 	{
-		$notifications = AdminNotification::orderBy('id', 'desc')->with('user')->paginate();
+		$notifications = AdminNotification::orderBy('id', 'desc')->paginate();
 		$pageTitle = 'Notifications';
 		return view('admin::notifications', compact('pageTitle', 'notifications'));
 	}
@@ -89,7 +89,7 @@ class AdminController extends Controller
 	public function notificationRead($id)
 	{
 		$notification = AdminNotification::findOrFail($id);
-		$notification->read_status = 1;
+		$notification->is_read = 1;
 		$notification->save();
 		return redirect($notification->click_url);
 	}
@@ -97,8 +97,8 @@ class AdminController extends Controller
 	public function readAll()
 	{
 		$notify = [];
-		AdminNotification::where('read_status', 0)->update([
-			'read_status' => 1
+		AdminNotification::where('is_read', 0)->update([
+			'is_read' => 1
 		]);
 		$notify[] = ['success', 'Notifications read successfully'];
 		return back()->withNotify($notify);

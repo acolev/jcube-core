@@ -771,3 +771,8 @@ function timezoneList()
 		"Zulu"
 	];
 }
+
+function paginateLinks($data)
+{
+	return $data->appends(request()->all())->links();
+}

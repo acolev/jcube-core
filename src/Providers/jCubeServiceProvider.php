@@ -12,6 +12,7 @@ use jCube\Models\Admin;
 use jCube\Http\Middleware\Permission;
 use jCube\Http\Middleware\RedirectIfAdmin;
 use jCube\Http\Middleware\RedirectIfNotAdmin;
+use jCube\Models\AdminNotification;
 
 class jCubeServiceProvider extends ServiceProvider
 {
@@ -29,7 +30,12 @@ class jCubeServiceProvider extends ServiceProvider
 			'layoutComponent' => View::exists('components.admin.layout') ? 'admin.layout' : 'admin::layout'
 		]);
 
-
+		view()->composer('*', function ($view) {
+			$view->with([
+				'adminNotifications' => AdminNotification::where('is_read', 0)->orderBy('id', 'desc')->take(10)->get(),
+				'adminNotificationCount' => AdminNotification::where('is_read', 0)->count(),
+			]);
+		});
 	}
 
 	protected function registerMiddleware()

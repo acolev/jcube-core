@@ -1,4 +1,4 @@
-<x-dynamic-component :component="$layoutComponent">
+<x-dynamic-component :component="$layoutComponent" :page-title="@$pageTitle">
     <div class="row">
 
         <div class="col-lg-12">
