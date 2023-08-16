@@ -104,28 +104,35 @@ class AdminController extends Controller
 		return back()->withNotify($notify);
 	}
 
-	public function systemInfo(){
+	public function systemInfo()
+	{
+		$metadata = json_decode(file_get_contents(dirname(__DIR__, 4) . '/composer.json'));
+
 		$laravelVersion = app()->version();
 		$timeZone = config('app.timezone');
 		$pageTitle = 'Application Information';
-		return view('admin::system.info',compact('pageTitle', 'laravelVersion','timeZone'));
+		$adminVersion = $metadata->version;
+		return view('admin::system.info', compact('pageTitle', 'laravelVersion', 'timeZone', 'adminVersion'));
 	}
 
-	public function systemServerInfo(){
+	public function systemServerInfo()
+	{
 		$currentPHP = phpversion();
 		$pageTitle = 'Server Information';
 		$serverDetails = $_SERVER;
-		return view('admin::system.server',compact('pageTitle', 'currentPHP', 'serverDetails'));
+		return view('admin::system.server', compact('pageTitle', 'currentPHP', 'serverDetails'));
 	}
 
-	public function optimize(){
+	public function optimize()
+	{
 		$pageTitle = 'Clear System Cache';
-		return view('admin::system.optimize',compact('pageTitle'));
+		return view('admin::system.optimize', compact('pageTitle'));
 	}
 
-	public function optimizeClear(){
+	public function optimizeClear()
+	{
 		Artisan::call('optimize:clear');
-		$notify[] = ['success','Cache cleared successfully'];
+		$notify[] = ['success', 'Cache cleared successfully'];
 		return back()->withNotify($notify);
 	}
 }
