@@ -18,38 +18,28 @@ class jCubeServiceProvider extends ServiceProvider
 
 	public function boot(): void
 	{
-		$this->config();
-		$this->middleware();
+		$this->registerConfig();
+		$this->registerMiddleware();
+		$this->registerCommands();
+		$this->registerComponents();
+		$this->registerLoads();
+		$this->registerPublishes();
 
 		view()->share([
-			'layoutComponent'=> View::exists('components.layout')? 'layout' : 'admin::layout'
+			'layoutComponent' => View::exists('components.admin.layout') ? 'admin.layout' : 'admin::layout'
 		]);
 
-		$this->loadMigrationsFrom(dirname(dirname(__DIR__)) . '/database/migrations');
-		$this->loadViewsFrom(dirname(__DIR__) . '/Views/admin', 'admin');
 
-		$this->publishes([
-			dirname(__DIR__) . '/Config/admin.php' => config_path('admin.php'),
-		], 'core-config');
-
-		Blade::anonymousComponentPath(dirname(__DIR__) . '/Views/components', 'admin');
-
-		if ($this->app->runningInConsole()) {
-			$this->commands([
-				InstallCommand::class,
-				AdminCommand::class,
-			]);
-		}
 	}
 
-	protected function middleware()
+	protected function registerMiddleware()
 	{
 		app('router')->aliasMiddleware('permission', Permission::class);
 		app('router')->aliasMiddleware('admin', RedirectIfNotAdmin::class);
 		app('router')->aliasMiddleware('admin.guest', RedirectIfAdmin::class);
 	}
 
-	protected function config()
+	protected function registerConfig()
 	{
 
 		Config::set('auth.guards.admin', [
@@ -70,4 +60,36 @@ class jCubeServiceProvider extends ServiceProvider
 
 	}
 
+	protected function registerCommands()
+	{
+		if ($this->app->runningInConsole()) {
+			$this->commands([
+				InstallCommand::class,
+				AdminCommand::class,
+			]);
+		}
+	}
+
+	protected function registerComponents()
+	{
+		Blade::anonymousComponentPath(dirname(__DIR__) . '/Views/components/admin', 'admin');
+		Blade::anonymousComponentPath(dirname(__DIR__) . '/Views/components/global');
+
+	}
+
+	protected function registerLoads()
+	{
+		$this->loadMigrationsFrom(dirname(dirname(__DIR__)) . '/database/migrations');
+		$this->loadViewsFrom(dirname(__DIR__) . '/Views/admin', 'admin');
+	}
+
+	protected function registerPublishes()
+	{
+		$this->publishes([
+			dirname(__DIR__) . '/Config/admin.php' => config_path('admin.php'),
+		], 'core-config');
+		$this->publishes([
+			dirname(__DIR__) . '/Config/adminMenu.php' => config_path('adminMenu.php'),
+		], 'core-config');
+	}
 }

@@ -7,8 +7,7 @@ Route::get('/clear', function(){
 });
 
 Route::controller('SiteController')->group(function () {
-	Route::get('placeholder-image/{size}', 'placeholderImage')->name('placeholder.image');
-	Route::get('placeholder-image/{size}/{bg}/{color}', 'placeholderImage')->name('placeholder.image');
-	Route::get('placeholder-image/{size}/{bg}/{color}/{text}', 'placeholderImage')->name('placeholder.image');
+	Route::get('placeholder-image/{size}/{bg?}/{color?}/{text?}', 'placeholderImage')
+		->name('placeholder.image');
 });
 

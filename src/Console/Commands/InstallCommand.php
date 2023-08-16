@@ -19,6 +19,9 @@ class InstallCommand extends Command
 		$this
 			->executeCommand('migrate')
 			->executeCommand('storage:link')
+			->executeCommand('vendor:publish', [
+				"--tag" => 'core-config'
+			])
 			->showMeLove();
 
 		$this->info('Completed!');

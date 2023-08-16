@@ -1,14 +1,11 @@
-@extends('admin::layouts.app')
-@section('panel')
-
+<x-dynamic-component :component="$layoutComponent">
     <div class="row mb-none-30">
         <div class="col-lg-3 col-md-3 mb-30">
-
-            <div class="card b-radius--5 overflow-hidden">
+            <div class="card overflow-hidden">
                 <div class="card-body p-0">
                     <div class="d-flex p-3 bg--primary">
                         <div class="avatar avatar--lg">
-                            <img src="{{ getImage(getFilePath('adminProfile').'/'. $admin->image,getFileSize('adminProfile'))}}" alt="@lang('Image')">
+                            <img src="{{ getImage(getFilePath('adminProfile').'/'. $admin->image, getFileSize('adminProfile'))}}" alt="{{ __('Avatar') }}">
                         </div>
                         <div class="ps-3">
                             <h4 class="text--white">{{__($admin->name)}}</h4>
@@ -16,15 +13,15 @@
                     </div>
                     <ul class="list-group">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            @lang('Name')
+                            {{ __('Name') }}
                             <span class="fw-bold">{{ __($admin->name) }}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            @lang('Username')
+                            {{ __('Username') }}
                             <span  class="fw-bold">{{ __($admin->username) }}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            @lang('Email')
+                            {{ __('Email') }}
                             <span  class="fw-bold">{{ $admin->email }}</span>
                         </li>
                     </ul>
@@ -60,10 +57,9 @@
             </div>
         </div>
     </div>
+    @push('breadcrumb-plugins')
+        <a href="{{route('admin.profile')}}" class="btn btn-sm btn-outline--primary" ><i class="las la-user"></i>@lang('Profile Setting')</a>
+    @endpush
+</x-dynamic-component>
 
 
-@endsection
-
-@push('breadcrumb-plugins')
-    <a href="{{route('admin.profile')}}" class="btn btn-sm btn-outline--primary" ><i class="las la-user"></i>@lang('Profile Setting')</a>
-@endpush

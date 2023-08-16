@@ -10,9 +10,9 @@ class SiteController extends Controller
 			$arr = [$size, $bg, $color];
 			$url = "https://placehold.co/" . implode('/', array_filter($arr));
 			if (!empty($text)) $url .= '?text=' . $text;
-			return file_get_contents($url);
+			return response(file_get_contents($url), 200)->header('Content-Type','image/svg+xml');
 		} catch (\Exception $e) {
-			return file_get_contents("https://placehold.co/" . $size);
+			return response(file_get_contents("https://placehold.co/" . $size), 200)->header('Content-Type','image/svg+xml');
 		}
 	}
 }
