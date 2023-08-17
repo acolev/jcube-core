@@ -9,6 +9,10 @@ return [
 			"name" => "admin.dashboard",
 			"active" => ['admin.dashboard'],
 		],
+		"search" => [
+			"query" => "dashboard",
+			"title" => "Manage Dashboard"
+		],
 		"icon" => 'las la-home',
 	],
 	[
@@ -18,6 +22,11 @@ return [
 			"type" => "link",
 			"name" => "admin.staff.index",
 			"active" => ['admin.staff.*'],
+		],
+		"search" => [
+			"query" => "manage staff",
+			"title" => "Manage Staff",
+			"group" => "Users"
 		],
 		"icon" => 'las la-users',
 	],
@@ -35,6 +44,11 @@ return [
 					"name" => "admin.setting.index",
 					"active" => ['admin.setting.index'],
 				],
+				"search" => [
+					"query" => "general setting",
+					"title" => "General Setting",
+					"group" => "Settings"
+				],
 				"icon" => 'las la-life-ring',
 			],
 			[
@@ -45,6 +59,11 @@ return [
 					"name" => "admin.setting.system.configuration",
 					"active" => ['admin.setting.system.configuration'],
 				],
+				"search" => [
+					"query" => "system setting, system configuration",
+					"title" => "System Configuration",
+					"group" => "Settings"
+				],
 				"icon" => 'las la-cog',
 			],
 			[
@@ -54,6 +73,11 @@ return [
 					"type" => "link",
 					"name" => "admin.setting.logo.icon",
 					"active" => ['admin.setting.logo.icon'],
+				],
+				"search" => [
+					"query" => "logo, favicon",
+					"title" => "Logo & Favicon",
+					"group" => "Settings"
 				],
 				"icon" => 'las la-images',
 			],
@@ -71,7 +95,8 @@ return [
 				"link" => [
 					"type" => "link",
 					"name" => "admin.setting.index",
-					"active" => ['admin.system*', 3],
+					"active" => 'admin.system*',
+					"open" => 'admin.system*',
 				],
 				"icon" => 'la la-server',
 				"children" => [
@@ -82,6 +107,11 @@ return [
 							"name" => "admin.system.info",
 							"active" => ['admin.system.info'],
 						],
+						"search" => [
+							"query" => "application info, app info",
+							"title" => "Application Info",
+							"group" => "Others"
+						],
 					],
 					[
 						"name" => "Server",
@@ -90,6 +120,11 @@ return [
 							"name" => "admin.system.server.info",
 							"active" => ['admin.system.server.info'],
 						],
+						"search" => [
+							"query" => "server info",
+							"title" => "Server Info",
+							"group" => "Others"
+						],
 					],
 					[
 						"name" => "Cache",
@@ -97,6 +132,11 @@ return [
 							"type" => "link",
 							"name" => "admin.system.optimize",
 							"active" => ['admin.system.optimize'],
+						],
+						"search" => [
+							"query" => "clear cache",
+							"title" => "Clear Cache",
+							"group" => "Others"
 						],
 					],
 				],

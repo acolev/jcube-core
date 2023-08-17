@@ -3,6 +3,7 @@
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use jCube\Lib\FileManager;
+use jCube\Lib\GoogleAuthenticator;
 use jCube\Models\GeneralSetting;
 
 function systemDetails()
@@ -775,4 +776,22 @@ function timezoneList()
 function paginateLinks($data)
 {
 	return $data->appends(request()->all())->links();
+}
+
+
+function verifyG2fa($user, $code, $secret = null)
+{
+	$authenticator = new GoogleAuthenticator();
+	if (!$secret) {
+		$secret = $user->tsc;
+	}
+	$oneCode = $authenticator->getCode($secret);
+	$userCode = $code;
+	if ($oneCode == $userCode) {
+		$user->tv = 1;
+		$user->save();
+		return true;
+	} else {
+		return false;
+	}
 }

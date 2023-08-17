@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Config;
 use jCube\Console\Commands\AdminCommand;
 use jCube\Console\Commands\InstallCommand;
+use jCube\Http\Middleware\Check2fa;
 use jCube\Models\Admin;
 use jCube\Http\Middleware\Permission;
 use jCube\Http\Middleware\RedirectIfAdmin;
@@ -43,6 +44,7 @@ class jCubeServiceProvider extends ServiceProvider
 		app('router')->aliasMiddleware('permission', Permission::class);
 		app('router')->aliasMiddleware('admin', RedirectIfNotAdmin::class);
 		app('router')->aliasMiddleware('admin.guest', RedirectIfAdmin::class);
+		app('router')->aliasMiddleware('admin2fa', Check2fa::class);
 	}
 
 	protected function registerConfig()

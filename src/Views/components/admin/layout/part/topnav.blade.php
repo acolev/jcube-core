@@ -1,8 +1,9 @@
 @php
     if(!isset($adminNotificationCount)) $adminNotificationCount = 0;
     if(!isset($adminNotifications)) $adminNotifications = [];
+    $user = auth()->guard('admin')->user();
 @endphp
-<!-- navbar-wrapper start -->
+@if(isset($user))
 <nav class="navbar-wrapper">
     <div class="navbar__left">
         <button type="button" class="res-sidebar-open-btn me-3"><i class="las la-bars"></i></button>
@@ -15,7 +16,6 @@
     </div>
     <div class="navbar__right">
         <ul class="navbar__action-list">
-
             <li class="dropdown">
                 <button type="button" class="primary--layer" data-bs-toggle="dropdown" data-display="static"
                         aria-haspopup="true" aria-expanded="false">
@@ -51,14 +51,12 @@
                     </div>
                 </div>
             </li>
-
-
             <li class="dropdown">
                 <button type="button" class="" data-bs-toggle="dropdown" data-display="static" aria-haspopup="true"
                         aria-expanded="false">
                     <span class="navbar-user">
                         <span class="navbar-user__thumb">
-                            <img src="{{ getImage('assets/admin/images/profile/'. auth()->guard('admin')->user()->image, '400x400') }}"
+                            <img src="{{ getImage('assets/admin/images/profile/'.$user->image, '400x400') }}"
                                  alt="image">
                         </span>
                         <span class="navbar-user__info">
@@ -82,6 +80,11 @@
                         <span class="dropdown-menu__caption">@lang('Password')</span>
                     </a>
 
+                    <a href="{{route('admin.twofactor')}}"
+                       class="dropdown-menu__item d-flex align-items-center px-3 py-2">
+                        <i class="dropdown-menu__icon las la-shield-alt"></i>
+                        <span class="dropdown-menu__caption">@lang('2FA Security')</span>
+                    </a>
                     <a href="{{ route('admin.logout') }}"
                        class="dropdown-menu__item d-flex align-items-center px-3 py-2">
                         <i class="dropdown-menu__icon las la-sign-out-alt"></i>
@@ -92,4 +95,9 @@
         </ul>
     </div>
 </nav>
-<!-- navbar-wrapper end -->
+@endif
+
+
+@push('script-lib')
+    <script src="{{ asset('admin_assets/js/search.js') }}"></script>
+@endpush

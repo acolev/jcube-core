@@ -17,10 +17,27 @@ Route::namespace('Auth')->group(function () {
 Route::middleware('admin')->group(function () {
 	Route::controller('AdminController')->group(function () {
 		Route::get('dashboard', 'dashboard')->name('dashboard');
-		Route::get('profile', 'profile')->name('profile');
-		Route::post('profile', 'profileUpdate')->name('profile.update');
-		Route::get('password', 'password')->name('password');
-		Route::post('password', 'passwordUpdate')->name('password.update');
+
+		Route::middleware(['admin2fa'])->group(function () {
+			Route::get('profile', 'profile')->name('profile');
+			Route::post('profile', 'profileUpdate')->name('profile.update');
+			Route::get('password', 'password')->name('password');
+			Route::post('password', 'passwordUpdate')->name('password.update');
+		});
+
+		//2FA
+		Route::get('twofactor', 'show2faForm')->name('twofactor');
+		Route::post('twofactor/enable', 'create2fa')->name('twofactor.enable');
+		Route::post('twofactor/disable', 'disable2fa')->name('twofactor.disable');
+
+		// 2FA Authorization
+		Route::controller('AuthorizationController')->group(function () {
+			Route::get('authorization', 'authorizeForm')->name('authorization');
+			Route::get('resend-verify/{type}', 'sendVerifyCode')->name('send.verify.code');
+			Route::post('verify-email', 'emailVerification')->name('verify.email');
+			Route::post('verify-mobile', 'mobileVerification')->name('verify.mobile');
+			Route::post('verify-g2fa', 'g2faVerification')->name('go2fa.verify');
+		});
 
 		//Notification
 		Route::get('notifications', 'notifications')->name('notifications');

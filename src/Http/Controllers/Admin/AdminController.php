@@ -3,6 +3,7 @@
 namespace jCube\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Artisan;
+use jCube\Lib\GoogleAuthenticator;
 use jCube\Models\AdminNotification;
 use Illuminate\Support\Facades\Hash;
 use jCube\Rules\FileTypeValidate;
@@ -24,6 +25,56 @@ class AdminController extends Controller
 		$pageTitle = 'Profile';
 		$admin = Auth::guard('admin')->user();
 		return view('admin::profile', compact('pageTitle', 'admin'));
+	}
+
+	public function show2faForm()
+	{
+		$general = gs();
+		$ga = new GoogleAuthenticator();
+		$user = auth()->guard('admin')->user();
+		$secret = $ga->createSecret();
+		$qrCodeUrl = $ga->getQRCodeGoogleUrl($user->username . '@' . $general->site_name, $secret);
+		$pageTitle = '2FA Setting';
+		return view('admin::twofactor', compact('pageTitle', 'secret', 'qrCodeUrl'));
+	}
+
+	public function create2fa(Request $request)
+	{
+		$user = auth()->guard('admin')->user();
+		$this->validate($request, [
+			'key' => 'required',
+			'code' => 'required',
+		]);
+		$response = verifyG2fa($user, $request->code, $request->key);
+		if ($response) {
+			$user->tsc = $request->key;
+			$user->ts = 1;
+			$user->save();
+			$notify[] = ['success', 'Google authenticator activated successfully'];
+			return back()->withNotify($notify);
+		} else {
+			$notify[] = ['error', 'Wrong verification code'];
+			return back()->withNotify($notify);
+		}
+	}
+
+	public function disable2fa(Request $request)
+	{
+		$this->validate($request, [
+			'code' => 'required',
+		]);
+
+		$user = auth()->guard('admin')->user();
+		$response = verifyG2fa($user, $request->code);
+		if ($response) {
+			$user->tsc = null;
+			$user->ts = 0;
+			$user->save();
+			$notify[] = ['success', 'Two factor authenticator deactivated successfully'];
+		} else {
+			$notify[] = ['error', 'Wrong verification code'];
+		}
+		return back()->withNotify($notify);
 	}
 
 	public function profileUpdate(Request $request)

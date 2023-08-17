@@ -93,7 +93,8 @@
     </div>
 
     @push('breadcrumb-plugins')
-        <a href="{{route('admin.password')}}" class="btn btn-sm btn-outline--primary"><i
-                    class="las la-key"></i>@lang('Password Setting')</a>
+        <a href="{{route('admin.password')}}" class="btn btn-sm btn-outline--primary">
+            <i class="las la-key"></i> {{ __('Password Setting') }}
+        </a>
     @endpush
 </x-dynamic-component>

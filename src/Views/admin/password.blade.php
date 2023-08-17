@@ -5,7 +5,8 @@
                 <div class="card-body p-0">
                     <div class="d-flex p-3 bg--primary">
                         <div class="avatar avatar--lg">
-                            <img src="{{ getImage(getFilePath('adminProfile').'/'. $admin->image, getFileSize('adminProfile'))}}" alt="{{ __('Avatar') }}">
+                            <img src="{{ getImage(getFilePath('adminProfile').'/'. $admin->image, getFileSize('adminProfile'))}}"
+                                 alt="{{ __('Avatar') }}">
                         </div>
                         <div class="ps-3">
                             <h4 class="text--white">{{__($admin->name)}}</h4>
@@ -18,11 +19,11 @@
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             {{ __('Username') }}
-                            <span  class="fw-bold">{{ __($admin->username) }}</span>
+                            <span class="fw-bold">{{ __($admin->username) }}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             {{ __('Email') }}
-                            <span  class="fw-bold">{{ $admin->email }}</span>
+                            <span class="fw-bold">{{ $admin->email }}</span>
                         </li>
                     </ul>
                 </div>
@@ -58,7 +59,9 @@
         </div>
     </div>
     @push('breadcrumb-plugins')
-        <a href="{{route('admin.profile')}}" class="btn btn-sm btn-outline--primary" ><i class="las la-user"></i>@lang('Profile Setting')</a>
+        <a href="{{route('admin.profile')}}" class="btn btn-sm btn-outline--primary">
+            <i class="las la-user"></i> {{ __('Profile Setting') }}
+        </a>
     @endpush
 </x-dynamic-component>
 
