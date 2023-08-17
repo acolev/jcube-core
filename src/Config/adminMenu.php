@@ -24,7 +24,7 @@ return [
 			"active" => ['admin.staff.*'],
 		],
 		"search" => [
-			"query" => "manage staff",
+			"query" => "manage staff, admins, manage admins",
 			"title" => "Manage Staff",
 			"group" => "Users"
 		],

@@ -26,7 +26,7 @@
                     <a href="{{route($item["link"]['name'], @$item["link"]['params'])}}" class="nav-link"
                        @if(is_array(@$item['search']))
                             data-search-query="{{ @$item['search']['query'] }}"
-                            data-search-title="{{ @$item['search']['title'] }}"
+                            data-search-title="{{ __(@$item['search']['title']) }}"
                             @if(@$item['search']['group']) data-search-group="{{ @$item['search']['group'] }}" @endif
                        @endif
                        target="{{ @$item['target'] }}">
