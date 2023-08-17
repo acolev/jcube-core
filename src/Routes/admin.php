@@ -23,6 +23,54 @@ Route::middleware('admin')->group(function () {
 			Route::post('profile', 'profileUpdate')->name('profile.update');
 			Route::get('password', 'password')->name('password');
 			Route::post('password', 'passwordUpdate')->name('password.update');
+
+
+			//staff route
+			Route::controller('StaffController')->middleware("permission:Manage Staff")->name('staff.')->prefix('staff')->group(function () {
+				Route::get('list', 'list')->name('index');
+				Route::post('save/{id?}', 'save')->name('save');
+				Route::post('remove/{id}', 'remove')->name('remove');
+			});
+
+			Route::controller('GeneralSettingController')->group(function () {
+
+				// General Setting
+				Route::middleware("permission:Manage General Setting")->group(function () {
+					Route::get('general-setting', 'index')->name('setting.index');
+					Route::post('general-setting', 'update')->name('setting.update');
+				});
+
+				//configuration
+				Route::middleware("permission:Manage System Configuration")->group(function () {
+					Route::get('setting/system-configuration', 'systemConfiguration')->name('setting.system.configuration');
+					Route::post('setting/system-configuration', 'systemConfigurationSubmit');
+				});
+
+				// Logo-Icon
+				Route::middleware("permission:Manage Logo And Favicon")->group(function () {
+					Route::get('setting/logo-icon', 'logoIcon')->name('setting.logo.icon');
+					Route::post('setting/logo-icon', 'logoIconUpdate')->name('setting.logo.icon');
+				});
+
+				//Custom CSS
+				Route::middleware("permission:Others")->group(function () {
+					Route::get('custom-css', 'customCss')->name('setting.custom.css');
+					Route::post('custom-css', 'customCssSubmit');
+				});
+
+				//Cookie
+				Route::middleware("permission:Manage GDPR Cookie")->group(function () {
+					Route::get('cookie', 'cookie')->name('setting.cookie');
+					Route::post('cookie', 'cookieSubmit');
+				});
+
+				//maintenance_mode
+				Route::middleware("permission:Manage Maintenance Mode")->group(function () {
+					Route::get('maintenance-mode', 'maintenanceMode')->name('maintenance.mode');
+					Route::post('maintenance-mode', 'maintenanceModeSubmit');
+				});
+			});
+
 		});
 
 		//2FA
@@ -44,13 +92,6 @@ Route::middleware('admin')->group(function () {
 		Route::get('notification/read/{id}', 'notificationRead')->name('notification.read');
 		Route::get('notifications/read-all', 'readAll')->name('notifications.readAll');
 
-		//staff route
-		Route::controller('StaffController')->middleware("permission:Manage Staff")->name('staff.')->prefix('staff')->group(function () {
-			Route::get('list', 'list')->name('index');
-			Route::post('save/{id?}', 'save')->name('save');
-			Route::post('remove/{id}', 'remove')->name('remove');
-		});
-
 		//System Information
 		Route::name('system.')
 			->prefix('system')
@@ -60,61 +101,6 @@ Route::middleware('admin')->group(function () {
 				Route::get('optimize', 'optimize')->name('optimize');
 				Route::get('optimize-clear', 'optimizeClear')->name('optimize.clear');
 			});
-	});
-
-	Route::controller('GeneralSettingController')->group(function () {
-
-		// General Setting
-		Route::middleware("permission:Manage General Setting")->group(function () {
-			Route::get('general-setting', 'index')->name('setting.index');
-			Route::post('general-setting', 'update')->name('setting.update');
-		});
-
-		//configuration
-		Route::middleware("permission:Manage System Configuration")->group(function () {
-			Route::get('setting/system-configuration', 'systemConfiguration')->name('setting.system.configuration');
-			Route::post('setting/system-configuration', 'systemConfigurationSubmit');
-		});
-
-		// Logo-Icon
-		Route::middleware("permission:Manage Logo And Favicon")->group(function () {
-			Route::get('setting/logo-icon', 'logoIcon')->name('setting.logo.icon');
-			Route::post('setting/logo-icon', 'logoIconUpdate')->name('setting.logo.icon');
-		});
-
-		//Custom CSS
-		Route::middleware("permission:Others")->group(function () {
-			Route::get('custom-css', 'customCss')->name('setting.custom.css');
-			Route::post('custom-css', 'customCssSubmit');
-		});
-
-		//Cookie
-		Route::middleware("permission:Manage GDPR Cookie")->group(function () {
-			Route::get('cookie', 'cookie')->name('setting.cookie');
-			Route::post('cookie', 'cookieSubmit');
-		});
-
-		//maintenance_mode
-		Route::middleware("permission:Manage Maintenance Mode")->group(function () {
-			Route::get('maintenance-mode', 'maintenanceMode')->name('maintenance.mode');
-			Route::post('maintenance-mode', 'maintenanceModeSubmit');
-		});
-	});
-
-	// Language Manager
-	Route::controller('LanguageController')->middleware("permission:Manage Language")->prefix('language')->name('language.')->group(function () {
-		Route::get('/', 'langManage')->name('manage');
-		Route::post('/', 'langStore')->name('manage.store');
-		Route::post('delete/{id}', 'langDelete')->name('manage.delete');
-		Route::post('update/{id}', 'langUpdate')->name('manage.update');
-		Route::get('edit/{id}', 'langEdit')->name('key');
-		Route::post('import', 'langImport')->name('import.lang');
-		Route::post('store/key/{id}', 'storeLanguageJson')->name('store.key');
-		Route::post('delete/key/{id}', 'deleteLanguageJson')->name('delete.key');
-		Route::post('update/key/{id}', 'updateLanguageJson')->name('update.key');
-
-		Route::get('change-edit-language/{lang}', 'changeEditLanguage')->name('change.editLanguage');
-
 	});
 
 

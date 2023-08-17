@@ -11,9 +11,8 @@ function systemDetails()
 	$def = [];
 	if (function_exists('mySystemDetails')) $def = mySystemDetails();
 
-	$system['name'] = 'core';
-	$system['version'] = '2.1';
-	$system['build_version'] = '1.0.5';
+	$system['name'] = 'Core';
+	$system['version'] = '1.0';
 
 	return array_merge($system, $def);
 }
