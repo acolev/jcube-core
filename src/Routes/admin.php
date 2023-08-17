@@ -18,7 +18,7 @@ Route::middleware('admin')->group(function () {
 	Route::controller('AdminController')->group(function () {
 		Route::get('dashboard', 'dashboard')->name('dashboard');
 
-		Route::middleware(['admin2fa'])->group(function () {
+		Route::middleware(['2fa:admin'])->group(function () {
 			Route::get('profile', 'profile')->name('profile');
 			Route::post('profile', 'profileUpdate')->name('profile.update');
 			Route::get('password', 'password')->name('password');
