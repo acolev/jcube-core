@@ -10,9 +10,10 @@
         </div>
         <div class="sidebar__menu-wrapper" id="sidebar__menuWrapper">
             <ul class="sidebar__menu">
-               @foreach($menus as $menu)
+                @foreach($menus as $menu)
                     <x-admin::menu :item="$menu" :admin="$admin"/>
-               @endforeach
+                @endforeach
+                {{ $slot }}
             </ul>
             <div class="text-center mb-3 text-uppercase">
                 <span class="text--primary">{{__(systemDetails()['name'])}}</span>

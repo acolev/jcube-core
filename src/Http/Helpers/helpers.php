@@ -777,6 +777,9 @@ function paginateLinks($data)
 	return $data->appends(request()->all())->links();
 }
 
+function camelCaseToNormal($str) {
+	return preg_replace('/(?<!^)([A-Z])/', ' $1', $str);
+}
 
 function verifyG2fa($user, $code, $secret = null)
 {
