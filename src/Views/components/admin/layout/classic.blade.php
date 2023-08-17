@@ -1,6 +1,6 @@
 <div class="page-wrapper default-version">
     <x-admin::layout.part.sidenav>
-        {{ $aside }}
+        {{ @$aside }}
     </x-admin::layout.part.sidenav>
     <x-admin::layout.part.topnav/>
 
