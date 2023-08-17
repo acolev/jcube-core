@@ -2,19 +2,19 @@
 
 namespace jCube\Http\Controllers\Admin;
 
-use jCube\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use jCube\Http\Controllers\Controller;
-
+use jCube\Models\Admin;
 
 class StaffController extends Controller
 {
     public function list()
     {
-        $pageTitle   = "Manage Staff";
-        $staffs      = Admin::latest('id')->paginate(getPaginate());
+        $pageTitle = 'Manage Staff';
+        $staffs = Admin::latest('id')->paginate(getPaginate());
         $permissions = config('admin.permission');
+
         return view('admin::staff.list', compact('pageTitle', 'staffs', 'permissions'));
     }
 
@@ -23,27 +23,28 @@ class StaffController extends Controller
         $passwordValidation = $id ? 'nullable' : 'required|min:6';
 
         $request->validate([
-            'name'     => 'required',
+            'name' => 'required',
             'password' => "$passwordValidation",
-            'email'    => 'required|email|unique:admins,email,' . $id,
-            'username' => 'required|unique:admins,username,' . $id
+            'email' => 'required|email|unique:admins,email,'.$id,
+            'username' => 'required|unique:admins,username,'.$id,
         ]);
 
         if ($id) {
-            $admin   = Admin::findOrFail($id);
-            $message = "Staff updated successfully";
+            $admin = Admin::findOrFail($id);
+            $message = 'Staff updated successfully';
         } else {
-            $admin           = new Admin();
+            $admin = new Admin();
             $admin->password = Hash::make($request->password);
-            $message         = "Staff created successfully";
+            $message = 'Staff created successfully';
         }
-        $admin->name        = $request->name;
-        $admin->email       = $request->email;
-        $admin->username    = $request->username;
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->username = $request->username;
         $admin->access_permissions = $request->permissions ?? [];
         $admin->save();
 
         $notify[] = ['success', $message];
+
         return back()->withNotify($notify);
     }
 
@@ -51,9 +52,8 @@ class StaffController extends Controller
     {
         $admin = Admin::findOrFail($id);
         $admin->delete();
-        $notify[] = ['success', "Staff deleted successfully"];
+        $notify[] = ['success', 'Staff deleted successfully'];
+
         return back()->withNotify($notify);
     }
-
-
 }

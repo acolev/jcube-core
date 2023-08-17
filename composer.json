@@ -23,7 +23,8 @@
     "ext-gd": "*"
   },
   "require-dev": {
-    "laravel/laravel": "^10.1"
+    "laravel/laravel": "^10.1",
+    "laravel/pint": "^1.11"
   },
   "extra": {
     "laravel": {

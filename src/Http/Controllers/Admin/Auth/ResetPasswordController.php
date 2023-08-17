@@ -2,14 +2,13 @@
 
 namespace jCube\Http\Controllers\Admin\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\AdminPasswordReset;
-use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Http\Request;
-
 
 class ResetPasswordController extends Controller
 {
@@ -33,7 +32,6 @@ class ResetPasswordController extends Controller
      */
     public $redirectTo = '/admin/dashboard';
 
-
     /**
      * Create a new controller instance.
      *
@@ -49,24 +47,23 @@ class ResetPasswordController extends Controller
      *
      * If no token is present, display the link request form.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string|null  $token
      * @return \Illuminate\Http\Response
      */
     public function showResetForm(Request $request, ?string $token)
     {
         $notify = [];
-        $pageTitle = "Account Recovery";
+        $pageTitle = 'Account Recovery';
         $resetToken = AdminPasswordReset::where('token', $token)->where('status', 0)->first();
 
-        if (!$resetToken) {
+        if (! $resetToken) {
             $notify[] = ['error', 'Token not found!'];
+
             return redirect()->route('admin.password.reset')->withNotify($notify);
         }
         $email = $resetToken->email;
+
         return view('admin::auth.passwords.reset', compact('pageTitle', 'email', 'token'));
     }
-
 
     public function reset(Request $request)
     {
@@ -81,6 +78,7 @@ class ResetPasswordController extends Controller
         $user = Admin::where('email', $reset->email)->first();
         if ($reset->status == 1) {
             $notify[] = ['error', 'Invalid code'];
+
             return redirect()->route('admin.login')->withNotify($notify);
         }
 
@@ -95,10 +93,11 @@ class ResetPasswordController extends Controller
             'operating_system' => $userBrowser['os_platform'],
             'browser' => $userBrowser['browser'],
             'ip' => $userIpInfo['ip'],
-            'time' => $userIpInfo['time']
+            'time' => $userIpInfo['time'],
         ]);
 
         $notify[] = ['success', 'Password changed'];
+
         return redirect()->route('admin.login')->withNotify($notify);
     }
 

@@ -2,10 +2,9 @@
 
 namespace jCube\Http\Controllers\Admin\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\AdminPasswordReset;
-use App\Http\Controllers\Controller;
-use backend\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 
@@ -42,6 +41,7 @@ class ForgotPasswordController extends Controller
     public function showLinkRequestForm()
     {
         $pageTitle = 'Account Recovery';
+
         return view('admin::auth.passwords.email', compact('pageTitle'));
     }
 
@@ -61,9 +61,9 @@ class ForgotPasswordController extends Controller
         $this->validate($request, [
             'email' => 'required|email',
         ]);
-        
+
         $user = Admin::where('email', $request->email)->first();
-        if (!$user) {
+        if (! $user) {
             return back()->withErrors(['Email Not Available']);
         }
 
@@ -72,7 +72,7 @@ class ForgotPasswordController extends Controller
         $adminPasswordReset->email = $user->email;
         $adminPasswordReset->token = $code;
         $adminPasswordReset->status = 0;
-        $adminPasswordReset->created_at = date("Y-m-d h:i:s");
+        $adminPasswordReset->created_at = date('Y-m-d h:i:s');
         $adminPasswordReset->save();
 
         $userIpInfo = getIpInfo();
@@ -82,11 +82,12 @@ class ForgotPasswordController extends Controller
             'operating_system' => $userBrowser['os_platform'],
             'browser' => $userBrowser['browser'],
             'ip' => $userIpInfo['ip'],
-            'time' => $userIpInfo['time']
+            'time' => $userIpInfo['time'],
         ]);
 
         $pageTitle = 'Account Recovery';
         $notify[] = ['success', 'Password reset email sent successfully'];
+
         return view('admin::auth.passwords.code_verify', compact('pageTitle', 'notify'));
     }
 
@@ -96,6 +97,7 @@ class ForgotPasswordController extends Controller
         $request->validate(['code' => 'required']);
         $notify[] = ['success', 'You can change your password.'];
         $code = str_replace(' ', '', $request->code);
+
         return redirect()->route('admin.password.reset.form', $code)->withNotify($notify);
     }
 }
