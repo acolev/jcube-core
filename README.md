@@ -8,7 +8,6 @@ Laravel Admin Panel: a ready-made solution providing user management, access con
 Install my-project with composer
 
 ```bash
-composer create laravel/laravel my-project
 cd my-project
 composer require jcube/core
 
