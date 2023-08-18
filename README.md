@@ -25,3 +25,6 @@ Create admin
 php artisan jcube:admin
 ```
     
+Run your application  and visit your admin
+
+http://localhost:8000/admin
