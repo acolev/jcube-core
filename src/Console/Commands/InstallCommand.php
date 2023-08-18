@@ -59,7 +59,7 @@ class InstallCommand extends Command
             return $this;
         }
 
-        $repo = 'https://gitlab.com/jcubegroup/jcube-core';
+        $repo = 'https://gitlab.com/jcubegroup/jcube-core-v2';
 
         match (PHP_OS_FAMILY) {
             'Darwin' => exec('open '.$repo),
