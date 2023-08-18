@@ -1,6 +1,14 @@
 <div class="page-wrapper default-version">
     <x-admin::layout.part.sidenav>
-        {{ @$aside }}
+        @if(isset($mainMenu))
+            <x-slot name="mainMenu">{{ $mainMenu }}</x-slot>
+        @endif
+        @if(isset($asidePre))
+            <x-slot name="asidePre">{{ $asidePre }}</x-slot>
+        @endif
+        @if(isset($asidePost))
+            <x-slot name="asidePost">{{ $asidePost }}</x-slot>
+        @endif
     </x-admin::layout.part.sidenav>
     <x-admin::layout.part.topnav/>
 

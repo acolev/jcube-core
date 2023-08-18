@@ -28,8 +28,14 @@
 <body>
 
 <x-dynamic-component :component="'admin::layout.' . strtolower($variant)" :page-title="$pageTitle">
-    @if(isset($aside))
-        <x-slot name="aside">{{ $aside }}</x-slot>
+    @if(isset($mainMenu))
+        <x-slot name="mainMenu">{{ $mainMenu }}</x-slot>
+    @endif
+    @if(isset($asidePre))
+        <x-slot name="asidePre">{{ $asidePre }}</x-slot>
+    @endif
+    @if(isset($asidePost))
+        <x-slot name="asidePost">{{ $asidePost }}</x-slot>
     @endif
     {{ $slot }}
 </x-dynamic-component>
