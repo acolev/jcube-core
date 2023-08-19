@@ -809,6 +809,16 @@ function camelCaseToNormal($str)
     return preg_replace('/(?<!^)([A-Z])/', ' $1', $str);
 }
 
+function fileUploader($file, $location, $size = null, $old = null, $thumb = null)
+{
+	$fileManager = new FileManager($file);
+	$fileManager->path = $location;
+	$fileManager->size = $size;
+	$fileManager->old = $old;
+	$fileManager->thumb = $thumb;
+	$fileManager->upload();
+	return $fileManager->filename;
+}
 function verifyG2fa($user, $code, $secret = null)
 {
     $authenticator = new GoogleAuthenticator();
