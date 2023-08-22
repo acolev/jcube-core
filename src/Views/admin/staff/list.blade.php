@@ -103,7 +103,7 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         @foreach ($permission as $k=>$group_permission)
-                                                            <div class="col-lg-3">
+                                                            <div class="col-lg-4">
                                                                 <label for="p_{{ titleToKey($group_name) }}_{{$k}}">
                                                                     <input value="{{titleToKey($group_permission)}}"
                                                                            name="permissions[]" id="p_{{ titleToKey($group_name) }}_{{$k}}"
