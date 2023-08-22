@@ -14,7 +14,7 @@ class AdminCommand extends Command
 
     protected $signature = 'jcube:admin {name?} {email?} {password?}  {--root=}';
 
-    protected $description = 'ICreate or update admin user';
+    protected $description = 'Create or update admin user';
 
     public function handle()
     {

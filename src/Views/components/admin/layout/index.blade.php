@@ -38,6 +38,7 @@
         <x-slot name="asidePost">{{ $asidePost }}</x-slot>
     @endif
     {{ $slot }}
+    <x-notify/>
 </x-dynamic-component>
 
 

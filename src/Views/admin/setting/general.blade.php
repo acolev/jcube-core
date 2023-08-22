@@ -36,11 +36,11 @@
 @endsection
 
 @push('script-lib')
-    <script src="{{ asset('assets/admin/js/spectrum.js') }}"></script>
+    <script src="{{ asset('admin_assets/js/spectrum.js') }}"></script>
 @endpush
 
 @push('style-lib')
-    <link rel="stylesheet" href="{{ asset('assets/admin/css/spectrum.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/css/spectrum.css') }}">
 @endpush
 
 @push('script')

@@ -76,7 +76,6 @@
         <h1>We are under scheduled maintenance.</h1>
         <p class="text-muted">Sorry for the inconvenience, we will be back shortly!</p>
     </div>
-
     @push('style')
         <style>
             .text-gray-800 {
