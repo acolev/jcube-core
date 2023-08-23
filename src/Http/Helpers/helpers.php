@@ -202,6 +202,12 @@ function getRealIP()
 	return $ip;
 }
 
+function osBrowser()
+{
+	$osBrowser = ClientInfo::osBrowser();
+	return $osBrowser;
+}
+
 function timezoneList()
 {
 	return [
