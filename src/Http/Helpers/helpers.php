@@ -209,6 +209,12 @@ function osBrowser()
 	return $osBrowser;
 }
 
+function getIpInfo()
+{
+	$ipInfo = ClientInfo::ipInfo();
+	return $ipInfo;
+}
+
 function timezoneList()
 {
 	return [
