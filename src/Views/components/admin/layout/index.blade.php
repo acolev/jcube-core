@@ -28,23 +28,18 @@
 <body>
 
 <x-dynamic-component :component="'admin::layout.' . strtolower($variant)" :page-title="$pageTitle">
-    @if(isset($mainMenu))
-        <x-slot name="mainMenu">{{ $mainMenu }}</x-slot>
-    @endif
-    @if(isset($asidePre))
-        <x-slot name="asidePre">{{ $asidePre }}</x-slot>
-    @endif
-    @if(isset($asidePost))
-        <x-slot name="asidePost">{{ $asidePost }}</x-slot>
-    @endif
-    {{ $slot }}
+    @if(isset($topBarLeft)) <x-slot name="topBarLeft">{{ $topBarLeft }}</x-slot> @endif
+    @if(isset($topBarRight)) <x-slot name="topBarRight">{{ $topBarRight }}</x-slot> @endif
+    @if(isset($mainMenu)) <x-slot name="mainMenu">{{ $mainMenu }}</x-slot> @endif
+    @if(isset($asidePre)) <x-slot name="asidePre">{{ $asidePre }}</x-slot> @endif
+    @if(isset($asidePost)) <x-slot name="asidePost">{{ $asidePost }}</x-slot>  @endif
+    @if(isset($body)) <x-slot name="body">{{ $body }}</x-slot> @else {{ $slot }} @endif
     <x-notify/>
 </x-dynamic-component>
 
 
 <script src="{{asset('admin_assets/vendor/jquery/jquery-3.6.0.min.js')}}"></script>
 <script src="{{asset('admin_assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
-<script src="{{asset('admin_assets/vendor/tinymce/tinymce.min.js')}}"></script>
 <script src="{{asset('admin_assets/vendor/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
 <script src="{{asset('admin_assets/vendor/slimscroll/jquery.slimscroll.min.js')}}"></script>
 
