@@ -1,7 +1,7 @@
 @extends('admin::layouts.app')
 @section('panel')
     <div class="row mb-none-30">
-      <div class="col-md-12 mb-30">
+        <div class="col-md-12 mb-30">
             <div class="card bl--5-primary">
                 <div class="card-body">
                     <p class="text--primary">@lang('From this page, you can add/update CSS for the user interface. Changing content on this page required programming knowledge.')</p>
@@ -18,7 +18,7 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group custom-css">
-                            <x-form.code name="css" rows="10" :value="$fileContent" />
+                            <x-form.code name="css" rows="10" :value="$fileContent"/>
                         </div>
                     </div>
                     <div class="card-footer">

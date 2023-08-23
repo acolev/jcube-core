@@ -1,16 +1,14 @@
 @props([
 	"name" => '',
 	"value" => '',
-	"label" => "",
+	"lang" => 'css',
 	"required" => false,
-	"type" => 'full',
-	"menubar" => 'false',
 ])
 @php
     $id = \Str::random(8)
 @endphp
 
-<textarea class="codemirror" name="{{ $name }}">{{ $value }}</textarea>
+<textarea class="codemirror" name="{{ $name }}" id="{{$id}}" {{ $attributes }}>{{ $value }}</textarea>
 
 @pushonce('style-lib')
     <link rel="stylesheet" href="{{asset('admin_assets/vendor/codemirror/css/codemirror.min.css')}}">
@@ -53,7 +51,7 @@
       document.querySelectorAll(".codemirror").forEach(function (el) {
         var editor = CodeMirror.fromTextArea(el, {
           lineNumbers: true,
-          mode: "text/css",
+          mode: "text/{{ $lang }}",
           theme: "monokai",
           keyMap: "sublime",
           autoCloseBrackets: true,
