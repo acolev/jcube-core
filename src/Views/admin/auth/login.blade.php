@@ -6,7 +6,7 @@
                     <div class="w-75">
                         <h4 class="logo-text mb-3">@lang('Welcome to')
                             <strong>{{__(gs()->site_name ?: 'jCube Admin')}}</strong></h4>
-                        <p>{{__($pageTitle)}} @lang('to')  {{__(gs()->site_name ?: 'jCube Admin')}} @lang('dashboard')</p>
+                        <p>{{__($pageTitle)}} @lang('to')  {{__(gs()->site_name ?: env('APP_NAME'))}} @lang('dashboard')</p>
                         <form action="{{ route('admin.login') }}" method="POST" class="cmn-form mt-5">
                             @csrf
                             <div class="form-group">
