@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use jCube\Lib\ClientInfo;
 use jCube\Lib\FileManager;
 use jCube\Lib\GoogleAuthenticator;
 use jCube\Models\GeneralSetting;

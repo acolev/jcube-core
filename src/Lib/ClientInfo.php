@@ -1,5 +1,7 @@
 <?php
 
+namespace jCube\Lib;
+
 class ClientInfo
 {
     /**
