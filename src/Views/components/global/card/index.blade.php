@@ -3,15 +3,17 @@
 'title' => null,
 'icon' => null,
 'bg' => null,
-'color' => null,
 'iconColor' => null,
 'iconOpacity' => null,
 'noBody' => false,
 ])
 
 <div class="card position-relative overflow-hidden {{ $bg }}">
-    <div class="@if(!$noBody) card-body @endif">
-        <div class="fw-bold fs-5">{{ __($title) }}</div>
+    {{ @$befereBody }}
+    <div class="{{ @$color }} @if(!$noBody) card-body @endif">
+        @if(isset($title))
+            <div class="fw-bold fs-5">{{ __($title) }}</div>
+        @endif
         {{ @$subtitle }}
         {{ $slot }}
     </div>
