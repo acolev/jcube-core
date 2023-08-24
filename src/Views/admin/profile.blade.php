@@ -84,14 +84,16 @@
                                     <input class="form-control" type="email" name="email" value="{{ $admin->email }}"
                                            required>
                                 </div>
-                                <div class="form-group">
-                                    <label>@lang('Language')</label>
-                                    <select class="form-control" name="lang">
-                                        @foreach($languages as $language)
-                                            <option value="{{ $language->code }}" @selected($admin->lang === $language->code)>{{ $language->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                @if(count($languages))
+                                    <div class="form-group">
+                                        <label>@lang('Language')</label>
+                                        <select class="form-control" name="lang">
+                                            @foreach($languages as $language)
+                                                <option value="{{ $language->code }}" @selected($admin->lang === $language->code)>{{ $language->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <button type="submit" class="btn btn--primary h-45 w-100">@lang('Submit')</button>
