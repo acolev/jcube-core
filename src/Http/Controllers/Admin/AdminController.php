@@ -24,7 +24,10 @@ class AdminController extends Controller
 	{
 		$pageTitle = 'Profile';
 		$admin = Auth::guard('admin')->user();
-		$languages = [];
+		$languages = [
+			"name" => "English",
+			"code" => "en"
+		];
 
 		if (class_exists(Language::class)) {
 			$languages = Language::get();
