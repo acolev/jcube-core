@@ -180,3 +180,4 @@ Array.from(document.querySelectorAll('table')).forEach(table => {
     });
   });
 });
+

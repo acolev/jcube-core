@@ -8,8 +8,11 @@
         <button type="button" class="res-sidebar-open-btn me-3"><i class="las la-bars"></i></button>
         <form class="navbar-search">
             <input type="search" name="#0" class="navbar-search-field" id="searchInput" autocomplete="off"
-                   placeholder="@lang('Search here...')">
+                   placeholder="{{ 'Search here...' }}">
             <i class="las la-search"></i>
+            <i class="navbar-search-help">
+                @if(osBrowser()['os_platform'] === 'Mac OS X') CMD+K @else CTR+K @endif
+            </i>
             <ul class="search-list"></ul>
         </form>
         @if(isset($topBarLeft))
@@ -106,5 +109,6 @@
 
 
 @push('script-lib')
+    <script src="{{ asset('admin_assets/js/hotkeys.js') }}"></script>
     <script src="{{ asset('admin_assets/js/search.js') }}"></script>
 @endpush

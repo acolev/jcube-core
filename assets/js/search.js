@@ -114,3 +114,12 @@ $('#searchInput').on('keydown', function (e) {
   }
   search = $(this).val();
 });
+
+
+hotKeys.push({
+  keys: ["ctr+k", "meta+k"],
+  callback: (event) => {
+    event.preventDefault();
+    $('.navbar-search-field').focus();
+  },
+})

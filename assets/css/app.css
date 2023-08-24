@@ -5927,6 +5927,17 @@ th.w-85 {
     width: 100%;
 }
 
+.navbar-search .navbar-search-help {
+    --color: #e1dddd;
+    right: 15px;
+    left: auto;
+    border: 1px solid var(--color);
+    color: var(--color);
+    font-size: 10px;
+    padding: 3px 5px;
+    border-radius: 5px;
+}
+
 .navbar-search .navbar-search-field::placeholder,
 .navbar-search .navbar-search-field::-moz-placeholder,
 .navbar-search .navbar-search-field::-webkit-input-placeholder {
@@ -7550,7 +7561,8 @@ th.w-85 {
     position: relative;
     overflow: hidden;
 }
-.image-upload .thumb .profilePicPreview img{
+
+.image-upload .thumb .profilePicPreview img {
     object-fit: cover;
     object-position: center;
     width: 100%;
@@ -8653,6 +8665,7 @@ label.required:after {
     border-radius: 1rem 1rem 0 0;
     color: var(--bs-dark);
 }
+
 .tabs .nav-link:not(.active):hover {
     background: var(--bs-primary-bg-subtle);
 }
