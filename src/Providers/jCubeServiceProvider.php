@@ -45,7 +45,6 @@ class jCubeServiceProvider extends ServiceProvider
         app('router')->aliasMiddleware('admin', RedirectIfNotAdmin::class);
         app('router')->aliasMiddleware('admin.guest', RedirectIfAdmin::class);
         app('router')->aliasMiddleware('2fa', Check2fa::class);
-        app('router')->aliasMiddleware('language', LanguageMiddleware::class);
     }
 
     protected function registerConfig()

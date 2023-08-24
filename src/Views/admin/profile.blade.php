@@ -52,7 +52,8 @@
                                         <div class="thumb">
                                             <div class="avatar-preview">
                                                 <div class="profilePicPreview">
-                                                    <img src="{{ getImage(getFilePath('adminProfile').'/'.$admin->image,getFileSize('adminProfile')) }}" alt="{{ __('Avatar') }}">
+                                                    <img src="{{ getImage(getFilePath('adminProfile').'/'.$admin->image,getFileSize('adminProfile')) }}"
+                                                         alt="{{ __('Avatar') }}">
                                                     <button type="button" class="remove-image">
                                                         <i class="fa fa-times"></i>
                                                     </button>
@@ -82,6 +83,14 @@
                                     <label>@lang('Email')</label>
                                     <input class="form-control" type="email" name="email" value="{{ $admin->email }}"
                                            required>
+                                </div>
+                                <div class="form-group">
+                                    <label>@lang('Language')</label>
+                                    <select class="form-control" name="lang">
+                                        @foreach($languages as $language)
+                                            <option value="{{ $language->code }}" @selected($admin->lang === $language->code)>{{ $language->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>

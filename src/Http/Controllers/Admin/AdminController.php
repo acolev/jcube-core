@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use jCube\Http\Controllers\Controller;
 use jCube\Lib\GoogleAuthenticator;
 use jCube\Models\AdminNotification;
+use App\Models\Language;
 use jCube\Rules\FileTypeValidate;
 
 class AdminController extends Controller
@@ -23,8 +24,47 @@ class AdminController extends Controller
 	{
 		$pageTitle = 'Profile';
 		$admin = Auth::guard('admin')->user();
+		$languages = [];
 
-		return view('admin::profile', compact('pageTitle', 'admin'));
+		if (class_exists(Language::class)) {
+			$languages = Language::get();
+		}
+
+		return view('admin::profile', compact(
+			'pageTitle',
+			'admin',
+			'languages'
+		));
+	}
+
+	public function profileUpdate(Request $request)
+	{
+		$notify = [];
+		$this->validate($request, [
+			'name' => 'required',
+			'email' => 'required|email',
+			'image' => ['nullable', 'image', new FileTypeValidate(['jpg', 'jpeg', 'png'])],
+		]);
+		$user = Auth::guard('admin')->user();
+
+		if ($request->hasFile('image')) {
+			try {
+				$old = $user->image ?: null;
+				$user->image = fileUploader($request->image, getFilePath('adminProfile'), getFileSize('adminProfile'), $old);
+			} catch (\Exception) {
+				$notify[] = ['error', 'Image could not be uploaded.'];
+
+				return back()->withNotify($notify);
+			}
+		}
+
+		$user->name = $request->name;
+		$user->email = $request->email;
+		$user->lang = $request->lang;
+		$user->save();
+		$notify[] = ['success', 'Your profile has been updated.'];
+
+		return redirect()->route('admin.profile')->withNotify($notify);
 	}
 
 	public function show2faForm()
@@ -81,34 +121,6 @@ class AdminController extends Controller
 		return back()->withNotify($notify);
 	}
 
-	public function profileUpdate(Request $request)
-	{
-		$notify = [];
-		$this->validate($request, [
-			'name' => 'required',
-			'email' => 'required|email',
-			'image' => ['nullable', 'image', new FileTypeValidate(['jpg', 'jpeg', 'png'])],
-		]);
-		$user = Auth::guard('admin')->user();
-
-		if ($request->hasFile('image')) {
-			try {
-				$old = $user->image ?: null;
-				$user->image = fileUploader($request->image, getFilePath('adminProfile'), getFileSize('adminProfile'), $old);
-			} catch (\Exception) {
-				$notify[] = ['error', 'Image could not be uploaded.'];
-
-				return back()->withNotify($notify);
-			}
-		}
-
-		$user->name = $request->name;
-		$user->email = $request->email;
-		$user->save();
-		$notify[] = ['success', 'Your profile has been updated.'];
-
-		return redirect()->route('admin.profile')->withNotify($notify);
-	}
 
 	public function password()
 	{

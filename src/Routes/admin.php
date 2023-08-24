@@ -101,5 +101,4 @@ Route::middleware('admin')->group(function () {
 				Route::get('optimize-clear', 'optimizeClear')->name('optimize.clear');
 			});
 	});
-
 });
