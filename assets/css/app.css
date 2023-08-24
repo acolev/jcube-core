@@ -5924,12 +5924,13 @@ th.w-85 {
     border: 1px solid rgb(233 233 233);
     border-radius: 5px;
     padding-left: 40px;
+    padding-right: 65px !important;
     width: 100%;
 }
 
 .navbar-search .navbar-search-help {
     --color: #e1dddd;
-    right: 15px;
+    right: 10px;
     left: auto;
     border: 1px solid var(--color);
     color: var(--color);

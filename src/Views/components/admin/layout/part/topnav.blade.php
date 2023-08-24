@@ -5,9 +5,9 @@
 @endphp
 <nav class="navbar-wrapper">
     <div class="navbar__left">
-        <button type="button" class="res-sidebar-open-btn me-3"><i class="las la-bars"></i></button>
+        <button type="button" class="res-sidebar-open-btn"><i class="las la-bars"></i></button>
         <form class="navbar-search">
-            <input type="search" name="#0" class="navbar-search-field" id="searchInput" autocomplete="off"
+            <input type="search" name="#0" class="navbar-search-field pe-5" id="searchInput" autocomplete="off"
                    placeholder="{{ 'Search here...' }}">
             <i class="las la-search"></i>
             <i class="navbar-search-help">
