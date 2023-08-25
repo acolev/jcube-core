@@ -12,7 +12,7 @@ class AdminCommand extends Command
 {
     protected $name = 'jcube:admin';
 
-    protected $signature = 'jcube:admin {name?} {email?} {password?}  {--root=}';
+    protected $signature = 'jcube:admin {name?} {email?} {password?}  {--root}';
 
     protected $description = 'Create or update admin user';
 

@@ -21,7 +21,9 @@ class InstallCommand extends Command
 			->executeCommand('vendor:publish', [
 				'--tag' => 'core-config',
 			])
-			->executeCommand('jcube:notify pass_reset_code');
+			->executeCommand('jcube:notify', [
+				'--all'
+			]);
 
 		if ($this->confirm('Would you like run migrate?')) {
 			$this->executeCommand('migrate');
