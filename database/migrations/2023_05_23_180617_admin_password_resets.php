@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('admin_password_resets', function (Blueprint $table) {
-            $table->string('email')->primary();
+            $table->id();
+            $table->string('email');
             $table->string('token');
             $table->tinyInteger('status')->default(1);
             $table->timestamp('created_at')->nullable();

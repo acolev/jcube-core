@@ -1,6 +1,7 @@
 @props([
 	"pageTitle" => 'jCube Admin',
-	"variant" => 'classic'
+	"variant" => 'classic',
+	'menus' => []
 ])
         <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light">
@@ -27,13 +28,30 @@
 </head>
 <body>
 
-<x-dynamic-component :component="'admin::layout.' . strtolower($variant)" :page-title="$pageTitle">
-    @if(isset($topBarLeft)) <x-slot name="topBarLeft">{{ $topBarLeft }}</x-slot> @endif
-    @if(isset($topBarRight)) <x-slot name="topBarRight">{{ $topBarRight }}</x-slot> @endif
-    @if(isset($mainMenu)) <x-slot name="mainMenu">{{ $mainMenu }}</x-slot> @endif
-    @if(isset($asidePre)) <x-slot name="asidePre">{{ $asidePre }}</x-slot> @endif
-    @if(isset($asidePost)) <x-slot name="asidePost">{{ $asidePost }}</x-slot>  @endif
-    @if(isset($body)) <x-slot name="body">{{ $body }}</x-slot> @else {{ $slot }} @endif
+<x-dynamic-component :component="'admin::layout.' . strtolower($variant)" :page-title="$pageTitle" :menus="$menus">
+    @if(isset($topBarLeft))
+        <x-slot name="topBarLeft">{{ $topBarLeft }}</x-slot>
+    @endif
+    @if(isset($topBarRight))
+        <x-slot name="topBarRight">{{ $topBarRight }}</x-slot>
+    @endif
+    @if(isset($mainMenu))
+        <x-slot name="mainMenu">{{ $mainMenu }}</x-slot>
+    @endif
+    @if(isset($asidePre))
+        <x-slot name="asidePre">{{ $asidePre }}</x-slot>
+    @endif
+    @if(isset($asidePost))
+        <x-slot name="asidePost">{{ $asidePost }}</x-slot>
+    @endif
+    @if(isset($asideOverride))
+        <x-slot name="asideOverride">{{ $asideOverride }}</x-slot>
+    @endif
+    @if(isset($body))
+        <x-slot name="body">{{ $body }}</x-slot>
+    @else
+        {{ $slot }}
+    @endif
     <x-notify/>
 </x-dynamic-component>
 

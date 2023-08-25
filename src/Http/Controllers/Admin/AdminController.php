@@ -30,7 +30,7 @@ class AdminController extends Controller
 			$languages = Language::get();
 		}
 
-		return view('admin::profile', compact(
+		return view('admin::profile.index', compact(
 			'pageTitle',
 			'admin',
 			'languages'
@@ -76,7 +76,7 @@ class AdminController extends Controller
 		$qrCodeUrl = $ga->getQRCodeGoogleUrl($user->username . '@' . $general->site_name, $secret);
 		$pageTitle = '2FA Setting';
 
-		return view('admin::twofactor', compact('pageTitle', 'secret', 'qrCodeUrl'));
+		return view('admin::profile.twofactor', compact('pageTitle', 'secret', 'qrCodeUrl'));
 	}
 
 	public function create2fa(Request $request)
@@ -127,7 +127,7 @@ class AdminController extends Controller
 		$pageTitle = 'Password Setting';
 		$admin = Auth::guard('admin')->user();
 
-		return view('admin::password', compact('pageTitle', 'admin'));
+		return view('admin::profile.password', compact('pageTitle', 'admin'));
 	}
 
 	public function passwordUpdate(Request $request)

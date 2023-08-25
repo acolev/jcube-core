@@ -6,6 +6,7 @@ use jCube\Lib\ClientInfo;
 use jCube\Lib\FileManager;
 use jCube\Lib\GoogleAuthenticator;
 use jCube\Models\GeneralSetting;
+use jCube\Notify\Notify;
 
 function systemDetails()
 {
@@ -852,4 +853,34 @@ function verifyG2fa($user, $code, $secret = null)
 	} else {
 		return false;
 	}
+}
+
+function verificationCode($length)
+{
+	if ($length == 0) return 0;
+	$min = pow(10, $length - 1);
+	$max = (int)($min - 1) . '9';
+	return random_int($min, $max);
+}
+
+function notify($user, $templateName, $shortCodes = null, $sendVia = null, $createLog = true)
+{
+	$general = gs();
+	$globalShortCodes = [
+		'site_name' => $general->site_name,
+	];
+
+	if (gettype($user) == 'array') {
+		$user = (object)$user;
+	}
+
+	$shortCodes = array_merge($shortCodes ?? [], $globalShortCodes);
+
+	$notify = new Notify($sendVia);
+	$notify->templateName = $templateName;
+	$notify->shortCodes = $shortCodes;
+	$notify->user = $user;
+	$notify->createLog = $createLog;
+	$notify->userColumn = isset($user->id) ? $user->getForeignKey() : 'user_id';
+	$notify->send();
 }

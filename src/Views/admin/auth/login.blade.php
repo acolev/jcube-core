@@ -12,7 +12,7 @@
                             <div class="form-group">
                                 <label for="email">@lang('Username')</label>
                                 <div class="input-icon">
-                                    <input type="text" name="username" class="form-control" id="username"
+                                    <input type="text" name="username" class="form-control rounded-pill" id="username"
                                            value="{{ old('username') }}" placeholder="{{ __('Enter your username') }}">
                                     <i class="las la-user icon right"></i>
                                 </div>
@@ -20,7 +20,7 @@
                             <div class="form-group">
                                 <label for="pass">@lang('Password')</label>
                                 <div class="input-icon">
-                                    <input type="password" name="password" class="form-control" id="pass"
+                                    <input type="password" name="password" class="form-control rounded-pill" id="pass"
                                            placeholder="{{ __('Enter your password') }}">
                                     <i class="las la-lock icon right"></i>
                                 </div>
@@ -30,7 +30,7 @@
                                     <i class="las la-lock"></i> {{ __('Forgot password?') }}</a>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="submit-btn mt-25 btn btn-primary">
+                                <button type="submit" class="submit-btn mt-25 btn btn-primary rounded-pill">
                                     {{ __('Login') }} <i class="las la-sign-in-alt"></i>
                                 </button>
                             </div>

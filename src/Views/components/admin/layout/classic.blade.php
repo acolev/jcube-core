@@ -1,5 +1,8 @@
+@props([
+	'menus' => []
+])
 <div class="page-wrapper default-version">
-    <x-admin::layout.part.sidenav>
+    <x-admin::layout.part.sidenav :menus="$menus">
         @if(isset($mainMenu))
             <x-slot name="mainMenu">{{ $mainMenu }}</x-slot>
         @endif
@@ -8,6 +11,9 @@
         @endif
         @if(isset($asidePost))
             <x-slot name="asidePost">{{ $asidePost }}</x-slot>
+        @endif
+        @if(isset($asideOverride))
+            <x-slot name="asideOverride">{{ $asideOverride }}</x-slot>
         @endif
     </x-admin::layout.part.sidenav>
     <x-admin::layout.part.topnav>
