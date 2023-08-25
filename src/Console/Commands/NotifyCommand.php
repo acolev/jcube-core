@@ -20,7 +20,17 @@ class NotifyCommand extends Command
 		try {
 			$action = $this->argument('action') ?: $this->ask('What action?');
 
-			$file = dirname(__DIR__, 3) . '/NotificationTemplates/' . $action . '.php';
+			$folders = [
+				dirname(__DIR__, 3) . '/stubs/notify/',
+				'stubs/notify/',
+			];
+			$file = null;
+
+			foreach ($folders as $folder) {
+				$__file = $folder . $action . '.php';
+				if (file_exists($__file)) $file = $__file;
+			}
+
 			if (!file_exists($file)) {
 				$this->error('Template not found');
 			} else {
