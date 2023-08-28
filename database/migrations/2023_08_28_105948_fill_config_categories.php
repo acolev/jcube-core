@@ -14,14 +14,14 @@ return new class extends Migration {
 		$cat = new ConfigCategory();
 		$cat->slug = 'general';
 		$cat->title = 'General Settings';
-		$cat->descriptrion = 'General settings and configuration';
+		$cat->description = 'General settings and configuration';
 		$cat->icon = 'la la-cog';
 		$cat->save();
 
 		$cat = new ConfigCategory();
 		$cat->slug = 'system';
 		$cat->title = 'System Configuration';
-		$cat->descriptrion = 'System settings and configuration';
+		$cat->description = 'System settings and configuration';
 		$cat->icon = 'la la-database';
 		$cat->save();
 	}
