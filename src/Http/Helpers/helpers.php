@@ -46,21 +46,6 @@ function getConfig($cat)
 	return $cached;
 }
 
-function activeTemplate($asset = false)
-{
-	try {
-		$general = gs();
-		$template = $general->active_template;
-		if ($asset) {
-			return 'assets/templates/' . $template . '/';
-		}
-
-		return 'templates.' . $template . '.';
-	} catch (Exception $e) {
-		return 'templates.basic.';
-	}
-}
-
 function slug($string)
 {
 	return Illuminate\Support\Str::slug($string);
