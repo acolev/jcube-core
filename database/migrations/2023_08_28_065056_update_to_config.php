@@ -22,7 +22,7 @@ return new class extends Migration {
 						'category' => 'general',
 						'name' => 'Site Name',
 						'type' => 'string',
-						'value' => $gs->site_name,
+						'value' => @$gs->site_name,
 						'default' => 'My website'
 					],
 					[
@@ -39,7 +39,7 @@ return new class extends Migration {
 						'category' => 'notify',
 						'name' => 'Email From',
 						'type' => 'string',
-						'value' => $gs->email_from,
+						'value' => @$gs->email_from,
 						'default' => 'no-reply@example.com'
 					],
 					[
@@ -47,7 +47,7 @@ return new class extends Migration {
 						'category' => 'notify',
 						'name' => 'Email From',
 						'type' => 'html',
-						'value' => $gs->email_template,
+						'value' => @$gs->email_template,
 						'default' => ''
 					],
 					[
@@ -55,7 +55,7 @@ return new class extends Migration {
 						'category' => 'notify',
 						'name' => 'SMS Body',
 						'type' => 'text',
-						'value' => $gs->sms_body,
+						'value' => @$gs->sms_body,
 						'default' => ''
 					],
 					[
@@ -63,15 +63,15 @@ return new class extends Migration {
 						'category' => 'notify',
 						'name' => 'SMS From',
 						'type' => 'string',
-						'value' => $gs->sms_from,
-						'default' => $gs->site_name
+						'value' => @$gs->sms_from,
+						'default' => @$gs->site_name
 					],
 					[
 						'slug' => 'mail_config',
 						'category' => 'notify',
 						'name' => 'Mail Config',
 						'type' => 'json',
-						'value' => $gs->mail_config,
+						'value' => @$gs->mail_config,
 						'default' => '{"name":"php"}'
 					],
 					[
@@ -79,7 +79,7 @@ return new class extends Migration {
 						'category' => 'notify',
 						'name' => 'SMS Config',
 						'type' => 'json',
-						'value' => $gs->sms_config,
+						'value' => @$gs->sms_config,
 						'default' => '{}'
 					],
 					[
@@ -87,7 +87,7 @@ return new class extends Migration {
 						'category' => 'system',
 						'name' => 'Email Notification',
 						'type' => 'boolean',
-						'value' => $gs->en,
+						'value' => @$gs->en,
 						'default' => 1,
 						'text' => "If you enable this module, the system will send emails to users where needed. Otherwise, no email will be sent. <code>So be sure before disabling this module that, the system doesn't need to send any emails.</code>"
 					],
@@ -96,7 +96,7 @@ return new class extends Migration {
 						'category' => 'system',
 						'name' => 'Email Verification',
 						'type' => 'boolean',
-						'value' => $gs->ev,
+						'value' => @$gs->ev,
 						'default' => 1,
 						'text' => "If you enable <span class=\"fw-bold\">Email Verification</span>, users have to verify their email to access the dashboard. A 6-digit verification code will be sent to their email to be verified.<br><span class=\"fw-bold\"><i>Note:</i></span> <i>Make sure that the <span class=\"fw-bold\">Email Notification </span> module is enabled</i>"
 					],
@@ -105,7 +105,7 @@ return new class extends Migration {
 						'category' => 'system',
 						'name' => 'SMS Notification',
 						'type' => 'boolean',
-						'value' => $gs->sn,
+						'value' => @$gs->sn,
 						'default' => 0,
 						'text' => "If you enable this module, the system will send SMS to users where needed. Otherwise, no SMS will be sent. <code>So be sure before disabling this module that, the system doesn't need to send any SMS.</code>"
 					],
@@ -114,7 +114,7 @@ return new class extends Migration {
 						'category' => 'system',
 						'name' => 'SMS Verification',
 						'type' => 'boolean',
-						'value' => $gs->ev,
+						'value' => @$gs->ev,
 						'default' => 0,
 						'text' => "If you enable <span class=\"fw-bold\">Mobile Verification</span>, users have to verify their mobile to access the dashboard. A 6-digit verification code will be sent to their mobile to be verified.<br><span class=\"fw-bold\"><i>Note:</i></span> <i>Make sure that the <span class=\"fw-bold\">SMS Notification </span> module is enabled</i>"
 					],
