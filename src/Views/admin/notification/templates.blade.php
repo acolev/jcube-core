@@ -26,7 +26,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-muted text-center" colspan="100%">{{ __($emptyMessage) }}</td>
+                                    <td class="text-muted text-center" colspan="100%">{{ __('No Data') }}</td>
                                 </tr>
                             @endforelse
 
