@@ -37,30 +37,16 @@ return [
 		],
 		"children" => [
 			[
-				"name" => "General Settings",
-				"access" => "Manage General Settings",
-				"link" => [
-					"type" => "link",
-					"name" => "admin.setting.index",
-					"active" => ['admin.setting.index'],
-				],
-				"search" => [
-					"query" => "general Settings",
-					"title" => "General Settings",
-					"group" => "Settings"
-				],
-				"icon" => 'las la-life-ring',
-			],
-			[
 				"name" => "System Configuration",
 				"access" => "Manage System Configuration",
 				"link" => [
 					"type" => "link",
-					"name" => "admin.setting.system.configuration",
-					"active" => ['admin.setting.system.configuration'],
+					"name" => "admin.config.view",
+					"params" => ['general'],
+					"active" => ['admin.config*'],
 				],
 				"search" => [
-					"query" => "system setting, system configuration",
+					"query" => "config, settings, preference, system",
 					"title" => "System Configuration",
 					"group" => "Settings"
 				],
@@ -80,17 +66,6 @@ return [
 					"group" => "Settings"
 				],
 				"icon" => 'las la-images',
-			],
-			[
-				"name" => "Custom CSS",
-				"access" => "Others",
-				"link" => [
-					"type" => "link",
-					"name" => "admin.setting.custom.css",
-					"active" => 'admin.setting.custom.css',
-					"open" => 'admin.setting.custom.css',
-				],
-				"icon" => 'lab la-css3-alt',
 			],
 			[
 				"name" => "Notification Settings",
@@ -154,7 +129,6 @@ return [
 				"access" => "Others",
 				"link" => [
 					"type" => "link",
-					"name" => "admin.setting.index",
 					"active" => 'admin.system*',
 					"open" => 'admin.system*',
 				],

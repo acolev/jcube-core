@@ -45,7 +45,7 @@ Route::middleware('admin')->group(function () {
 			});
 
 			Route::controller('ConfigController')->group(function (){
-				Route::middleware('permission:Manage General Settings')->group(function () {
+				Route::middleware('permission:Manage System Configuration')->group(function () {
 					Route::get('configuration/{category}', 'index')->name('config.view');
 					Route::post('configuration/{category}', 'update')->name('config.update');
 				});
