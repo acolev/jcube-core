@@ -37,5 +37,51 @@
             height: inherit;
             overflow: auto;
         }
+
+        .drawer-menu-title{
+            margin: 2.5rem 2rem;
+            font-size: 1.75rem;
+            font-weight: 900;
+        }
+
+        .drawer-menu a {
+            display: block;
+            padding: 1.25rem 2rem;
+            line-height: 1.5rem;
+            border-bottom: 1px solid var(--bs-border-color);
+        }
+
+        .drawer-menu a:first-child {
+            border-top: 1px solid var(--bs-border-color);
+        }
+
+        .drawer-menu b {
+            font-size: .875rem;
+            font-weight: 500;
+            color: var(--bs-dark);
+        }
+
+        .drawer-menu p {
+            font-size: .875rem;
+            color: var(--bs-secondary);
+        }
+
+        .drawer-menu i {
+            font-size: 24px;
+            color: rgba(var(--bs-secondary-rgb), .7);
+        }
+
+        .drawer-menu a:hover {
+            background-color: #f1f5f9;
+        }
+
+        .drawer-menu a.active {
+            background-color: #eef2ff;
+        }
+
+        .drawer-menu a.active i,
+        .drawer-menu a.active b {
+            color: var(--bs-primary);
+        }
     </style>
 @endpushonce

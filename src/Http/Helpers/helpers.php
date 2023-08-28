@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Cache;
 use jCube\Lib\ClientInfo;
 use jCube\Lib\FileManager;
 use jCube\Lib\GoogleAuthenticator;
-use jCube\Models\GeneralSetting;
+use jCube\Models\Config;
 use jCube\Notify\Notify;
 
 function systemDetails()
@@ -23,17 +23,27 @@ function systemDetails()
 
 function gs()
 {
-	try {
-		$general = Cache::get('GeneralSetting');
-		if (!$general) {
-			$general = GeneralSetting::firstOrFail();
-			Cache::put('GeneralSetting', $general);
-		}
+	return getConfig('general');
+}
 
-		return $general;
-	} catch (Exception $e) {
-		//
+function getConfig($cat)
+{
+	$key = !is_array($cat) ? $cat . 'Setting' : implode('_', $cat) . 'Setting';
+	$cached = Cache::get($key);
+
+	if (!$cached) {
+		$raw = collect(Config::whereIn('category', is_array($cat) ? $cat : [$cat])->orderBy('slug')->get());
+		$obj = (object)$raw->flatMap(function ($item) {
+			if ($item->type === 'json') {
+				return [$item->slug => json_decode($item->value ?: $item->value)];
+			} else {
+				return [$item->slug => $item->value ?: $item->default];
+			}
+		})->all();
+		Cache::put($key, $obj);
+		return $obj;
 	}
+	return $cached;
 }
 
 function activeTemplate($asset = false)
@@ -58,7 +68,19 @@ function slug($string)
 
 function getMetaTitle($title)
 {
-	return $title;
+	$general = gs();
+	return replaceShortCode($general->meta_title, [
+		'site_name' => $general->site_name,
+		'title' => $title,
+	]);
+}
+
+function replaceShortCode($message, $shorts = [])
+{
+	foreach ($shorts as $k => $short) {
+		$message = str_replace("{{" . $k . "}}", $short, $message);
+	}
+	return $message;
 }
 
 function getImage($image, $size = '200x200')

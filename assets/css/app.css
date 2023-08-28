@@ -4076,12 +4076,7 @@ label {
 
 input:not([type="radio"]), textarea {
     padding: 10px 20px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    background-color: transparent;
+    border-radius: 6px;
     font-size: 0.875rem !important;
 }
 

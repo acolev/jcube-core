@@ -8,10 +8,10 @@ return [
 	'sms_body' => 'Your password has been changed successfully',
 	'shortcodes' => [
 		'ip' => 'IP address of the user',
-		'browser' => '"Browser of the user',
+		'browser' => 'Browser of the user',
 		'operating_system' => 'Operating system of the user',
 		'time' => 'Time of the request',
 	],
 	'email_status' => 1,
-	'sms_status' => 1,
+	'sms_status' => 0,
 ];

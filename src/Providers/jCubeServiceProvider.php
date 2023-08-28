@@ -84,7 +84,6 @@ class jCubeServiceProvider extends ServiceProvider
 	{
 		Blade::anonymousComponentPath(dirname(__DIR__) . '/Views/components/admin', 'admin');
 		Blade::anonymousComponentPath(dirname(__DIR__) . '/Views/components/global');
-
 	}
 
 	protected function registerLoads()

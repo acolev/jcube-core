@@ -32,43 +32,46 @@ Route::middleware('admin')->group(function () {
 			});
 
 			Route::controller('GeneralSettingController')->group(function () {
-
-				// General Setting
-				Route::middleware('permission:Manage General Setting')->group(function () {
-					Route::get('general-setting', 'index')->name('setting.index');
-					Route::post('general-setting', 'update')->name('setting.update');
-				});
-
-				//configuration
-				Route::middleware('permission:Manage System Configuration')->group(function () {
-					Route::get('setting/system-configuration', 'systemConfiguration')->name('setting.system.configuration');
-					Route::post('setting/system-configuration', 'systemConfigurationSubmit');
-				});
-
 				// Logo-Icon
 				Route::middleware('permission:Manage Logo And Favicon')->group(function () {
 					Route::get('setting/logo-icon', 'logoIcon')->name('setting.logo.icon');
 					Route::post('setting/logo-icon', 'logoIconUpdate')->name('setting.logo.icon');
 				});
-
 				//Custom CSS
 				Route::middleware('permission:Others')->group(function () {
 					Route::get('custom-css', 'customCss')->name('setting.custom.css');
 					Route::post('custom-css', 'customCssSubmit');
 				});
+			});
 
-				//Cookie
-				Route::middleware('permission:Manage GDPR Cookie')->group(function () {
-					Route::get('cookie', 'cookie')->name('setting.cookie');
-					Route::post('cookie', 'cookieSubmit');
-				});
-
-				//maintenance_mode
-				Route::middleware('permission:Manage Maintenance Mode')->group(function () {
-					Route::get('maintenance-mode', 'maintenanceMode')->name('maintenance.mode');
-					Route::post('maintenance-mode', 'maintenanceModeSubmit');
+			Route::controller('ConfigController')->group(function (){
+				Route::middleware('permission:Manage General Settings')->group(function () {
+					Route::get('configuration/{category}', 'index')->name('config.view');
+					Route::post('configuration/{category}', 'update')->name('config.update');
 				});
 			});
+
+			//Notification Setting
+			Route::controller('NotificationController')
+				->name('setting.notification.')
+				->prefix('notification')->group(function () {
+					//Template Setting
+					Route::get('global', 'global')->name('global');
+					Route::post('global/update', 'globalUpdate')->name('global.update');
+					Route::get('templates', 'templates')->name('templates');
+					Route::get('template/edit/{id}', 'templateEdit')->name('template.edit');
+					Route::post('template/update/{id}', 'templateUpdate')->name('template.update');
+
+					//Email Setting
+					Route::get('email/setting', 'emailSetting')->name('email');
+					Route::post('email/setting', 'emailSettingUpdate');
+					Route::post('email/test', 'emailTest')->name('email.test');
+
+					//SMS Setting
+					Route::get('sms/setting', 'smsSetting')->name('sms');
+					Route::post('sms/setting', 'smsSettingUpdate');
+					Route::post('sms/test', 'smsTest')->name('sms.test');
+				});
 
 		});
 

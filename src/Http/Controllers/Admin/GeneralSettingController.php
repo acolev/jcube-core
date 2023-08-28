@@ -10,52 +10,6 @@ use jCube\Rules\FileTypeValidate;
 
 class GeneralSettingController extends Controller
 {
-	public function index()
-	{
-		$pageTitle = 'General Setting';
-		$timezones = timezoneList();
-
-		return view('admin::setting.general', compact('pageTitle', 'timezones'));
-	}
-
-	public function update(Request $request)
-	{
-		$request->validate([
-			'site_name' => 'required|string|max:40',
-		]);
-
-		$general = gs();
-		$general->site_name = $request->site_name;
-		$general->data_values = array_merge((array)$general->data_values, (array)$request->data_values);
-		$general->save();
-
-		$timezoneFile = config_path('timezone.php');
-		$content = '<?php $timezone = ' . $request->timezone . ' ?>';
-		file_put_contents($timezoneFile, $content);
-		Artisan::call('optimize:clear');
-		$notify[] = ['success', 'General setting updated successfully'];
-
-		return back()->withNotify($notify);
-	}
-
-	public function systemConfiguration()
-	{
-		$pageTitle = 'System Configuration';
-
-		return view('admin::setting.configuration', compact('pageTitle'));
-	}
-
-	public function systemConfigurationSubmit(Request $request)
-	{
-		$general = gs();
-		$general->data_values = array_merge((array)$general->data_values, (array)$request->data_values);
-		$general->save();
-		Artisan::call('optimize:clear');
-		$notify[] = ['success', 'System configuration updated successfully'];
-
-		return back()->withNotify($notify);
-	}
-
 	public function logoIcon()
 	{
 		$pageTitle = 'Logo & Favicon';
@@ -95,6 +49,7 @@ class GeneralSettingController extends Controller
 			} catch (\Exception $exp) {
 				$notify[] = ['error', 'Couldn\'t upload the logo'];
 
+				Artisan::call('optimize:clear');
 				return back()->withNotify($notify);
 			}
 		}

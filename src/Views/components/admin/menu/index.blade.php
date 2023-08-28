@@ -2,10 +2,9 @@
 	"item" => [],
 	"admin" => null,
 ])
-
 @switch($item["link"]['type'])
     @case('link')
-        @if(Route::has($item["link"]['name']) && (!isset($item['access']) || @$admin?->access($item['access'])) )
+        @if((!isset($item["link"]['name']) || Route::has($item["link"]['name'])) && (!isset($item['access']) || @$admin?->access($item['access'])) )
             @if(isset($item['children']))
                 <li class="sidebar-menu-item {{ @$item['children'] ? 'sidebar-dropdown' : '' }}">
                     <a href="javascript:void(0)" class="nav-link {{ menuActive($item["link"]['active'], 3) }}">
@@ -25,9 +24,9 @@
                 <li class="sidebar-menu-item {{ menuActive($item["link"]['active']) }}">
                     <a href="{{route($item["link"]['name'], @$item["link"]['params'])}}" class="nav-link"
                        @if(is_array(@$item['search']))
-                            data-search-query="{{ @$item['search']['query'] }}"
-                            data-search-title="{{ __(@$item['search']['title']) }}"
-                            @if(@$item['search']['group']) data-search-group="{{ @$item['search']['group'] }}" @endif
+                           data-search-query="{{ @$item['search']['query'] }}"
+                       data-search-title="{{ __(@$item['search']['title']) }}"
+                       @if(@$item['search']['group']) data-search-group="{{ @$item['search']['group'] }}" @endif
                        @endif
                        target="{{ @$item['target'] }}">
                         <i class="menu-icon {{ @$item['icon'] ?: 'la la-circle' }}"></i>

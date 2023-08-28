@@ -171,6 +171,7 @@ class NotifyProcess
 
 		//Getting the notification message from database if use and template exist
 		//If not exist, get the message which have sent via method
+
 		if ($user && $template) {
 			$message = $this->replaceShortCode($user->fullname, $user->username, $this->setting->$globalTemplate, $template->$body);
 			if (empty($message)) {
@@ -239,7 +240,7 @@ class NotifyProcess
 	protected function setSetting()
 	{
 		if (!$this->setting) {
-			$this->setting = gs();
+			$this->setting = getConfig(['general', 'notify']);
 		}
 	}
 

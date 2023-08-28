@@ -9,10 +9,10 @@ return [
 	'shortcodes' => [
 		'code' => 'Verification code for password reset',
 		'ip' => 'IP address of the user',
-		'browser' => '"Browser of the user',
+		'browser' => 'Browser of the user',
 		'operating_system' => 'Operating system of the user',
 		'time' => 'Time of the request',
 	],
 	'email_status' => 1,
-	'sms_status' => 1,
+	'sms_status' => 0,
 ];
