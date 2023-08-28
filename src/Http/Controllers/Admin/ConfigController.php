@@ -38,12 +38,12 @@ class ConfigController extends Controller
 		));
 	}
 
-	public function update(ConfigCategory $category, Request $request)
+	public function update($category, Request $request)
 	{
 		try {
 			foreach ($request->getPayload() as $k => $v) {
 				if ($k !== '_token') {
-					$config = Config::where('category', $category->slug)
+					$config = Config::where('category', $category)
 						->where('slug', $k)->first();
 					if ($config->type === 'boolean' && $v === 'on') {
 						$v = true;
