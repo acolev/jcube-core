@@ -16,10 +16,10 @@ return new class extends Migration {
 			$table->string('category');
 			$table->string('name');
 			$table->string('type')->default('string');
-			$table->text('value');
-			$table->text('default');
-			$table->string('variants');
-			$table->string('text');
+			$table->text('value')->nullable();
+			$table->text('default')->nullable();
+			$table->string('variants')->nullable();
+			$table->string('text')->nullable();
 		});
 	}
 
