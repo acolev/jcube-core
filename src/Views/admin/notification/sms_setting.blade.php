@@ -214,8 +214,8 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="headerFields">
-                                                @isset($general->sms_config)
-                                                    @for($i = 0; $i < count($general->sms_config?->custom->headers->name); $i++)
+                                                @isset($general->sms_config->custom)
+                                                    @for($i = 0; $i < count($general->sms_config->custom->headers->name); $i++)
                                                         <div class="row mt-3">
                                                             <div class="col-md-5">
                                                                 <input type="text" name="custom_header_name[]"
@@ -251,7 +251,7 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="bodyFields">
-                                                @isset($general->sms_config)
+                                                @isset($general->sms_config->custom)
                                                     @for($i = 0; $i < count($general->sms_config->custom->body->name); $i++)
                                                         <div class="row mt-3">
                                                             <div class="col-md-5">
