@@ -35,7 +35,7 @@ function getConfig($cat)
 		$raw = collect(Config::whereIn('category', is_array($cat) ? $cat : [$cat])->orderBy('slug')->get());
 		$obj = (object)$raw->flatMap(function ($item) {
 			if ($item->type === 'json') {
-				return [$item->slug => json_decode($item->value ?: $item->value)];
+				return [$item->slug => json_decode($item->value ?: $item->default)];
 			} else {
 				return [$item->slug => $item->value ?: $item->default];
 			}
@@ -43,6 +43,7 @@ function getConfig($cat)
 		Cache::put($key, $obj);
 		return $obj;
 	}
+
 	return $cached;
 }
 

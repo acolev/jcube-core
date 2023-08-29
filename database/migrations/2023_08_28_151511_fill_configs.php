@@ -17,7 +17,7 @@ return new class extends Migration {
                 'category' => 'general',
                 'name' => 'Site Name',
                 'type' => 'string',
-                'value' => 'Grigo Academy',
+                'value' => '',
                 'default' => 'My website'
             ],
             [
@@ -25,7 +25,7 @@ return new class extends Migration {
                 'category' => 'general',
                 'name' => 'Meta Title Rule',
                 'type' => 'string',
-                'value' => '{{title}} - {{site_name}}',
+                'value' => '',
                 'default' => '{{title}} || {{site_name}}'
             ],
 
@@ -34,7 +34,7 @@ return new class extends Migration {
                 'category' => 'notify',
                 'name' => 'Email From',
                 'type' => 'string',
-                'value' => 'no-reply@grigo.academy',
+                'value' => '',
                 'default' => 'no-reply@example.com'
             ],
             [
@@ -58,8 +58,8 @@ return new class extends Migration {
                 'category' => 'notify',
                 'name' => 'SMS From',
                 'type' => 'string',
-                'value' => 'Grigo.Academy',
-                'default' => ''
+                'value' => '',
+                'default' => 'Example'
             ],
             [
                 'slug' => 'mail_config',
