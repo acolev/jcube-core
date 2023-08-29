@@ -41,8 +41,8 @@
                                 <div class="form-group">
                                     <label>@lang('Encryption')</label>
                                     <select class="form-control" name="enc">
-                                        <option value="ssl">@lang('SSL')</option>
-                                        <option value="tls">@lang('TLS')</option>
+                                        <option value="ssl" @selected(@$general->mail_config->enc === 'ssl')>@lang('SSL')</option>
+                                        <option value="tls" @selected(@$general->mail_config->enc === 'tls')>@lang('TLS')</option>
                                     </select>
                                 </div>
                             </div>
@@ -148,7 +148,7 @@
             "use strict";
 
             var method = '{{ $general->mail_config?->name }}';
-            emailMethod(method);
+            if (method) emailMethod(method);
             $('select[name=email_method]').on('change', function () {
               var method = $(this).val();
               emailMethod(method);
