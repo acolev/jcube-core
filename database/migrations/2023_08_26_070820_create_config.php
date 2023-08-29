@@ -19,7 +19,7 @@ return new class extends Migration {
 			$table->text('value')->nullable();
 			$table->text('default')->nullable();
 			$table->string('variants')->nullable();
-			$table->string('text')->nullable();
+			$table->text('text')->nullable();
 		});
 	}
 

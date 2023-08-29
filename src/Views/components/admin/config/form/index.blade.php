@@ -22,7 +22,7 @@
         <x-form.code :name="$name" :label="$label" :value="$value ?: $default"/>
         @break
     @case('boolean')
-        <div class="d-flex flex-wrap flex-sm-nowrap gap-2 justify-content-between align-items-center">
+        <div class="d-flex flex-wrap flex-sm-nowrap gap-5 justify-content-between align-items-center">
             <div>
                 <p class="fw-bold mb-0">{{ __($label) }}</p>
                 @isset($text)
@@ -32,19 +32,7 @@
                 @endisset
             </div>
             <div class="form-group">
-                <input type="hidden"  name="{{$name}}" value="off">
-                <input
-                        type="checkbox"
-                        data-width="80"
-                        data-height="24"
-                        data-size="small"
-                        data-onstyle="-success"
-                        data-offstyle="-danger"
-                        data-bs-toggle="toggle"
-                        data-on="@lang('Enable')"
-                        data-off="@lang('Disable')"
-                        name="{{$name}}"
-                        @checked($value == 1)>
+                <x-form.input type="toggle" :name="$name" :value="$value ?: $default"/>
             </div>
         </div>
         @break
