@@ -13,9 +13,9 @@
             {{ @$aside }}
         </div>
         <div class="drawer-content">
-            <div class="drawer-content-title">
-                <div class="d-flex align-items-start gap-3">
-                    <div class="mt-1 drawer-content-close">
+            <div class="drawer-content-title mb-5">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="drawer-content-close">
                         <a href="javascript:void(0)" onclick="toggleDrawer('{{$id}}')">
                             <i class="las la-bars fs-5"></i>
                         </a>

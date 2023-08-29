@@ -5,7 +5,7 @@
 
     <x-slot name="body">
         <x-admin::drawer>
-            <x-admin::layout.part.breadcrumb :page-title="__('Change Password')"/>
+            <x-slot name="title">{{ __('2FA Security') }}</x-slot>
 
             @if(!$admin?->ts)
                 <div class="card custom--card">
@@ -73,12 +73,7 @@
                 </div>
             @endif
 
-            <x-slot name="aside">
-                <div @class(['px-5', 'py-4'])>
-                    <h2>{{ __('Profile') }}</h2>
-                </div>
-                @include('admin::profile.part.menu')
-            </x-slot>
+            @include('admin::profile.part.menu')
         </x-admin::drawer>
     </x-slot>
     @push('style')

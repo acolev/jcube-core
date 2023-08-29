@@ -1,7 +1,7 @@
 <x-dynamic-component :component="$layoutComponent" :page-title="@$pageTitle">
     <x-slot name="body">
         <x-admin::drawer>
-            <x-admin::layout.part.breadcrumb :page-title="__('Change Password')"/>
+            <x-slot name="title">{{ __('Change Password') }}</x-slot>
             <form action="{{ route('admin.password.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
@@ -21,13 +21,7 @@
                 </div>
                 <button type="submit" class="btn btn--primary w-100 btn-lg h-45">@lang('Submit')</button>
             </form>
-
-            <x-slot name="aside">
-                <div @class(['px-5', 'py-4'])>
-                    <h2>{{ __('Profile') }}</h2>
-                </div>
-                @include('admin::profile.part.menu')
-            </x-slot>
+            @include('admin::profile.part.menu')
         </x-admin::drawer>
     </x-slot>
     @push('breadcrumb-plugins')
