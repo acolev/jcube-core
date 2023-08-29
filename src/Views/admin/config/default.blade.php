@@ -1,7 +1,9 @@
 <x-dynamic-component :component="$layoutComponent" :page-title="@$pageTitle">
     <x-slot name="body">
         <x-admin::drawer>
-            <x-admin::layout.part.breadcrumb :page-title="__($category->title)"/>
+           <x-slot name="title">
+               {{ __($category->title) }}
+           </x-slot>
 
             <form action="{{ route('admin.config.update', $category->slug) }}" method="post">
                 @csrf

@@ -1,87 +1,42 @@
-<div class="drawer">
-    <div class="drawer-backdrop"></div>
+@php
+    $id = 'drawer-' . \Str::random(8)
+@endphp
+<div class="drawer" id="{{$id}}">
     <div class="drawer-container">
+        <div class="drawer-backdrop" onclick="toggleDrawer('{{$id}}')"></div>
         <div class="drawer-aside">
+            <div class="drawer-aside-close">
+                <a href="javascript:void(0)" onclick="toggleDrawer('{{$id}}')">
+                    <i class="la la-close fs-5"></i>
+                </a>
+            </div>
             {{ @$aside }}
         </div>
         <div class="drawer-content">
+            <div class="drawer-content-title">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="mt-1 drawer-content-close">
+                        <a href="javascript:void(0)" onclick="toggleDrawer('{{$id}}')">
+                            <i class="las la-bars fs-5"></i>
+                        </a>
+                    </div>
+                    <div>{{ @$title }}</div>
+                </div>
+            </div>
             {{ $slot }}
         </div>
     </div>
 </div>
 
-@pushonce('style')
-    <style>
-        .drawer {
-            --aside-width: 24rem;
-            height: calc(100dvh - 74px);
-        }
-
-        .drawer-container {
-            position: relative;
-            height: inherit;
-            padding-left: var(--aside-width);
-        }
-
-        .drawer-aside {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 24rem;
-            height: inherit;
-            background: #fff;
-        }
-
-        .drawer-content {
-            padding: 48px;
-            height: inherit;
-            overflow: auto;
-        }
-
-        .drawer-menu-title{
-            margin: 2.5rem 2rem;
-            font-size: 1.75rem;
-            font-weight: 900;
-        }
-
-        .drawer-menu a {
-            display: block;
-            padding: 1.25rem 2rem;
-            line-height: 1.5rem;
-            border-bottom: 1px solid var(--bs-border-color);
-        }
-
-        .drawer-menu a:first-child {
-            border-top: 1px solid var(--bs-border-color);
-        }
-
-        .drawer-menu b {
-            font-size: .875rem;
-            font-weight: 500;
-            color: var(--bs-dark);
-        }
-
-        .drawer-menu p {
-            font-size: .875rem;
-            color: var(--bs-secondary);
-        }
-
-        .drawer-menu i {
-            font-size: 24px;
-            color: rgba(var(--bs-secondary-rgb), .7);
-        }
-
-        .drawer-menu a:hover {
-            background-color: #f1f5f9;
-        }
-
-        .drawer-menu a.active {
-            background-color: #eef2ff;
-        }
-
-        .drawer-menu a.active i,
-        .drawer-menu a.active b {
-            color: var(--bs-primary);
-        }
-    </style>
+@pushonce('style-lib')
+    <link rel="stylesheet" href="{{asset('admin_assets/css/components/drawer.css')}}">
 @endpushonce
+
+@push('script')
+    <script>
+      function toggleDrawer(id) {
+        const el = document.querySelector('#' + id);
+        el.classList.toggle('open');
+      }
+    </script>
+@endpush
