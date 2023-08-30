@@ -26,7 +26,7 @@
                                 <div class="form-group">
                                     <label>@lang('Host') </label>
                                     <input type="text" class="form-control"
-                                           placeholder="e.g. @lang('smtp.googlemail.com')" name="host"
+                                           placeholder="e.g. @lang('smtp.google.com')" name="host"
                                            value="{{ $general->mail_config->host ?? '' }}"/>
                                 </div>
                             </div>

@@ -51,6 +51,7 @@ class ConfigController extends Controller
 						$v = false;
 					}
 					if ($config->slug && $config->value !== $v) {
+						if(is_array($v)) $v = implode(',', $v);
 						$config->value = $v;
 						$config->save();
 					}
