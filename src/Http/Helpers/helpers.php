@@ -34,7 +34,7 @@ function getConfig($cat)
 	if (!$cached) {
 		$raw = collect(Config::whereIn('category', is_array($cat) ? $cat : [$cat])->orderBy('slug')->get());
 		$obj = (object)$raw->flatMap(function ($item) {
-			if ($item->type === 'json') {
+			if (is_json($item->value ?: $item->default)) {
 				return [$item->slug => json_decode($item->value ?: $item->default)];
 			} else {
 				return [$item->slug => $item->value ?: $item->default];
@@ -891,4 +891,12 @@ function notify($user, $templateName, $shortCodes = null, $sendVia = null, $crea
 	$notify->createLog = $createLog;
 	$notify->userColumn = isset($user->id) ? $user->getForeignKey() : 'user_id';
 	$notify->send();
+}
+
+if (!function_exists('is_json')) {
+	function is_json($json_str)
+	{
+		json_decode($json_str);
+		return json_last_error() === JSON_ERROR_NONE;
+	}
 }
