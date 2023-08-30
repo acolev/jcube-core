@@ -45,7 +45,7 @@ class StaffController extends Controller
 
         $notify[] = ['success', $message];
 
-        return back()->withNotify($notify);
+        return back()->with('notify', $notify);
     }
 
     public function remove($id)
@@ -54,6 +54,6 @@ class StaffController extends Controller
         $admin->delete();
         $notify[] = ['success', 'Staff deleted successfully'];
 
-        return back()->withNotify($notify);
+        return back()->with('notify', $notify);
     }
 }

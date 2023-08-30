@@ -73,7 +73,7 @@
 @elseif($type === 'select')
     <label class="@if(!!$required) required @endif">{{ __($label) }}</label>
     @if(is_array($variants))
-        <select name="{{ $name }}" id="{{ $id }}">
+        <select class="form-control" name="{{ $name }}" id="{{ $id }}">
             <option value="">{{ __('Choose option') }}</option>
             @foreach($variants as $variant)
                 <option value="{{$variant}}" @selected($value === $variant)>{{ __($variant) }}</option>

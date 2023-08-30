@@ -47,7 +47,7 @@ class LanguageController extends Controller
 
         $notify[] = ['success', 'Language added successfully'];
 
-        return back()->withNotify($notify);
+        return back()->with('notify', $notify);
     }
 
     public function langUpdate(Request $request, $id)
@@ -63,7 +63,7 @@ class LanguageController extends Controller
             if (! $defaultLang) {
                 $notify[] = ['error', 'You\'ve to set another language as default before unset this'];
 
-                return back()->withNotify($notify);
+                return back()->with('notify', $notify);
             }
         }
 
@@ -81,7 +81,7 @@ class LanguageController extends Controller
 
         $notify[] = ['success', 'Update successfully'];
 
-        return back()->withNotify($notify);
+        return back()->with('notify', $notify);
     }
 
     public function langDelete($id)
@@ -91,7 +91,7 @@ class LanguageController extends Controller
         $lang->delete();
         $notify[] = ['success', 'Language deleted successfully'];
 
-        return back()->withNotify($notify);
+        return back()->with('notify', $notify);
     }
 
     public function langEdit($id)
@@ -104,7 +104,7 @@ class LanguageController extends Controller
         if (empty($json)) {
             $notify[] = ['error', 'File not found'];
 
-            return back()->withNotify($notify);
+            return back()->with('notify', $notify);
         }
         $json = json_decode($json);
 
@@ -139,7 +139,7 @@ class LanguageController extends Controller
         if (array_key_exists($reqKey, json_decode($items, true))) {
             $notify[] = ['error', 'Key already exist'];
 
-            return back()->withNotify($notify);
+            return back()->with('notify', $notify);
         } else {
             $newArr[$reqKey] = trim($request->value);
             $itemData = json_decode($items, true);
@@ -147,7 +147,7 @@ class LanguageController extends Controller
             file_put_contents(resource_path('lang/').$lang->code.'.json', json_encode($result, JSON_UNESCAPED_UNICODE));
             $notify[] = ['success', 'Language key added successfully'];
 
-            return back()->withNotify($notify);
+            return back()->with('notify', $notify);
         }
 
     }
@@ -169,7 +169,7 @@ class LanguageController extends Controller
         file_put_contents(resource_path('lang/').$lang->code.'.json', json_encode($json_arr, JSON_UNESCAPED_UNICODE));
         $notify[] = ['success', 'Language key deleted successfully'];
 
-        return back()->withNotify($notify);
+        return back()->with('notify', $notify);
     }
 
     public function updateLanguageJson(Request $request, $id)
@@ -193,7 +193,7 @@ class LanguageController extends Controller
 
         $notify[] = ['success', 'Language key updated successfully'];
 
-        return back()->withNotify($notify);
+        return back()->with('notify', $notify);
     }
 
     public function changeEditLanguage($lang = null)

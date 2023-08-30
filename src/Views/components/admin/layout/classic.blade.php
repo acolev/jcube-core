@@ -1,5 +1,6 @@
 @props([
-	'menus' => []
+	'menus' => [],
+	'noBody' => false
 ])
 <div class="page-wrapper default-version">
     <x-admin::layout.part.sidenav :menus="$menus">
@@ -25,9 +26,9 @@
         @endif
     </x-admin::layout.part.topnav>
 
-    @if(isset($body))
+    @if(@$noBody)
         <div class="body-wrapper p-0">
-            {{ $body }}
+            {{ $slot }}
         </div>
     @else
         <div class="body-wrapper">

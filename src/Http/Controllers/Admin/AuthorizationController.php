@@ -64,7 +64,7 @@ class AuthorizationController extends Controller
 
         $notify[] = ['success', 'Verification code sent successfully'];
 
-        return back()->withNotify($notify);
+        return back()->with('notify', $notify);
     }
 
     public function emailVerification(Request $request)
@@ -117,6 +117,6 @@ class AuthorizationController extends Controller
             $notify[] = ['error', 'Wrong verification code'];
         }
 
-        return back()->withNotify($notify);
+        return back()->with('notify', $notify);
     }
 }

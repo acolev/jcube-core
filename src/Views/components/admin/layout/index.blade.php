@@ -28,7 +28,8 @@
 </head>
 <body>
 
-<x-dynamic-component :component="'admin::layout.' . strtolower($variant)" :page-title="$pageTitle" :menus="$menus">
+<x-dynamic-component :component="'admin::layout.' . strtolower($variant)" :page-title="$pageTitle"
+                     :menus="$menus" {{ $attributes }}>
     @if(isset($topBarLeft))
         <x-slot name="topBarLeft">{{ $topBarLeft }}</x-slot>
     @endif
@@ -47,12 +48,8 @@
     @if(isset($asideOverride))
         <x-slot name="asideOverride">{{ $asideOverride }}</x-slot>
     @endif
-    @if(isset($body))
-        <x-slot name="body">{{ $body }}</x-slot>
-    @else
-        {{ $slot }}
-    @endif
-    <x-notify/>
+    {{ $slot }}
+    <x-notify />
 </x-dynamic-component>
 
 

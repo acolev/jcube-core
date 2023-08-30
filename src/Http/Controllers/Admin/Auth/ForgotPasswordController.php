@@ -100,6 +100,6 @@ class ForgotPasswordController extends Controller
 		$notify[] = ['success', 'You can change your password.'];
 		$code = str_replace(' ', '', $request->code);
 
-		return redirect()->route('admin.password.reset.form', $code)->withNotify($notify);
+		return redirect()->route('admin.password.reset.form', $code)->with('notify', $notify);
 	}
 }

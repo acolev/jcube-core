@@ -60,9 +60,9 @@ class ConfigController extends Controller
 			}
 			Artisan::call('optimize:clear');
 			$notify[] = ['success', 'Settings updated successfully'];
-			return back()->withNotify($notify);
+			return back()->with('notify', $notify);
 		} catch (\Exception $exception) {
-			dd($request->getPayload(), $exception);
+			return back()->withErrors( $exception->getMessage());
 		}
 	}
 }

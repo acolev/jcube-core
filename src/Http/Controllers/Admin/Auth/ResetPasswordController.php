@@ -58,7 +58,7 @@ class ResetPasswordController extends Controller
 		if (!$resetToken) {
 			$notify[] = ['error', 'Token not found!'];
 
-			return redirect()->route('admin.password.reset')->withNotify($notify);
+			return redirect()->route('admin.password.reset')->with('notify', $notify);
 		}
 		$email = $resetToken->email;
 
@@ -79,7 +79,7 @@ class ResetPasswordController extends Controller
 		if ($reset->status == 1) {
 			$notify[] = ['error', 'Invalid code'];
 
-			return redirect()->route('admin.login')->withNotify($notify);
+			return redirect()->route('admin.login')->with('notify', $notify);
 		}
 
 		$user->password = bcrypt($request->password);
@@ -98,7 +98,7 @@ class ResetPasswordController extends Controller
 
 		$notify[] = ['success', 'Password changed'];
 
-		return redirect()->route('admin.login')->withNotify($notify);
+		return redirect()->route('admin.login')->with('notify', $notify);
 	}
 
 	/**

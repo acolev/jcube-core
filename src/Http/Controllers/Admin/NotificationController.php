@@ -51,7 +51,7 @@ class NotificationController extends Controller
 
 		$notify[] = ['success', 'Notification template updated successfully'];
 		Artisan::call('optimize:clear');
-		return back()->withNotify($notify);
+		return back()->with('notify', $notify);
 	}
 
 	public function emailSetting()
@@ -100,7 +100,7 @@ class NotificationController extends Controller
 		$config->save();
 		$notify[] = ['success', 'Email settings updated successfully'];
 		Artisan::call('optimize:clear');
-		return back()->withNotify($notify);
+		return back()->with('notify', $notify);
 	}
 
 	public function emailTest(Request $request)
@@ -130,7 +130,7 @@ class NotificationController extends Controller
 		} else {
 			$notify[] = ['info', 'Please enable from general settings'];
 			$notify[] = ['error', 'Your email notification is disabled'];
-			return back()->withNotify($notify);
+			return back()->with('notify', $notify);
 		}
 
 		if (session('mail_error')) {
@@ -139,7 +139,7 @@ class NotificationController extends Controller
 			$notify[] = ['success', 'Email sent to ' . $request->email . ' successfully'];
 		}
 
-		return back()->withNotify($notify);
+		return back()->with('notify', $notify);
 	}
 
 	public function smsSetting()
@@ -217,7 +217,7 @@ class NotificationController extends Controller
 		$config->save();
 		$notify[] = ['success', 'Sms settings updated successfully'];
 		Artisan::call('optimize:clear');
-		return back()->withNotify($notify);
+		return back()->with('notify', $notify);
 	}
 
 	public function smsTest(Request $request)
@@ -234,7 +234,7 @@ class NotificationController extends Controller
 		} else {
 			$notify[] = ['info', 'Please enable from general settings'];
 			$notify[] = ['error', 'Your sms notification is disabled'];
-			return back()->withNotify($notify);
+			return back()->with('notify', $notify);
 		}
 
 		if (session('sms_error')) {
@@ -243,7 +243,7 @@ class NotificationController extends Controller
 			$notify[] = ['success', 'SMS sent to ' . $request->mobile . 'successfully'];
 		}
 
-		return back()->withNotify($notify);
+		return back()->with('notify', $notify);
 	}
 
 }

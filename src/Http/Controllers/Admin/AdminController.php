@@ -54,7 +54,7 @@ class AdminController extends Controller
 			} catch (\Exception) {
 				$notify[] = ['error', 'Image could not be uploaded.'];
 
-				return back()->withNotify($notify);
+				return back()->with('notify', $notify);
 			}
 		}
 
@@ -64,7 +64,7 @@ class AdminController extends Controller
 		$user->save();
 		$notify[] = ['success', 'Your profile has been updated.'];
 
-		return redirect()->route('admin.profile')->withNotify($notify);
+		return redirect()->route('admin.profile')->with('notify', $notify);
 	}
 
 	public function show2faForm()
@@ -93,11 +93,11 @@ class AdminController extends Controller
 			$user->save();
 			$notify[] = ['success', 'Google authenticator activated successfully'];
 
-			return back()->withNotify($notify);
+			return back()->with('notify', $notify);
 		} else {
 			$notify[] = ['error', 'Wrong verification code'];
 
-			return back()->withNotify($notify);
+			return back()->with('notify', $notify);
 		}
 	}
 
@@ -118,7 +118,7 @@ class AdminController extends Controller
 			$notify[] = ['error', 'Wrong verification code'];
 		}
 
-		return back()->withNotify($notify);
+		return back()->with('notify', $notify);
 	}
 
 
@@ -142,13 +142,13 @@ class AdminController extends Controller
 		if (!Hash::check($request->old_password, $user->password)) {
 			$notify[] = ['error', 'Password do not match !!'];
 
-			return back()->withNotify($notify);
+			return back()->with('notify', $notify);
 		}
 		$user->password = bcrypt($request->password);
 		$user->save();
 		$notify[] = ['success', 'Password changed successfully.'];
 
-		return redirect()->route('admin.password')->withNotify($notify);
+		return redirect()->route('admin.password')->with('notify', $notify);
 	}
 
 	public function notifications()
@@ -176,7 +176,7 @@ class AdminController extends Controller
 		]);
 		$notify[] = ['success', 'Notifications read successfully'];
 
-		return back()->withNotify($notify);
+		return back()->with('notify', $notify);
 	}
 
 	public function systemInfo()
@@ -212,6 +212,6 @@ class AdminController extends Controller
 		Artisan::call('optimize:clear');
 		$notify[] = ['success', 'Cache cleared successfully'];
 
-		return back()->withNotify($notify);
+		return back()->with('notify', $notify);
 	}
 }

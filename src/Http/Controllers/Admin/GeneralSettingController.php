@@ -36,7 +36,7 @@ class GeneralSettingController extends Controller
 			} catch (\Exception $exp) {
 				$notify[] = ['error', 'Couldn\'t upload the logo'];
 
-				return back()->withNotify($notify);
+				return back()->with('notify', $notify);
 			}
 		}
 		if ($request->hasFile('logo_dark')) {
@@ -50,7 +50,7 @@ class GeneralSettingController extends Controller
 				$notify[] = ['error', 'Couldn\'t upload the logo'];
 
 				Artisan::call('optimize:clear');
-				return back()->withNotify($notify);
+				return back()->with('notify', $notify);
 			}
 		}
 
@@ -65,12 +65,12 @@ class GeneralSettingController extends Controller
 			} catch (\Exception $exp) {
 				$notify[] = ['error', 'Couldn\'t upload the favicon'];
 
-				return back()->withNotify($notify);
+				return back()->with('notify', $notify);
 			}
 		}
 		$notify[] = ['success', 'Logo & favicon updated successfully'];
 
-		return back()->withNotify($notify);
+		return back()->with('notify', $notify);
 	}
 
 	public function customCss()
@@ -94,6 +94,6 @@ class GeneralSettingController extends Controller
 		file_put_contents($file, $request->css);
 		$notify[] = ['success', 'CSS updated successfully'];
 
-		return back()->withNotify($notify);
+		return back()->with('notify', $notify);
 	}
 }
