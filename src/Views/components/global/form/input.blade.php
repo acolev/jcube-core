@@ -47,7 +47,7 @@
                 @foreach($variants as $k=>$variant)
                     @php
                         if($type === 'radio')  $checked =  $value === $variant;
-                        else $checked = in_array($variant, explode(',', $value));
+                        else $checked = in_array($variant, json_decode($value));
                     @endphp
                     <input @class(['btn-check' => $btn]) type="{{$type}}" name="{{ $name }}" value="{{ $variant }}"
                            id="{{ $id }}-{{ $k }}"  @checked($checked) @required(!!$required)>
@@ -58,7 +58,7 @@
             @foreach($variants as $k=>$variant)
                 @php
                     if($type === 'radio')  $checked =  $value === $variant;
-                    else $checked = in_array($variant, $value);
+                    else $checked = in_array($variant, json_decode($value));
                 @endphp
                 <div @class(['form-check-inline' =>  $inline,])>
                     <input @class(['form-check-input']) type="{{$type}}" name="{{ $name }}" value="{{ $variant }}"

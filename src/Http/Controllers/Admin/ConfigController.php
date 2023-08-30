@@ -49,9 +49,10 @@ class ConfigController extends Controller
 						$v = true;
 					} elseif ($config->type === 'boolean') {
 						$v = false;
+					} elseif (is_array($v)) {
+						$v = json_encode($v);
 					}
 					if ($config->slug && $config->value !== $v) {
-						if(is_array($v)) $v = implode(',', $v);
 						$config->value = $v;
 						$config->save();
 					}
@@ -61,7 +62,7 @@ class ConfigController extends Controller
 			$notify[] = ['success', 'Settings updated successfully'];
 			return back()->withNotify($notify);
 		} catch (\Exception $exception) {
-			dd($request->getPayload() ,$exception);
+			dd($request->getPayload(), $exception);
 		}
 	}
 }
