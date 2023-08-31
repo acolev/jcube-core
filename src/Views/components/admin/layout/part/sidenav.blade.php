@@ -22,10 +22,6 @@
                     {{ @$mainMenu }}
                 </ul>
                 {{ @$asidePost }}
-                <div class="text-center my-3 text-uppercase">
-                    <span class="text--primary">{{__(systemDetails()['name'])}}</span>
-                    <span class="text--success">@lang('V'){{systemDetails()['version']}} </span>
-                </div>
             </div>
         @endif
     </div>

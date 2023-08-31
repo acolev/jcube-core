@@ -12,27 +12,28 @@ class InstallCommand extends Command
 
 	public function handle()
 	{
-		$metadata = json_decode(file_get_contents(dirname(__DIR__, 3) . '/composer.json'));
+		try {
+			$metadata = json_decode(file_get_contents(dirname(__DIR__, 3) . '/composer.json'));
 
-		$this->comment('Installation started. Please wait...');
-		$this->info('Version: ' . $metadata->version);
-		$this
-			->executeCommand('storage:link')
-			->executeCommand('vendor:publish', [
-				'--tag' => 'core-config',
-			])
-			->executeCommand('jcube:notify', [
-				'--all'
-			]);
+			$this->comment('Installation started. Please wait...');
+			$this->info('Version: ' . $metadata->version);
+			$this
+				->executeCommand('storage:link')
+				->executeCommand('vendor:publish', ['--tag' => 'core-config',])
+				->executeCommand('make:create-admin-layout', ['name' => 'layout'])
+				->executeCommand('jcube:notify', ['--all']);
 
-		if ($this->confirm('Would you like run migrate?')) {
-			$this->executeCommand('migrate');
+			if ($this->confirm('Would you like run migrate?')) {
+				$this->executeCommand('migrate');
+			}
+			$this->showMeLove();
+
+			$this->info('Completed!');
+			$this->comment("To create a user, run 'artisan jcube:admin'");
+			$this->line("To start the embedded server, run 'artisan serve'");
+		}catch (\Exception $exception){
+
 		}
-		$this->showMeLove();
-
-		$this->info('Completed!');
-		$this->comment("To create a user, run 'artisan jcube:admin'");
-		$this->line("To start the embedded server, run 'artisan serve'");
 	}
 
 	/**
@@ -78,4 +79,5 @@ class InstallCommand extends Command
 
 		return $this;
 	}
+
 }

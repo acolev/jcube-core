@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use jCube\Console\Commands\AdminCommand;
 use jCube\Console\Commands\InstallCommand;
+use jCube\Console\Commands\LayoutCommand;
 use jCube\Console\Commands\NotifyCommand;
 use jCube\Http\Middleware\Check2fa;
 use jCube\Http\Middleware\LanguageMiddleware;
@@ -76,6 +77,7 @@ class jCubeServiceProvider extends ServiceProvider
 				InstallCommand::class,
 				AdminCommand::class,
 				NotifyCommand::class,
+				LayoutCommand::class
 			]);
 		}
 	}
