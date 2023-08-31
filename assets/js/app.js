@@ -81,14 +81,13 @@ $(".select2-auto-tokenize").select2({
   tokenSeparators: [',']
 });
 
-
 function setMenuNotified(item, parent, count = 0) {
   const notifyParent = document.querySelector(`.nav-parent-${parent}`);
   const notifyItem = document.querySelector(`.nav-item-${item}`);
   if (notifyParent)
     notifyParent.insertAdjacentHTML("beforeend", '<span class="menu-badge pill bg--danger ms-auto"><i class="fa fa-exclamation"></i></span>')
   if (notifyItem)
-    notifyItem.insertAdjacentHTML("beforeend", '<span class="menu-badge pill bg--danger ms-auto">10</span>')
+    notifyItem.insertAdjacentHTML("beforeend", `<span class="menu-badge pill bg--danger ms-auto">${count}</span>`)
 }
 
 function proPicURL(input) {
