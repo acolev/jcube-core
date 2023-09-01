@@ -19,7 +19,7 @@
            id="{{ $id }}">
 @elseif($type === 'number')
     <input class="form-control" type="number" name="{{ $name }}" @required(!!$required) value="{{ $value }}"
-           id="{{ $id }}">
+           id="{{ $id }}" {{ $attributes }}>
 @elseif($type === 'text')
     <textarea {{ $attributes }} class="form-control" name="{{ $name }}" @if(!!$required) required
               @endif id="{{ $id }}">@php echo $value @endphp</textarea>
@@ -70,7 +70,7 @@
     @endif
 @elseif($type === 'select')
     @if(is_array($variants))
-        <select class="form-control" name="{{ $name }}" id="{{ $id }}">
+        <select class="form-control" name="{{ $name }}" id="{{ $id }}" {{ $attributes }}>
             <option value="">{{ __('Choose option') }}</option>
             @foreach($variants as $v => $variant)
                 @if(gettype($v) === 'integer')
