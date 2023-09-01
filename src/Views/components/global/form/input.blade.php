@@ -72,8 +72,12 @@
     @if(is_array($variants))
         <select class="form-control" name="{{ $name }}" id="{{ $id }}">
             <option value="">{{ __('Choose option') }}</option>
-            @foreach($variants as $variant)
-                <option value="{{$variant}}" @selected($value === $variant)>{{ __($variant) }}</option>
+            @foreach($variants as $v => $variant)
+                @if(gettype($v) === 'integer')
+                    <option value="{{$v}}" @selected($value === $v)>{{ __($variant) }}</option>
+                @else
+                    <option value="{{$variant}}" @selected($value === $v)>{{ __($variant) }}</option>
+                @endif
             @endforeach
         </select>
     @endif
