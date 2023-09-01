@@ -21,7 +21,7 @@ class InstallCommand extends Command
 				->executeCommand('storage:link')
 				->executeCommand('vendor:publish', ['--tag' => 'core-config',])
 				->executeCommand('make:create-admin-layout', ['name' => 'layout'])
-				->call('jcube:notify');
+				->executeCommand('jcube:notify');
 
 			if ($this->confirm('Would you like run migrate?')) {
 				$this->executeCommand('migrate');
@@ -29,7 +29,6 @@ class InstallCommand extends Command
 			$this->showMeLove();
 
 			$this->info('Completed!');
-			$this->comment("To create a user, run 'artisan jcube:admin'");
 			$this->comment("To create a user, run 'artisan jcube:admin'");
 			$this->line("To start the embedded server, run 'artisan serve'");
 		}catch (\Exception $exception){
