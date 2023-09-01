@@ -11,7 +11,7 @@ class NotifyCommand extends Command
 {
 	protected $name = 'jcube:notify';
 
-	protected $signature = 'jcube:notify {action?} {--all}';
+	protected $signature = 'jcube:notify {action?}';
 
 	protected $description = 'Add new notification template';
 
@@ -22,7 +22,7 @@ class NotifyCommand extends Command
 				dirname(__DIR__, 3) . '/stubs/notify/',
 				'stubs/notify/',
 			];
-			if ($this->option('all')) {
+			if (!$this->argument('action')) {
 				foreach ($folders as $folder) {
 					foreach (glob($folder . '*') as $file) {
 						if (file_exists($file)) {
