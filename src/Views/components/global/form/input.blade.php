@@ -13,15 +13,21 @@
 @endphp
 
 @if($type === 'string')
-    <label for="{{ $id }}" class="@required(!!$required)">{{ __($label) }}</label>
+    @isset($label)
+        <label class="@if(!!$required) required @endif">{{ __($label) }}</label>
+    @endisset
     <input class="form-control" type="text" name="{{ $name }}" @required(!!$required) value="{{ $value }}"
            id="{{ $id }}">
 @elseif($type === 'number')
-    <label for="{{ $id }}" class="@required(!!$required)">{{ __($label) }}</label>
+    @isset($label)
+        <label class="@if(!!$required) required @endif">{{ __($label) }}</label>
+    @endisset
     <input class="form-control" type="number" name="{{ $name }}" @required(!!$required) value="{{ $value }}"
            id="{{ $id }}">
 @elseif($type === 'text')
-    <label for="{{ $id }}" class="@required(!!$required)">{{ __($label) }}</label>
+    @isset($label)
+        <label class="@if(!!$required) required @endif">{{ __($label) }}</label>
+    @endisset
     <textarea {{ $attributes }} class="form-control" name="{{ $name }}" @if(!!$required) required
               @endif id="{{ $id }}">@php echo $value @endphp</textarea>
 @elseif($type === 'toggle')
@@ -39,7 +45,9 @@
         @endisset
     </div>
 @elseif(in_array($type, ['radio', 'checkbox']))
-    <label class="@if(!!$required) required @endif">{{ __($label) }}</label>
+    @isset($label)
+        <label class="@if(!!$required) required @endif">{{ __($label) }}</label>
+    @endisset
     @if(is_array($variants))
         @php  if($type === 'checkbox') $name = $name. '[]' @endphp
         @if($btn)
@@ -50,7 +58,7 @@
                         else $checked = in_array($variant, json_decode($value));
                     @endphp
                     <input @class(['btn-check' => $btn]) type="{{$type}}" name="{{ $name }}" value="{{ $variant }}"
-                           id="{{ $id }}-{{ $k }}"  @checked($checked) @required(!!$required)>
+                           id="{{ $id }}-{{ $k }}" @checked($checked) @required(!!$required)>
                     <label class="btn btn-outline-primary" for="{{ $id }}-{{ $k }}">{{ __($variant) }}</label>
                 @endforeach
             </div>
@@ -71,7 +79,9 @@
         @endif
     @endif
 @elseif($type === 'select')
-    <label class="@if(!!$required) required @endif">{{ __($label) }}</label>
+    @isset($label)
+        <label class="@if(!!$required) required @endif">{{ __($label) }}</label>
+    @endisset
     @if(is_array($variants))
         <select class="form-control" name="{{ $name }}" id="{{ $id }}">
             <option value="">{{ __('Choose option') }}</option>
