@@ -9,7 +9,7 @@
                 <li class="sidebar-menu-item {{ @$item['children'] ? 'sidebar-dropdown' : '' }}">
                     <a href="javascript:void(0)" class="nav-link nav-parent-{{titleToKey(@$item['name'])}} {{ menuActive(@$item["link"]['active'], 3) }}">
                         <i class="menu-icon {{ @$item['icon'] ?: 'la la-circle' }}"></i>
-                        <span class="menu-title">{{ __($item['name']) }}</span>
+                        <span class="menu-title">{{ __(@$item['name']) }}</span>
                     </a>
                     <div class="sidebar-submenu {{menuActive(@$item["link"]['active'],2)}} ">
                         <ul>
@@ -22,7 +22,7 @@
                 </li>
             @else
                 <li class="sidebar-menu-item {{ menuActive($item["link"]['active']) }}">
-                    <a href="{{route($item["link"]['name'], @$item["link"]['params'])}}" class="nav-link nav-item-{{titleToKey(@$item['name'])}}"
+                    <a href="{{route(@$item["link"]['name'], @$item["link"]['params'])}}" class="nav-link nav-item-{{titleToKey(@$item['name'])}}"
                        @if(is_array(@$item['search']))
                            data-search-query="{{ @$item['search']['query'] }}"
                        data-search-title="{{ __(@$item['search']['title']) }}"
