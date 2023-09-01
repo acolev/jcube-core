@@ -3,6 +3,7 @@
 	"value" => '',
 	"type" => 'string',
 	"label" => "",
+	"placeholder" => "",
 	"required" => false,
 	"btn" => false,
 	"inline" => false,
@@ -18,7 +19,7 @@
     <input class="form-control" type="text" name="{{ $name }}" @required(!!$required) value="{{ $value }}"
            id="{{ $id }}">
 @elseif($type === 'number')
-    <input class="form-control" type="number" name="{{ $name }}" @required(!!$required) value="{{ $value }}"
+    <input class="form-control" type="number" name="{{ $name }}" placeholder="{{ $placeholder }}" @required(!!$required) value="{{ $value }}"
            id="{{ $id }}" {{ $attributes }}>
 @elseif($type === 'text')
     <textarea {{ $attributes }} class="form-control" name="{{ $name }}" @if(!!$required) required
@@ -71,7 +72,7 @@
 @elseif($type === 'select')
     @if(is_array($variants))
         <select class="form-control" name="{{ $name }}" id="{{ $id }}" {{ $attributes }}>
-            <option value="">{{ __('Choose option') }}</option>
+            <option value="">{{ __($placeholder ?: 'Choose option') }}</option>
             @foreach($variants as $v => $variant)
                 @if(gettype($v) === 'integer')
                     <option value="{{$variant}}" @selected($value === $v)>{{ __($variant) }}</option>
