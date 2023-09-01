@@ -74,9 +74,9 @@
             <option value="">{{ __('Choose option') }}</option>
             @foreach($variants as $v => $variant)
                 @if(gettype($v) === 'integer')
-                    <option value="{{$v}}" @selected($value === $v)>{{ __($variant) }}</option>
-                @else
                     <option value="{{$variant}}" @selected($value === $v)>{{ __($variant) }}</option>
+                @else
+                    <option value="{{$v}}" @selected($value === $v)>{{ __($variant) }}</option>
                 @endif
             @endforeach
         </select>
