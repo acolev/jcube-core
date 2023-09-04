@@ -12,7 +12,8 @@ return new class extends Migration
 	public function up(): void
 	{
 		Schema::create('config_categories', function (Blueprint $table) {
-			$table->string('slug')->primary();
+      $table->id();
+			$table->string('slug');
 			$table->string('title');
 			$table->string('description');
 			$table->string('icon');

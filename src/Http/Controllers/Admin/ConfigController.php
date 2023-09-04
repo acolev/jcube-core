@@ -18,7 +18,7 @@ class ConfigController extends Controller
   {
     $pageTitle = 'Configuration: ' . $category->getAttribute('title');
     
-    $categories = ConfigCategory::get();
+    $categories = ConfigCategory::orderBy('id')->get();
     $viewFile = 'admin::config.' . $category->slug;
     $viewFileAlt = 'admin.config.' . $category->slug;
     $configs = Config::where('category', $category->slug)->get();

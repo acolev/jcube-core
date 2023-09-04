@@ -12,7 +12,8 @@ return new class extends Migration {
 	public function up(): void
 	{
 		Schema::create('configs', function (Blueprint $table) {
-			$table->string('slug')->primary();
+			$table->id();
+			$table->string('slug');
 			$table->string('category');
 			$table->string('name');
 			$table->string('type')->default('string');
