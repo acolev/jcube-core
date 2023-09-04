@@ -20,7 +20,7 @@
                             <i class="las la-bars fs-5"></i>
                         </a>
                     </div>
-                    <div>{{ @$title }}</div>
+                    <div @class(['flex-fill'])>{{ @$title }}</div>
                 </div>
             </div>
             {{ $slot }}

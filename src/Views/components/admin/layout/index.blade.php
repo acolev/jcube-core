@@ -52,6 +52,7 @@
     <x-notify />
 </x-dynamic-component>
 
+@stack('modal-place')
 
 <script src="{{asset('admin_assets/vendor/jquery/jquery-3.6.0.min.js')}}"></script>
 <script src="{{asset('admin_assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>

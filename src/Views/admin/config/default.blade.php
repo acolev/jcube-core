@@ -1,7 +1,9 @@
 <x-dynamic-component :component="$layoutComponent" :page-title="@$pageTitle" no-body>
     <x-admin::drawer>
         <x-slot name="title">
-            {{ __($category->title) }}
+           <div @class(['d-flex', 'flex-grow-1'])>
+               {{ __($category->title) }}
+           </div>
         </x-slot>
 
         <form action="{{ route('admin.config.update', $category->slug) }}" method="post">
