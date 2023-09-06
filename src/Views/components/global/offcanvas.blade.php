@@ -7,7 +7,7 @@
 @isset($button)
 {{$button}}
 @else
-    <button class="btn btn--primary">
+    <button class="btn btn--primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#{{ $id }}" role="button" aria-controls="{{ $id }}">
         <i class="la la-bars"></i>
     </button>
 @endisset
