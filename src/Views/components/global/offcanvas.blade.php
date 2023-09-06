@@ -5,10 +5,11 @@
   'width' => null,
 ])
 @isset($button)
-{{$button}}
+    {{$button}}
 @else
-    <button class="btn btn--primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#{{ $id }}" role="button" aria-controls="{{ $id }}">
-        <i class="la la-bars"></i>
+    <button class="btn btn--primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#{{ $id }}" role="button"
+            aria-controls="{{ $id }}">
+        <i class="la la-bars p-0"></i>
     </button>
 @endisset
 @push('modal-place')
