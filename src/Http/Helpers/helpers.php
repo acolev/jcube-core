@@ -85,7 +85,7 @@ function getFilePath($key)
     $fileManager = new FileManager();
     return $fileManager->$key()->path;
   } catch (Exception $exception) {
-    return 'assets/file/' . $key;
+    return 'assets/files/' . $key;
   }
 }
 
