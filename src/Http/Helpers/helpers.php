@@ -95,7 +95,7 @@ function getFileSize($key)
     $fileManager = new FileManager();
     return $fileManager->$key()->size;
   } catch (Exception $exception) {
-    return '';
+    return '400x400';
   }
 }
 
