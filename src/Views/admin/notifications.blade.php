@@ -5,8 +5,10 @@
                href="{{ route('admin.notification.read',$notification->id) }}">
                 <div class="notify__content">
                     <h6 class="title">{{ __($notification->title) }}</h6>
-                    <span class="date"><i
-                                class="las la-clock"></i> {{ $notification->created_at->diffForHumans() }}</span>
+                    <span class="date">
+                        <i class="las la-clock"></i>
+                        {{ $notification->created_at->diffForHumans() }}
+                    </span>
                 </div>
             </a>
         @empty
