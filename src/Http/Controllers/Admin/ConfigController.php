@@ -48,7 +48,7 @@ class ConfigController extends Controller
         if ($k !== '_token') {
           $config = Config::where('category', $category)
             ->where('slug', $k)->first();
-          if ($config->type === 'boolean' && $v === 'on') {
+          if ($config->type === 'boolean' && $v === '1') {
             $v = true;
           } elseif ($config->type === 'boolean') {
             $v = false;
