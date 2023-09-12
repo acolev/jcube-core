@@ -887,7 +887,7 @@ function notify($user, $templateName, $shortCodes = null, $sendVia = null, $crea
   
   $shortCodes = array_merge($shortCodes ?? [], $globalShortCodes);
   
-  $notify = new Notify($sendVia);
+  $notify = new Notify($sendVia ?: ['email', 'sms']);
   $notify->templateName = $templateName;
   $notify->shortCodes = $shortCodes;
   $notify->user = $user;
