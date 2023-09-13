@@ -30,6 +30,9 @@
 
 <x-dynamic-component :component="'admin::layout.' . strtolower($variant)" :page-title="$pageTitle"
                      :menus="$menus" {{ $attributes }}>
+    @if(isset($topBarOverride))
+        <x-slot name="topBarOverride">{{ $topBarOverride }}</x-slot>
+    @endif
     @if(isset($topBarLeft))
         <x-slot name="topBarLeft">{{ $topBarLeft }}</x-slot>
     @endif
@@ -49,7 +52,7 @@
         <x-slot name="asideOverride">{{ $asideOverride }}</x-slot>
     @endif
     {{ $slot }}
-    <x-notify />
+    <x-notify/>
 </x-dynamic-component>
 
 @stack('modal-place')
