@@ -23,7 +23,7 @@ function systemDetails()
 
 function gs()
 {
-  return getConfig('general');
+  return getConfig(['general', 'system']);
 }
 
 function getConfig($cat)
