@@ -17,15 +17,18 @@
             <x-slot name="asideOverride">{{ $asideOverride }}</x-slot>
         @endif
     </x-admin::layout.part.sidenav>
-    <x-admin::layout.part.topnav>
-        @if(isset($topBarLeft))
-            <x-slot name="topBarLeft">{{ $topBarLeft }}</x-slot>
-        @endif
-        @if(isset($topBarRight))
-            <x-slot name="topBarRight">{{ $topBarRight }}</x-slot>
-        @endif
-    </x-admin::layout.part.topnav>
-
+    @if(isset($topBarOverride))
+        {{ $topBarOverride }}
+    @else
+        <x-admin::layout.part.topnav>
+            @if(isset($topBarLeft))
+                <x-slot name="topBarLeft">{{ $topBarLeft }}</x-slot>
+            @endif
+            @if(isset($topBarRight))
+                <x-slot name="topBarRight">{{ $topBarRight }}</x-slot>
+            @endif
+        </x-admin::layout.part.topnav>
+    @endif
     @if(@$noBody)
         <div class="body-wrapper p-0">
             {{ $slot }}
