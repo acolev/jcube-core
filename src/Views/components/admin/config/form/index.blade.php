@@ -18,7 +18,7 @@
 	'hidden',
 ]))
     <x-form.input :type="$type" btn :name="$name" :label="$label" :value="$value ?: $default"
-                  :variants="explode(',', $variants)"/>
+                  :variants="$variants"/>
 @elseif($type === 'html')
     <x-form.html :name="$name" :label="$label" :value="$value ?: $default"/>
 @elseif($type === 'code')
