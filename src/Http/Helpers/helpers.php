@@ -881,6 +881,10 @@ function notify($user, $templateName, $shortCodes = null, $sendVia = null, $crea
     'site_name' => $general->site_name,
   ];
   
+  if (function_exists('notifyShortCodes')) {
+    $globalShortCodes = array_merge($globalShortCodes, notifyShortCodes());
+  }
+  
   if (gettype($user) == 'array') {
     $user = (object)$user;
   }
