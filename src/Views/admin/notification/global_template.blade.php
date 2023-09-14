@@ -74,7 +74,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>@lang('Email Body') </label>
-                                    <x-form.html type="full" name="email_template" :value="$general->email_template" type="short"/>
+                                    <x-form.html name="email_template" :value="$general->email_template" type="short"/>
                                 </div>
                             </div>
                             <div class="col-md-12">
