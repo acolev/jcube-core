@@ -22,7 +22,7 @@
                     </div>
                 </li>
             @else
-                <li class="sidebar-menu-item {{ menuActive($item["link"]['active']) }}">
+                <li class="sidebar-menu-item {{ menuActive($item["link"]['active'], null, @$item["link"]['params']) }}">
                     <a href="{{ isset($item["link"]['name']) ? route(@$item["link"]['name'], @$item["link"]['params']) : 'javascript:void(0)'}}"
                        class="nav-link nav-item-{{titleToKey(@$item['name'])}}"
                        @if(is_array(@$item['search']))
