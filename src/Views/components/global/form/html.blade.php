@@ -5,6 +5,7 @@
 	"required" => false,
 	"type" => 'full',
 	"menubar" => 'false',
+	"editorTemplates" => [],
 ])
 @php
     $id = \Str::random(8)
@@ -27,7 +28,7 @@
           toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor case removeformat help | pagebreak | charmap emoticons | fullscreen  preview | insertfile image media link anchor codesample | a11ycheck ltr rtl | showcomments addcomment | code',
           quickbars_selection_toolbar: 'bold italic underline strikethrough | quicklink h2 h3 blockquote | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | case template',
           quickbars_insert_toolbar: 'template image table',
-          templates: @isset($editorTemplates) @json($editorTemplates) @else [] @endisset,
+          templates: @json($editorTemplates),
           toolbar_mode: 'sliding',
           autosave_ask_before_unload: true,
           autosave_interval:'30s',
