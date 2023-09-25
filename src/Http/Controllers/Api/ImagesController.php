@@ -22,7 +22,7 @@ class ImagesController extends Controller
         }
         
         $filename = fileUploader($request->file, $filePath);
-        $fullpath = implode('/',[getFilePath($path), $filename]);
+        $fullpath = implode('/',[getPublicFilePath($path), $filename]);
         
         return Response::json([
           'location' => $fullpath,

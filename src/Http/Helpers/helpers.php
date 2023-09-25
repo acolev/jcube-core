@@ -89,6 +89,16 @@ function getFilePath($key)
   }
 }
 
+function getPublicFilePath($key)
+{
+  try {
+    $fileManager = new FileManager();
+    return $fileManager->$key()->public;
+  } catch (Exception $exception) {
+    return getFilePath($key);
+  }
+}
+
 function getFileSize($key)
 {
   try {
