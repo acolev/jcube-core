@@ -12,7 +12,7 @@ class AdminCommand extends Command
 {
     protected $name = 'jcube:admin';
 
-    protected $signature = 'jcube:admin {name?} {email?} {password?}  {--root}';
+    protected $signature = 'jcube:admin {name?} {email?} {password?}';
 
     protected $description = 'Create or update admin user';
 
@@ -26,7 +26,7 @@ class AdminCommand extends Command
             $staff->password = Hash::make($this->argument('password') ?? $this->secret('What is the password?'));
             $staff->email = $this->argument('email') ?? $this->ask('What is your email?', 'admin@admin.com');
             //			$staff->email_verified_at = time();
-            $staff->status = $this->option('root') ?: 0;
+            $staff->status = 1;
 
             $staff->save();
 
