@@ -31,16 +31,21 @@
           templates: @json($templates),
           toolbar_mode: 'sliding',
           autosave_ask_before_unload: true,
-          autosave_interval:'30s',
+          autosave_interval: '30s',
           autosave_prefix: '{path}{query}-{id}-',
           autosave_restore_when_empty: false,
           autosave_retention: '2m',
             @else
             plugins: 'lists autoresize',
-          toolbar:'bold italic h2 h3 numlist bullist blockquote hr undo redo',
+          toolbar: 'bold italic h2 h3 numlist bullist blockquote hr undo redo',
             @endif
             autoresize: 'on',
-          images_upload_url:'/api/images/editor',
+          images_upload_url: '/api/images/editor',
+          image_title: true,
+          relative_urls: false,
+          remove_script_host: false,
+          convert_urls: false,
+          images_upload_base_path: '/'
         });
       })
       ();

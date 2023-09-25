@@ -9,31 +9,29 @@ use jCube\Rules\FileTypeValidate;
 
 class ImagesController extends Controller
 {
-    public function editor(Request $request)
-    {
-
-        $fullpath = null;
-        $request->validate([
-            'file' => ['image', new FileTypeValidate(['jpg', 'jpeg', 'png'])],
-        ]);
-
-        if ($request->hasFile('file')) {
-            try {
-                $path = getFilePath('editor');
-                if (! file_exists($path)) {
-                    mkdir($path, 0755, true);
-                }
-                $fullpath = getPublicPath('editor').fileUploader($request->file, $path);
-
-            } catch (\Exception $exp) {
-                $notify = ['error', 'Couldn\'t upload the file'];
-
-                return Response::json($notify, 200);
-            } finally {
-                return Response::json([
-                    'location' => $fullpath,
-                ], 200);
-            }
+  public function upload($path, Request $request)
+  {
+    $request->validate([
+      'file' => ['image', new FileTypeValidate(['jpg', 'jpeg', 'png'])],
+    ]);
+    if ($request->hasFile('file')) {
+      try {
+        $filePath = getFilePath($path);
+        if (!file_exists($path)) {
+          mkdir($path, 0755, true);
         }
+        
+        $filename = fileUploader($request->file, $filePath);
+        $fullpath = implode('/',[getFilePath($path), $filename]);
+        
+        return Response::json([
+          'location' => $fullpath,
+        ], 200);
+      } catch (\Exception $exp) {
+        $notify = ['error', 'Couldn\'t upload the file'];
+        
+        return Response::json($notify, 200);
+      }
     }
+  }
 }

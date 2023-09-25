@@ -839,6 +839,7 @@ function camelCaseToNormal($str)
 
 function fileUploader($file, $location, $size = null, $old = null, $thumb = null)
 {
+  
   $fileManager = new FileManager($file);
   $fileManager->path = $location;
   $fileManager->size = $size;
