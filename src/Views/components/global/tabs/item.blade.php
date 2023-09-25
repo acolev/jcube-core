@@ -24,7 +24,7 @@
         $(val).on('click', function (el) {
           var href = new URL(location.href);
           href.searchParams.set('tab', $(el.target).attr("aria-controls"));
-          location.href = href;
+          window.history.pushState(location.data, location.title, href)
         })
       });
     </script>
