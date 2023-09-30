@@ -124,57 +124,19 @@ return [
 			"type" => "title",
 		],
 		"children" => [
-			[
-				"name" => "System",
-				"access" => "Others",
-				"link" => [
-					"type" => "link",
-					"active" => 'admin.system*',
-					"open" => 'admin.system*',
-				],
-				"icon" => 'la la-server',
-				"children" => [
-					[
-						"name" => "Application",
-						"link" => [
-							"type" => "link",
-							"name" => "admin.system.info",
-							"active" => ['admin.system.info'],
-						],
-						"search" => [
-							"query" => "application info, app info",
-							"title" => "Application Info",
-							"group" => "Others"
-						],
-					],
-					[
-						"name" => "Server",
-						"link" => [
-							"type" => "link",
-							"name" => "admin.system.server.info",
-							"active" => ['admin.system.server.info'],
-						],
-						"search" => [
-							"query" => "server info",
-							"title" => "Server Info",
-							"group" => "Others"
-						],
-					],
-					[
-						"name" => "Cache",
-						"link" => [
-							"type" => "link",
-							"name" => "admin.system.optimize",
-							"active" => ['admin.system.optimize'],
-						],
-						"search" => [
-							"query" => "clear cache",
-							"title" => "Clear Cache",
-							"group" => "Others"
-						],
-					],
-				],
-			],
+      [
+        "name" => "Cache",
+        "link" => [
+          "type" => "link",
+          "name" => "admin.system.optimize",
+          "active" => ['admin.system.optimize'],
+        ],
+        "search" => [
+          "query" => "clear cache",
+          "title" => "Clear Cache",
+          "group" => "Others"
+        ],
+      ],
 		],
 	],
 ];

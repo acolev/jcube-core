@@ -17,14 +17,14 @@
 @endif
 @if($type === 'string')
     <input class="form-control" type="text" name="{{ $name }}" @required(!!$required) value="{{ $value }}"
-           id="{{ $id }}">
+           id="{{ $id }}" {{ $attributes }}>
 @elseif($type === 'number')
     <input class="form-control" type="number" name="{{ $name }}" placeholder="{{ $placeholder }}"
            @required(!!$required) value="{{ $value }}"
            id="{{ $id }}" {{ $attributes }}>
 @elseif($type === 'text')
     <textarea {{ $attributes }} class="form-control" name="{{ $name }}" @if(!!$required) required
-              @endif id="{{ $id }}">@php echo $value @endphp</textarea>
+              @endif id="{{ $id }}" {{ $attributes }}>@php echo $value @endphp</textarea>
 @elseif($type === 'toggle')
     <div class="form-check form-switch">
         <input type="hidden" name="{{$name}}" value="0">

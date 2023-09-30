@@ -98,10 +98,7 @@ Route::middleware('admin')->group(function () {
 		Route::name('system.')
 			->prefix('system')
 			->group(function () {
-				Route::get('info', 'systemInfo')->name('info');
-				Route::get('server-info', 'systemServerInfo')->name('server.info');
 				Route::get('optimize', 'optimize')->name('optimize');
-				Route::get('optimize-clear', 'optimizeClear')->name('optimize.clear');
 			});
 	});
 });
