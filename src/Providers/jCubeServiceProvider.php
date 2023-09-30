@@ -11,7 +11,6 @@ use jCube\Console\Commands\InstallCommand;
 use jCube\Console\Commands\LayoutCommand;
 use jCube\Console\Commands\NotifyCommand;
 use jCube\Http\Middleware\Check2fa;
-use jCube\Http\Middleware\LanguageMiddleware;
 use jCube\Http\Middleware\Permission;
 use jCube\Http\Middleware\RedirectIfAdmin;
 use jCube\Http\Middleware\RedirectIfNotAdmin;

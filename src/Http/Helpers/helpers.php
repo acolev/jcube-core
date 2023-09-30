@@ -82,18 +82,18 @@ function getImage($image, $size = '200x200')
 function getFilePath($key)
 {
   try {
-    $fileManager = new FileManager();
-    return $fileManager->$key()->path;
+    $fileManager = config('admin.fileInfo');
+    return $fileManager[$key]['path'];
   } catch (Exception $exception) {
-    return 'assets/files/' . $key;
+    return 'assets/uploads/' . $key;
   }
 }
 
 function getPublicFilePath($key)
 {
   try {
-    $fileManager = new FileManager();
-    return $fileManager->$key()->public;
+    $fileManager = config('admin.fileInfo');
+    return $fileManager[$key]['public'];
   } catch (Exception $exception) {
     return getFilePath($key);
   }
@@ -102,8 +102,8 @@ function getPublicFilePath($key)
 function getFileSize($key)
 {
   try {
-    $fileManager = new FileManager();
-    return $fileManager->$key()->size;
+    $fileManager = config('admin.fileInfo');
+    return $fileManager[$key]['size'];
   } catch (Exception $exception) {
     return '400x400';
   }
