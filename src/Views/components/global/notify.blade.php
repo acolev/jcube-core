@@ -1,8 +1,9 @@
 <link rel="stylesheet" href="{{ asset('admin_assets/vendor/iziToast/css/iziToast.min.css') }}">
 <script src="{{ asset('admin_assets/vendor/iziToast/js/iziToast.min.js') }}"></script>
 
+
 @if(session()->has('notify'))
-    @foreach(session('notify') as $msg)
+    @foreach(@session('notify') as $msg)
         <script>
           "use strict";
           iziToast.{{ $msg[0] }}({message:"{{ __($msg[1]) }}", position: "topRight"});
