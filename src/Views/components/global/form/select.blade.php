@@ -26,7 +26,7 @@
             @if($multiple)
                 <option value="{{$v}}" @selected(in_array($v, $value))>{{ __($variant) }}</option>
             @else
-                <option value="{{$v}}" @selected($value === $v)>{{ __($variant) }}</option>
+                <option value="{{$v}}" @selected($value == $v)>{{ __($variant) }}</option>
             @endif
         @endforeach
     @endif
