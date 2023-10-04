@@ -11,6 +11,9 @@
     $id = \Str::random(8)
 @endphp
 
+@if($label)
+    <label class="@if(!!$required) required @endif">{{ __($label) }}</label>
+@endif
 <textarea class="tinymce" name="{{ $name }}">{{ $value }}</textarea>
 
 @push('script-lib')
