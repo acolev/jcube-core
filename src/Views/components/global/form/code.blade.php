@@ -1,4 +1,5 @@
 @props([
+	"label" => "",
 	"name" => '',
 	"value" => '',
 	"lang" => 'css',
