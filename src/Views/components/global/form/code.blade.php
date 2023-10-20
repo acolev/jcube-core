@@ -8,6 +8,10 @@
     $id = \Str::random(8)
 @endphp
 
+
+@if($label)
+    <label class="@if(!!$required) required @endif">{{ __($label) }}</label>
+@endif
 <textarea class="codemirror" name="{{ $name }}" id="{{$id}}" {{ $attributes }}>{{ $value }}</textarea>
 
 @pushonce('style-lib')
