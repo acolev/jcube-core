@@ -6,15 +6,14 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Permission
+class Permission extends \Spatie\Permission\Middleware\PermissionMiddleware
 {
-    public function handle(Request $request, Closure $next, $permission = '')
-    {
-        $user = Auth::guard('admin')->user();
-        if ($user->status || $user->access($permission)) {
-            return $next($request);
-        } else {
-            return abort(403);
-        }
-    }
+  
+  
+  public function handle($request, Closure $next, $permission, $guard = 'admin')
+  {
+    $user = Auth::guard($guard)->user();
+    if ($user->status) return $next($request);
+    return parent::handle($request, $next, $permission, $guard);
+  }
 }

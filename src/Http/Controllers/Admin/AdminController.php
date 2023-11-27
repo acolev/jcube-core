@@ -17,6 +17,9 @@ class AdminController extends Controller
   public function dashboard()
   {
     $pageTitle = 'Dashboard';
+    $admin = Auth::guard('admin')->user();
+    
+//    dump($admin->getAllPermissions());
     return view('admin::dashboard', compact('pageTitle'));
   }
   

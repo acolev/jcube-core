@@ -15,21 +15,45 @@ return [
 		],
 		"icon" => 'las la-home',
 	],
-	[
-		"name" => "Manage Staff",
-		"access" => "Manage Staff",
-		"link" => [
-			"type" => "link",
-			"name" => "admin.staff.index",
-			"active" => ['admin.staff.*'],
-		],
-		"search" => [
-			"query" => "manage staff, admins, manage admins",
-			"title" => "Manage Staff",
-			"group" => "Users"
-		],
-		"icon" => 'las la-users',
-	],
+  [
+    "name" => "Staff",
+    "access" => "Staff:Read",
+    "link" => [
+      "type" => "link",
+      "name" => "admin.staff.index",
+      "active" => ['admin.staff.*','admin.roles.*'],
+    ],
+    "icon" => 'las la-users',
+    "children" => [
+      [
+        "name" => "Staff",
+        "access" => "Staff:Read",
+        "link" => [
+          "type" => "link",
+          "name" => "admin.staff.index",
+          "active" => ['admin.staff.index'],
+        ],
+        "search" => [
+          "query" => "manage staff, admins, manage admins",
+          "title" => "Manage Staff",
+          "group" => "Users"
+        ],
+      ],
+      [
+        "name" => "Roles",
+        "access" => "Role:Edit",
+        "link" => [
+          "type" => "link",
+          "name" => "admin.roles.index",
+          "active" => ['admin.roles.*'],
+        ],
+        "search" => [
+          "query" => "manage roles",
+          "title" => "Manage Roles",
+        ],
+      ],
+    ]
+  ],
 	[
 		"name" => "Settings",
 		"link" => [

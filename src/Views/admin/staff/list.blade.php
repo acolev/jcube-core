@@ -1,183 +1,188 @@
 <x-dynamic-component :component="$layoutComponent" :page-title="@$pageTitle">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card b-radius--10 ">
-                <div class="card-body p-0">
-                    <div class="table-responsive--md  table-responsive">
-                        <table class="table table--light style--two">
-                            <thead>
-                            <tr>
-                                <th>@lang('Name')</th>
-                                <th>@lang('Email')</th>
-                                <th>@lang('Username')</th>
-                                <th>@lang('Joined At')</th>
-                                <th>@lang('Action')</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @forelse($staffs as $staff)
-                                <tr>
-                                    <td>{{ $staff->name }}</td>
-                                    <td>{{ $staff->email }}</td>
-                                    <td>{{ $staff->username }}</td>
-                                    <td>
-                                        <div>
-                                            <span class="d-block">{{ showDateTime($staff->created_at) }}</span>
-                                            <span>{{ diffForHumans($staff->created_at) }}</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button class="btn--group">
-                                            <button type="button" class="btn btn-sm btn-outline--primary editBtn"
-                                                    data-edit='@json($staff)'>
-                                                <i class="la la-pencil"></i>@lang('Edit')
-                                            </button>
-                                            @if ($staff->id!=1)
-                                                <button type="button"
-                                                        class="btn btn-sm btn-outline--danger confirmationBtn"
-                                                        data-action="{{ route('admin.staff.remove',$staff->id) }}"
-                                                        data-question="@lang('Are you sure to remove this staff')?">
-                                                    <i class="la la-trash"></i>@lang('Remove')
-                                                </button>
-                                            @endif
-                                        </button>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td class="text-muted text-center" colspan="100%">{{ __('No data') }}</td>
-                                </tr>
-                            @endforelse
-                            </tbody>
-                        </table>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card b-radius--10 ">
+        <div class="card-body p-0">
+          <div class="table-responsive--md  table-responsive">
+            <table class="table table--light style--two">
+              <thead>
+              <tr>
+                <th>@lang('Name')</th>
+                <th>@lang('Email')</th>
+                <th>@lang('Username')</th>
+                <th>@lang('Joined At')</th>
+                <th>@lang('Action')</th>
+              </tr>
+              </thead>
+              <tbody>
+              @forelse($staffs as $staff)
+                <tr>
+                  <td>{{ $staff->name }}</td>
+                  <td>{{ $staff->email }}</td>
+                  <td>{{ $staff->username }}</td>
+                  <td>
+                    <div>
+                      <span class="d-block">{{ showDateTime($staff->created_at) }}</span>
+                      <span>{{ diffForHumans($staff->created_at) }}</span>
                     </div>
-                </div>
-                @if ($staffs->hasPages())
-                    <div class="card-footer py-4">
-                        {{ paginateLinks($staffs) }}
-                    </div>
-                @endif
-            </div>
-        </div>
-    </div>
-
-    <div id="modal" class="modal fade" tabindex="-1" data-bs-keyboard="false" data-bs-backdrop="static">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">@lang('New Admin')</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="las la-times"></i>
-                    </button>
-                </div>
-                <form method="POST" action="{{ route('admin.staff.save') }}">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label class="form-label">@lang('Name')</label>
-                            <input type="text" required class="form-control" autocomplete="off" name="name">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">@lang('Email')</label>
-                            <input type="text" required class="form-control" autocomplete="off" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">@lang('Username')</label>
-                            <input type="text" required class="form-control" autocomplete="off" name="username">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">@lang('Password')</label>
-                            <input type="password" class="form-control" autocomplete="off" name="password">
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                @foreach ($permissions as  $group_name => $permission)
-                                    @if(is_array($permission))
-                                        <div class="col-lg-12">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                   <div class="d-flex gap-2">
-                                                       <h5>{{ $group_name }}</h5>
-                                                   </div>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        @foreach ($permission as $k=>$group_permission)
-                                                            <div class="col-lg-4">
-                                                                <label for="p_{{ titleToKey($group_name) }}_{{$k}}">
-                                                                    <input value="{{titleToKey($group_permission)}}"
-                                                                           name="permissions[]" id="p_{{ titleToKey($group_name) }}_{{$k}}"
-                                                                           type="checkbox">
-                                                                    {{ $group_permission }}
-                                                                </label>
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @else
-                                        <div class="col-lg-3">
-                                            <label for="p_{{ $loop->index }}">
-                                                <input value="{{titleToKey($permission)}}" name="permissions[]"
-                                                       id="p_{{$loop->index}}" type="checkbox">
-                                                {{ $permission }}
-                                            </label>
-                                        </div>
-                                    @endif
-                                @endforeach
+                  </td>
+                  <td>
+                    <div class="btn--group">
+                      <x-offcanvas id="userEdit-{{ $staff->id  }}" width="30vw" :title="'Edit:' . $staff->username">
+                        <x-slot name="button">
+                          <button class="btn btn-sm btn-outline--primary" type="button"
+                                  data-bs-toggle="offcanvas"
+                                  data-bs-target="#userEdit-{{ $staff->id  }}"
+                                  role="button"
+                                  aria-controls="userEdit-{{ $staff->id  }}">
+                            <i class="la la-pencil"></i> {{ __('Edit') }}
+                          </button>
+                        </x-slot>
+                        <form method="POST" action="{{ route('admin.staff.save', $staff->id) }}"
+                              class="text-start h-100">
+                          @csrf
+                          <div class="d-flex flex-column h-100">
+                            <div>
+                              <div class="form-group">
+                                <label class="form-label">{{ __('Name') }}</label>
+                                <x-form.input type="string" required name="name" :value="$staff->name"/>
+                              </div>
+                              <div class="form-group">
+                                <label class="form-label">{{ __('Email') }}</label>
+                                <x-form.input type="string" required name="email" :value="$staff->email"/>
+                              </div>
+                              <div class="form-group">
+                                <label class="form-label">{{ __('Username') }}</label>
+                                <x-form.input type="string" required name="username" :value="$staff->username"/>
+                              </div>
+                              <div class="form-group">
+                                <label class="form-label">{{ __('Roles') }}</label>
+                                <div class="row">
+                                  <x-form.select name="roles[]" multiple :value="$staff->roles" :variants="$roles"/>
+                                </div>
+                              </div>
                             </div>
-                        </div>
+                            <div class="flex-grow-1"></div>
+                            <div>
+                              <button type="submit" class="btn btn--primary w-100 h-45">{{ __('Submit') }}</button>
+                            </div>
+                          </div>
+                        </form>
+                      </x-offcanvas>
+                      @if ($staff->status!==1)
+                        <button type="button"
+                                class="btn btn-sm btn-outline--danger confirmationBtn"
+                                data-action="{{ route('admin.staff.remove',$staff->id) }}"
+                                data-question="@lang('Are you sure to remove this staff')?">
+                          <i class="la la-trash"></i>@lang('Remove')
+                        </button>
+                      @endif
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn--primary w-100 h-45">@lang('Submit')</button>
-                    </div>
-                </form>
-            </div>
+                  </td>
+                </tr>
+              @empty
+                <tr>
+                  <td class="text-muted text-center" colspan="100%">{{ __('No data') }}</td>
+                </tr>
+              @endforelse
+              </tbody>
+            </table>
+          </div>
         </div>
+        @if ($staffs->hasPages())
+          <div class="card-footer py-4">
+            {{ paginateLinks($staffs) }}
+          </div>
+        @endif
+      </div>
     </div>
-    <x-confirmation-modal/>
+  </div>
 
-    @push('breadcrumb-plugins')
-        <x-search-form placeholder="Username / Email"/>
-        <a class="btn btn-sm btn-outline--primary addBtn"><i class="las la-plus"></i>@lang('Add New')</a>
-    @endpush
-    @push('script')
-        <script>
-          "use strict";
-          (function ($) {
-            let modal = $("#modal");
-            $('.addBtn').on('click', function (e) {
-              let action = "{{ route('admin.staff.save') }}";
-              modal.find('form').trigger('reset')
-              modal.find(`input[name=password]`).closest('.form-group').removeClass('d-none')
-              modal.find('form').attr('action', action);
-              $(`input[type=checkbox]`).attr('checked', false);
-              $(modal).find('.modal-title').text('New Staff');
-              $(modal).modal('show')
-            });
-            $('.editBtn').on('click', function (e) {
+  <x-confirmation-modal/>
 
-              let action = "{{ route('admin.staff.save',':id') }}";
-              let edit = $(this).data('edit');
+  @push('breadcrumb-plugins')
+    <x-search-form placeholder="Username / Email"/>
+    <x-offcanvas id="addUser" width="30vw" title="Add Staff">
+      <x-slot name="button">
+        <button class="btn btn-sm btn-outline--primary" type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#addUser"
+                role="button"
+                aria-controls="addUser">
+          <i class="las la-plus"></i> {{ __('Add New') }}
+        </button>
+      </x-slot>
+      <form method="POST" action="{{ route('admin.staff.save') }}" class="text-start h-100">
+        @csrf
+        <div class="d-flex flex-column h-100">
+          <div>
+            <div class="form-group">
+              <label class="form-label">{{ __('Name') }}</label>
+              <x-form.input type="string" required name="name" :value="old('name')"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">{{ __('Email') }}</label>
+              <x-form.input type="string" required name="email" :value="old('email')"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">{{ __('Username') }}</label>
+              <x-form.input type="string" required name="username" autocomplete="one-time-code" :value="old('username')"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">{{ __('Password') }}</label>
+              <x-form.input type="password" required name="password" autocomplete="one-time-code" :value="old('password')"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">{{ __('Roles') }}</label>
+              <div class="row">
+                <x-form.select name="roles[]" multiple :variants="$roles" :value="old('roles') ?: []"/>
+              </div>
+            </div>
+          </div>
+          <div class="flex-grow-1"></div>
+          <div>
+            <button type="submit" class="btn btn--primary w-100 h-45">{{ __('Submit') }}</button>
+          </div>
+        </div>
+      </form>
+    </x-offcanvas>
+  @endpush
+  @push('script')
+    <script>
+      "use strict";
+      (function ($) {
+        let modal = $("#modal");
+        $('.addBtn').on('click', function (e) {
+          let action = "{{ route('admin.staff.save') }}";
+          modal.find('form').trigger('reset')
+          modal.find(`input[name=password]`).closest('.form-group').removeClass('d-none')
+          modal.find('form').attr('action', action);
+          $(`input[type=checkbox]`).attr('checked', false);
+          $(modal).find('.modal-title').text('New Staff');
+          $(modal).modal('show')
+        });
+        $('.editBtn').on('click', function (e) {
 
-              $(`input[type=checkbox]`).attr('checked', false);
+          let action = "{{ route('admin.staff.save',':id') }}";
+          let edit = $(this).data('edit');
 
-              $.each(edit.access_permissions || [], function (i, permission) {
-                $(`input[value=${permission.toLowerCase().replace(/\s+/g, '_')}]`).attr('checked', true);
-              });
+          $(`input[type=checkbox]`).attr('checked', false);
 
-              modal.find(`input[name=password]`).closest('.form-group').addClass('d-none');
-              modal.find(`input[name=name]`).val(edit.name);
-              modal.find(`input[name=email]`).val(edit.email);
-              modal.find(`input[name=username]`).val(edit.username);
+          $.each(edit.access_permissions || [], function (i, permission) {
+            $(`input[value=${permission.toLowerCase().replace(/\s+/g, '_')}]`).attr('checked', true);
+          });
 
-              modal.find('form').attr('action', action.replace(':id', edit.id));
-              $(modal).find('.modal-title').text('Update Staff');
-              $(modal).modal('show');
-            });
-          })(jQuery);
+          modal.find(`input[name=password]`).closest('.form-group').addClass('d-none');
+          modal.find(`input[name=name]`).val(edit.name);
+          modal.find(`input[name=email]`).val(edit.email);
+          modal.find(`input[name=username]`).val(edit.username);
 
-        </script>
-    @endpush
+          modal.find('form').attr('action', action.replace(':id', edit.id));
+          $(modal).find('.modal-title').text('Update Staff');
+          $(modal).modal('show');
+        });
+      })(jQuery);
+
+    </script>
+  @endpush
 </x-dynamic-component>

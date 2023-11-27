@@ -50,7 +50,11 @@ class jCubeServiceProvider extends ServiceProvider
 
 	protected function registerConfig()
 	{
-
+		Config::set('app.providers', [
+      ...config('app.providers'),
+      \Spatie\Permission\PermissionServiceProvider::class,
+    ]);
+  
 		Config::set('auth.guards.admin', [
 			'driver' => 'session',
 			'provider' => 'admins',

@@ -17,17 +17,18 @@
 @if($label )
     <label class="@if(!!$required) required @endif">{{ __($label) }}</label>
 @endif
-
-<select @class(['form-control', 'select2-multi-select' => $multiple, 'select2-basic' => !$multiple]) @if($multiple) multiple @endif name="{{ $name }}"
-        id="{{ $id }}" {{ $attributes }}>
-    <option value="">{{ __($placeholder ?: 'Choose option') }}</option>
+<div>
+  <select @class(['form-control', 'select2-multi-select' => $multiple, 'select2-basic' => !$multiple]) @if($multiple) multiple @endif name="{{ $name }}"
+          id="{{ $id }}" {{ $attributes }}>
+    @if(!$multiple) <option value="">{{ __($placeholder ?: 'Choose option') }}</option>@endif
     @if(isset($variants))
-        @foreach($variants as $v => $variant)
-            @if($multiple)
-                <option value="{{$v}}" @selected(in_array($v, $value))>{{ __($variant) }}</option>
-            @else
-                <option value="{{$v}}" @selected($value == $v)>{{ __($variant) }}</option>
-            @endif
-        @endforeach
+      @foreach($variants as $v => $variant)
+        @if($multiple)
+          <option value="{{$v}}" @selected(in_array($v, $value) || in_array($variant, $value))>{{ __($variant) }}</option>
+        @else
+          <option value="{{$v}}" @selected($value == $v)>{{ __($variant) }}</option>
+        @endif
+      @endforeach
     @endif
-</select>
+  </select>
+</div>

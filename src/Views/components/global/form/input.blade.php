@@ -18,6 +18,9 @@
 @if($type === 'string')
     <input class="form-control" type="text" name="{{ $name }}" @required(!!$required) value="{{ $value }}"
            id="{{ $id }}" {{ $attributes }}>
+@elseif($type === 'password')
+    <input class="form-control" type="password" name="{{ $name }}" @required(!!$required) value="{{ $value }}"
+           id="{{ $id }}" {{ $attributes }}>
 @elseif($type === 'number')
     <input class="form-control" type="number" name="{{ $name }}" placeholder="{{ $placeholder }}"
            @required(!!$required) value="{{ $value }}"

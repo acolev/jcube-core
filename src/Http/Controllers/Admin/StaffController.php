@@ -6,54 +6,67 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use jCube\Http\Controllers\Controller;
 use jCube\Models\Admin;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class StaffController extends Controller
 {
-    public function list()
-    {
-        $pageTitle = 'Manage Staff';
-        $staffs = Admin::latest('id')->paginate(getPaginate());
-        $permissions = config('admin.permission');
-
-        return view('admin::staff.list', compact('pageTitle', 'staffs', 'permissions'));
+  public function list()
+  {
+    $pageTitle = 'Manage Staff';
+    $staffs = Admin::latest('id')->paginate(getPaginate());
+    $permissions = Permission::where('guard_name', 'admin')->get();
+    $roles = Role::where('guard_name', 'admin')->pluck('name')->toArray();
+    $roles = array_merge(...collect($roles)->map(fn($role) => [$role => $role]));
+    
+    $staffs->map(function ($item) {
+      try {
+        return $item['roles'] = array_map(fn($role) => $role['name'], $item->roles->toArray());
+      } catch (\Exception $exception) {
+        return $item['roles'];
+      }
+    });
+    
+    return view('admin::staff.list', compact('pageTitle', 'staffs', 'roles', 'permissions'));
+  }
+  
+  public function save(Request $request, $id = 0)
+  {
+    $passwordValidation = $id ? 'nullable' : 'required|min:6';
+    
+    $request->validate([
+      'name' => 'required',
+      'password' => "$passwordValidation",
+      'email' => 'required|email|unique:admins,email,' . $id,
+      'username' => 'required|unique:admins,username,' . $id,
+    ]);
+    
+    if ($id) {
+      $admin = Admin::findOrFail($id);
+      $message = 'Staff updated successfully';
+    } else {
+      $admin = new Admin();
+      $admin->password = Hash::make($request->password);
+      $message = 'Staff created successfully';
     }
-
-    public function save(Request $request, $id = 0)
-    {
-        $passwordValidation = $id ? 'nullable' : 'required|min:6';
-
-        $request->validate([
-            'name' => 'required',
-            'password' => "$passwordValidation",
-            'email' => 'required|email|unique:admins,email,'.$id,
-            'username' => 'required|unique:admins,username,'.$id,
-        ]);
-
-        if ($id) {
-            $admin = Admin::findOrFail($id);
-            $message = 'Staff updated successfully';
-        } else {
-            $admin = new Admin();
-            $admin->password = Hash::make($request->password);
-            $message = 'Staff created successfully';
-        }
-        $admin->name = $request->name;
-        $admin->email = $request->email;
-        $admin->username = $request->username;
-        $admin->access_permissions = $request->permissions ?? [];
-        $admin->save();
-
-        $notify[] = ['success', $message];
-
-        return back()->with('notify', $notify);
-    }
-
-    public function remove($id)
-    {
-        $admin = Admin::findOrFail($id);
-        $admin->delete();
-        $notify[] = ['success', 'Staff deleted successfully'];
-
-        return back()->with('notify', $notify);
-    }
+    $admin->name = $request->name;
+    $admin->email = $request->email;
+    $admin->username = $request->username;
+    $admin->syncRoles(...$request->roles ?: []);
+    
+    $admin->save();
+    
+    $notify[] = ['success', $message];
+    
+    return back()->with('notify', $notify);
+  }
+  
+  public function remove($id)
+  {
+    $admin = Admin::findOrFail($id);
+    $admin->delete();
+    $notify[] = ['success', 'Staff deleted successfully'];
+    
+    return back()->with('notify', $notify);
+  }
 }
