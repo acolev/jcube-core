@@ -113,7 +113,7 @@ class jCubeServiceProvider extends ServiceProvider
 		], 'core-config');
 	}
   
-  public static function bladeMethodWrapper($method, $role, $guard = null): bool
+  public static function bladeMethodWrapper($method, $role, $guard = 'admin'): bool
   {
     return auth($guard)->check() && (auth($guard)->user()->status === 1 || auth($guard)->user()->{$method}($role));
   }
