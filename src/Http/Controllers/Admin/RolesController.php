@@ -65,7 +65,6 @@ class RolesController extends Controller
     $role = $id;
     $isNew = !$role->exists;
     $validation = ['name' => 'required',];
-    if ($isNew) $validation['guard_name'] = 'required';
     $req->validate($validation);
     
     $role->name = $req->name;
