@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Compilers\BladeCompiler;
 use jCube\Console\Commands\AdminCommand;
 use jCube\Console\Commands\InstallCommand;
 use jCube\Console\Commands\LayoutCommand;
@@ -39,8 +40,13 @@ class jCubeServiceProvider extends ServiceProvider
 			]);
 		});
 	}
-
-	protected function registerMiddleware()
+  
+  public function register()
+  {
+    $this->callAfterResolving('blade.compiler', fn (BladeCompiler $bladeCompiler) => $this->registerBladeExtensions($bladeCompiler));
+  }
+  
+  protected function registerMiddleware()
 	{
 		app('router')->aliasMiddleware('permission', Permission::class);
 		app('router')->aliasMiddleware('admin', RedirectIfNotAdmin::class);
@@ -106,4 +112,18 @@ class jCubeServiceProvider extends ServiceProvider
 			dirname(__DIR__) . '/Config/adminMenu.php' => config_path('adminMenu.php'),
 		], 'core-config');
 	}
+  
+  public static function bladeMethodWrapper($method, $role, $guard = null): bool
+  {
+    return auth($guard)->check() && (auth($guard)->user()->status === 1 || auth($guard)->user()->{$method}($role));
+  }
+  
+  protected function registerBladeExtensions($bladeCompiler): void
+  {
+    $bladeMethodWrapper = '\\jCube\\Providers\\jCubeServiceProvider::bladeMethodWrapper';
+    
+    $bladeCompiler->directive('access', fn ($args) => "<?php if({$bladeMethodWrapper}('checkPermissionTo', {$args})): ?>");
+    $bladeCompiler->directive('elseaccess', fn ($args) => "<?php elseif({$bladeMethodWrapper}('checkPermissionTo', {$args})): ?>");
+    $bladeCompiler->directive('endaccess', fn () => '<?php endif; ?>');
+  }
 }
