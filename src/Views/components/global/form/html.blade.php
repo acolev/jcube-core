@@ -17,7 +17,7 @@
 <textarea class="tinymce" name="{{ $name }}">{{ $value }}</textarea>
 
 @push('script-lib')
-    <script src="{{asset('admin_assets/vendor/tinymce/tinymce.min.js')}}"></script>
+    <script src="{{asset('admin_assets/libs/tinymce/tinymce.min.js')}}"></script>
 @endpush
 @push('script')
     <script>

@@ -1,46 +1,28 @@
 @props([
-	'menus' => [],
+	'menu' => [],
 	'noBody' => false
 ])
-<div class="page-wrapper default-version">
-    <x-admin::layout.part.sidenav :menus="$menus">
-        @if(isset($mainMenu))
-            <x-slot name="mainMenu">{{ $mainMenu }}</x-slot>
-        @endif
-        @if(isset($asidePre))
-            <x-slot name="asidePre">{{ $asidePre }}</x-slot>
-        @endif
-        @if(isset($asidePost))
-            <x-slot name="asidePost">{{ $asidePost }}</x-slot>
-        @endif
-        @if(isset($asideOverride))
-            <x-slot name="asideOverride">{{ $asideOverride }}</x-slot>
-        @endif
-    </x-admin::layout.part.sidenav>
-    @if(isset($topBarOverride))
-        {{ $topBarOverride }}
-    @else
-        <x-admin::layout.part.topnav>
-            @if(isset($topBarLeft))
-                <x-slot name="topBarLeft">{{ $topBarLeft }}</x-slot>
-            @endif
-            @if(isset($topBarRight))
-                <x-slot name="topBarRight">{{ $topBarRight }}</x-slot>
-            @endif
-        </x-admin::layout.part.topnav>
-    @endif
-    @if(@$noBody)
-        <div class="body-wrapper p-0">
-            {{ $slot }}
-        </div>
-    @else
-        <div class="body-wrapper">
-            <div class="bodywrapper__inner">
+<div id="layout-wrapper">
+  <x-admin::layout.part.header>
+          @if(isset($headerLeft))
+            <x-slot name="headerLeft">{{ $headerLeft }}</x-slot>
+          @endif
+          @if(isset($headerRight))
+            <x-slot name="headerRight">{{ $headerRight }}</x-slot>
+          @endif
+  </x-admin::layout.part.header>
+  @if(count($menu))
+    <x-admin::layout.part.appMenu :menu="$menu"/>
+  @endif
 
-                <x-admin::layout.part.breadcrumb :page-title="$pageTitle"/>
-                {{ $slot }}
+  <div class="main-content">
 
-            </div>
-        </div>
-    @endif
+    <div class="page-content">
+      <div class="container-fluid">
+        {{ $slot }}
+      </div>
+
+    </div>
+    <x-admin::layout.part.footer/>
+  </div>
 </div>

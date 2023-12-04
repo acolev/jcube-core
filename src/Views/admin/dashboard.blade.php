@@ -1,5 +1,8 @@
 <x-dynamic-component :component="$layoutComponent" :page-title="@$pageTitle">
-    <div class="row">
+    <x-admin::breadcrumb :page-title="$pageTitle">
+
+    </x-admin::breadcrumb>
+    <div class="row mt-4">
         <div class="col"></div>
         <div class="col-lg-6">
             <svg viewBox="0 0 945 584" fill="none" preserveAspectRatio="xMidYMax slice"

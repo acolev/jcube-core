@@ -18,7 +18,7 @@ class AdminController extends Controller
   {
     $pageTitle = 'Dashboard';
     $admin = Auth::guard('admin')->user();
-    
+
 //    dump($admin->getAllPermissions());
     return view('admin::dashboard', compact('pageTitle'));
   }
@@ -28,15 +28,17 @@ class AdminController extends Controller
     $pageTitle = 'Profile';
     $admin = Auth::guard('admin')->user();
     $languages = [];
+    $part = 'profile';
     
     if (class_exists(Language::class)) {
-      $languages = Language::get();
+      $languages = Language::pluck('name', 'code');
     }
     
     return view('admin::profile.index', compact(
       'pageTitle',
       'admin',
-      'languages'
+      'languages',
+      'part'
     ));
   }
   
@@ -44,8 +46,8 @@ class AdminController extends Controller
   {
     $notify = [];
     $this->validate($request, [
-      'name' => 'required',
-      'email' => 'required|email',
+      'name' => 'nullable|string',
+      'email' => 'nullable|email',
       'image' => ['nullable', 'image', new FileTypeValidate(['jpg', 'jpeg', 'png'])],
     ]);
     $user = Auth::guard('admin')->user();
@@ -61,9 +63,13 @@ class AdminController extends Controller
       }
     }
     
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->lang = $request->lang;
+    if (isset($request->name)) $user->name = $request->name;
+    if (isset($request->last_name)) $user->last_name = $request->last_name;
+    if (isset($request->email)) $user->email = $request->email;
+    if (isset($request->lang)) $user->lang = $request->lang;
+    if (isset($request->phone)) $user->phone = $request->phone;
+//    if (isset($request->job_title))  $user->job_title = $request->job_title;
+
     $user->save();
     $notify[] = ['success', 'Your profile has been updated.'];
     
@@ -74,12 +80,19 @@ class AdminController extends Controller
   {
     $general = gs();
     $ga = new GoogleAuthenticator();
-    $user = auth()->guard('admin')->user();
+    $admin = auth()->guard('admin')->user();
     $secret = $ga->createSecret();
-    $qrCodeUrl = $ga->getQRCodeGoogleUrl($user->username . '@' . $general->site_name, $secret);
+    $qrCodeUrl = $ga->getQRCodeGoogleUrl($admin->username . '@' . $general->site_name, $secret);
     $pageTitle = '2FA Setting';
+    $part = 'twofactor';
     
-    return view('admin::profile.twofactor', compact('pageTitle', 'secret', 'qrCodeUrl'));
+    return view('admin::profile.index', compact(
+      'pageTitle',
+      'secret',
+      'qrCodeUrl',
+      'admin',
+      'part'
+    ));
   }
   
   public function create2fa(Request $request)
@@ -129,8 +142,9 @@ class AdminController extends Controller
   {
     $pageTitle = 'Password Setting';
     $admin = Auth::guard('admin')->user();
+    $part = 'password';
     
-    return view('admin::profile.password', compact('pageTitle', 'admin'));
+    return view('admin::profile.index', compact('pageTitle', 'admin', 'part'));
   }
   
   public function passwordUpdate(Request $request)

@@ -2,6 +2,7 @@
 
 namespace jCube\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
@@ -39,7 +40,10 @@ class jCubeServiceProvider extends ServiceProvider
 				'adminNotificationCount' => AdminNotification::where('is_read', 0)->count(),
 			]);
 		});
-	}
+    
+    
+    Paginator::useBootstrap();
+  }
   
   protected function registerMiddleware()
 	{

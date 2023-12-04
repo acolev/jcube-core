@@ -1,55 +1,82 @@
 <x-dynamic-component :component="$layoutComponent" :page-title="@$pageTitle">
-  <div class="row">
-    <div class="col-lg-12">
-      <form action="{{ route('admin.roles.save') }}" method="POST">
-        @csrf
+  <x-admin::breadcrumb :page-title="$pageTitle">
+    <ol class="breadcrumb m-0">
+      <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="mdi mdi-home"></i></a></li>
+      <li class="breadcrumb-item"><a href="{{ route('admin.roles.index') }}">{{ __('Roles') }}</a></li>
+      <li class="breadcrumb-item active">{{ __('Edit') }}</li>
+    </ol>
+  </x-admin::breadcrumb>
+
+  <form action="{{ route('admin.roles.save') }}" method="POST">
+    @csrf
+    <div class="row">
+      <div class="col-lg-12">
         <div class="card">
+          <div class="card-header">
+            <x-form.input name="name" label="Name" :value="old('name')"/>
+          </div>
           <div class="card-body">
-            <div class="mb-3">
-              <x-form.input name="name" label="Name" :value="old('name')"/>
+            <div class="table-responsive table-card">
+              <table class="table table-striped-columns mb-0">
+                <thead class="table-light">
+                <tr>
+                  <th>{{ __('Permission') }}</th>
+                  <th>{{ __('Read') }}</th>
+                  <th>{{ __('Edit') }}</th>
+                  <th>{{ __('Drop') }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                @forelse($permissions as $module=>$perms)
+                  <tr>
+                    <td>{{ $module }}</td>
+                    <td>
+                      @php $action = $module . ':Read'; @endphp
+                      <input type="checkbox"
+                             name="permissions[{{$action}}]"
+                             value="1"
+                             class="form-check-input"
+                          @disabled(!$perms->where('action', 'Read')->first()) />
+
+                    </td>
+                    <td>
+                      @php $action = $module . ':Edit'; @endphp
+                      <input type="checkbox"
+                             name="permissions[{{$action}}]"
+                             value="1"
+                             class="form-check-input"
+                          @disabled(!$perms->where('action', 'Edit')->first()) />
+                    </td>
+                    <td>
+                      @php $action = $module . ':Drop'; @endphp
+                      <input type="checkbox"
+                             name="permissions[{{$action}}]"
+                             value="1"
+                             class="form-check-input"
+                          @disabled(!$perms->where('action', 'Drop')->first()) />
+                    </td>
+                  </tr>
+                @empty
+                  <tr>
+                    <td colspan="4">
+                      <div class="card card-body text-center">
+                        {{ __('No Permissions to assign') }}
+                      </div>
+                    </td>
+                  </tr>
+                @endforelse
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer  border-0">
+            <div class="hstack gap-2 justify-content-end">
+              <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+              <button type="reset" class="btn btn-soft-success">{{__('Cancel')}}</button>
             </div>
           </div>
         </div>
-        <h5 class="mt-5 mb-3">{{ __('Permissions') }}</h5>
-        <div class="row row-cols-md-3 g-3">
-          @forelse($permissions as $module=>$perms)
-            <div>
-              <div class="card">
-                <div class="card-title pt-2 px-3 fw-semibold">{{ $module }}</div>
-                <div class="card-body">
-                  <table class="table">
-                    @foreach($perms as $action)
-                      <tr>
-                        <td class="p-1">{{ $action->action }}</td>
-                        <td width="1%" class="p-1">
-                          <x-form.input type="toggle" name="permissions[{{$action->name}}]"
-                                        value=""/>
-                        </td>
-                      </tr>
-                    @endforeach
-                  </table>
-                </div>
-              </div>
-            </div>
-          @empty
-            <div>
-              <div class="card card-body text-center">
-                {{ __('No Permissions to assign') }}
-              </div>
-            </div>
-          @endforelse
-        </div>
-        <hr class="my-4">
-        <div class="text-end">
-          <button class="btn btn-outline--secondary rounded-pill" type="reset">{{ __('Cancel') }}</button>
-          <button class="btn btn--primary rounded-pill">{{ __('Save') }}</button>
-        </div>
-      </form>
+      </div>
     </div>
-  </div>
-
-
-  @push('breadcrumb-plugins')
-    <x-back :route="route('admin.roles.index')"/>
-  @endpush
+  </form>
 </x-dynamic-component>

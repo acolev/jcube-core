@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="{{ asset('admin_assets/vendor/iziToast/css/iziToast.min.css') }}">
-<script src="{{ asset('admin_assets/vendor/iziToast/js/iziToast.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('admin_assets/libs/iziToast/css/iziToast.min.css') }}">
+<script src="{{ asset('admin_assets/libs/iziToast/js/iziToast.min.js') }}"></script>
 
 
 @if(session()->has('notify'))

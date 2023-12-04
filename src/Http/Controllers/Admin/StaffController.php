@@ -18,7 +18,8 @@ class StaffController extends Controller
     $permissions = Permission::where('guard_name', 'admin')->get();
     $roles = Role::where('guard_name', 'admin')->pluck('name')->toArray();
     $roles = array_merge(...collect($roles)->map(fn($role) => [$role => $role]));
-    
+    $jobTitles = Admin::where('job_title' , '!=', null)->distinct()->pluck('job_title', 'job_title');
+
     $staffs->map(function ($item) {
       try {
         return $item['roles'] = array_map(fn($role) => $role['name'], $item->roles->toArray());
@@ -27,7 +28,7 @@ class StaffController extends Controller
       }
     });
     
-    return view('admin::staff.list', compact('pageTitle', 'staffs', 'roles', 'permissions'));
+    return view('admin::staff.list', compact('pageTitle', 'staffs', 'roles', 'permissions', 'jobTitles'));
   }
   
   public function save(Request $request, $id = 0)
@@ -49,9 +50,23 @@ class StaffController extends Controller
       $admin->password = Hash::make($request->password);
       $message = 'Staff created successfully';
     }
+    if ($request->hasFile('image')) {
+      try {
+        $old = $admin->image ?: null;
+        $admin->image = fileUploader($request->image, getFilePath('adminProfile'), getFileSize('adminProfile'), $old);
+      } catch (\Exception) {
+        $notify[] = ['error', 'Image could not be uploaded.'];
+        
+        return back()->with('notify', $notify);
+      }
+    }
+    
     $admin->name = $request->name;
+    $admin->last_name = $request->last_name;
     $admin->email = $request->email;
+    $admin->phone = $request->phone;
     $admin->username = $request->username;
+    $admin->job_title = $request->job_title;
     $admin->syncRoles(...$request->roles ?: []);
     
     $admin->save();

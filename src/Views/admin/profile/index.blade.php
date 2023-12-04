@@ -1,66 +1,74 @@
 <x-dynamic-component :component="$layoutComponent" :page-title="@$pageTitle" no-body>
-    <x-admin::drawer>
-        <x-slot name="title">{{ __('Profile Information') }}</x-slot>
-        <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="image-upload">
-                            <div class="thumb">
-                                <div class="avatar-preview">
-                                    <div class="profilePicPreview">
-                                        <img src="{{ getImage(getFilePath('adminProfile').'/'.$admin->image,getFileSize('adminProfile')) }}"
-                                             alt="{{ __('Avatar') }}">
-                                        <button type="button" class="remove-image">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="avatar-edit">
-                                    <input type="file" class="profilePicUpload" name="image"
-                                           id="profilePicUpload1" accept=".png, .jpg, .jpeg">
-                                    <label for="profilePicUpload1"
-                                           class="bg--success">@lang('Upload Image')</label>
-                                    <small class="mt-2  ">@lang('Supported files'): <b>@lang('jpeg')
-                                            , @lang('jpg'), @lang('png')
-                                            .</b> @lang('Image will be resized into 400x400px') </small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group ">
-                        <label>@lang('Name')</label>
-                        <input class="form-control" type="text" name="name" value="{{ $admin->name }}"
-                               required>
-                    </div>
-                    <div class="form-group">
-                        <label>@lang('Email')</label>
-                        <input class="form-control" type="email" name="email" value="{{ $admin->email }}"
-                               required>
-                    </div>
-                    @if(count($languages))
-                        <div class="form-group">
-                            <label>@lang('Language')</label>
-                            <select class="form-control" name="lang">
-                                @foreach($languages as $language)
-                                    <option value="{{ $language->code }}" @selected($admin->lang === $language->code)>{{ $language->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    @endif
-                </div>
-            </div>
-            <button type="submit" class="btn btn--primary h-45 w-100">{{ __('Submit') }}</button>
-        </form>
-        @include('admin::profile.part.menu')
-    </x-admin::drawer>
 
-    @push('breadcrumb-plugins')
-        <a href="{{route('admin.password')}}" class="btn btn-sm btn-outline--primary">
-            <i class="las la-key"></i> {{ __('Password Setting') }}
-        </a>
-    @endpush
+  <div class="position-relative mx-n4 mt-n4">
+    <div class="profile-wid-bg profile-setting-img">
+      <img src="{{ asset('admin_assets/images/profile-bg.jpg') }}" class="profile-wid-img" alt="">
+      <div class="overlay-content">
+        <div class="text-end p-3 d-none">
+          <div class="p-0 ms-auto rounded-circle profile-photo-edit">
+            <input id="profile-foreground-img-file-input" type="file" class="profile-foreground-img-file-input">
+            <label for="profile-foreground-img-file-input" class="profile-photo-edit btn btn-light">
+              <i class="ri-image-edit-line align-bottom me-1"></i> Change Cover
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-xxl-3">
+      <div class="card mt-n5">
+        <div class="card-body p-4">
+          <div class="text-center">
+            <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
+              @csrf
+              <div class="profile-user position-relative d-inline-block mx-auto  mb-4">
+                <img src="{{ getImage(getFilePath('adminProfile').'/'.$admin->image,getFileSize('adminProfile')) }}"
+                     class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image">
+                <div class="avatar-xs p-0 rounded-circle profile-photo-edit">
+                  <input id="profile-img-file-input" type="file" class="profile-img-file-input" name="image"
+                         oninput="submit()">
+                  <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
+                                                    <span class="avatar-title rounded-circle bg-light text-body">
+                                                        <i class="ri-camera-fill"></i>
+                                                    </span>
+                  </label>
+                </div>
+              </div>
+            </form>
+            <h5 class="fs-16 mb-1">{{ implode(' ', [$admin->name, $admin->last_name]) }}</h5>
+            <p class="text-muted mb-0">{{ @$admin->job_title }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xxl-9">
+      <div class="card mt-xxl-n5">
+        <div class="card-header">
+          <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link {{ menuActive('admin.profile') }}" href="{{ route('admin.profile') }}" role="tab">
+                <i class="fas fa-home"></i> {{ __('Personal Details') }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ menuActive('admin.password') }}" href="{{ route('admin.password') }}" role="tab">
+                <i class="far fa-user"></i> {{ __('Change Password') }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ menuActive('admin.twofactor') }}" href="{{ route('admin.twofactor') }}" role="tab">
+                <i class="far fa-envelope"></i> {{ __('2fa Security') }}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body p-4">
+          @include('admin::profile.part.'.$part)
+        </div>
+      </div>
+    </div>
+  </div>
 </x-dynamic-component>

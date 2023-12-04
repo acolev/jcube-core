@@ -22,10 +22,10 @@ return new class extends Migration {
       'Role:Read',
       'Role:Edit',
       'Role:Drop',
-      'System:Read',
-      'System:Edit',
-      'Notification:Read',
-      'Notification:Edit',
+      'System Configuration:Read',
+      'System Configuration:Edit',
+      'Logo::Edit',
+      'Notification Settings:Edit',
     ];
     
     foreach ($permissions as $perm) {

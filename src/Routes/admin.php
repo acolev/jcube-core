@@ -42,20 +42,20 @@ Route::middleware('admin')->group(function () {
       
       Route::controller('GeneralSettingController')->group(function () {
         // Logo-Icon
-        Route::middleware('permission:System:Edit')->group(function () {
-          Route::get('setting/logo-icon', 'logoIcon')->name('setting.logo.icon');
-          Route::post('setting/logo-icon', 'logoIconUpdate')->name('setting.logo.icon');
+        Route::middleware('permission:Logo:Edit')->group(function () {
+          Route::get('configuration/logo-icon', 'logoIcon')->name('setting.logo.icon');
+          Route::post('configuration/logo-icon', 'logoIconUpdate')->name('setting.logo.icon');
         });
       });
       
       Route::controller('ConfigController')->group(function () {
-        Route::get('configuration/{category}', 'index')->middleware('permission:System:Read')->name('config.view');
-        Route::post('configuration/{category}', 'update')->middleware('permission:System:Edit')->name('config.update');
+        Route::get('configuration/{category}', 'index')->middleware('permission:System Configuration:Read')->name('config.view');
+        Route::post('configuration/{category}', 'update')->middleware('permission:System Configuration:Edit')->name('config.update');
       });
       
       //Notification Setting
       Route::controller('NotificationController')
-        ->middleware('permission:Notification:Read')
+        ->middleware('permission:Notification Settings:Edit')
         ->name('setting.notification.')
         ->prefix('notification')->group(function () {
           //Template Setting

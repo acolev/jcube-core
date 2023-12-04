@@ -1,77 +1,9 @@
-'use strict';
-
 $(function () {
-  $('#sidebar__menuWrapper').slimScroll({
-    height: 'calc(100vh - 86.75px)',
-    railVisible: true,
-    alwaysVisible: true
-  });
-});
+  $('[data-bs-toggle="tooltip"]').tooltip();
 
-$(function () {
-  $('.dropdown-menu__body').slimScroll({
-    height: '270px'
-  });
-});
-
-// modal-dialog-scrollable
-$(function () {
-  $('.modal-dialog-scrollable .modal-body').slimScroll({
-    height: '100%'
-  });
-});
-
-// activity-list 
-$(function () {
-  $('.activity-list').slimScroll({
-    height: '385px'
-  });
-});
-
-// recent ticket list 
-$(function () {
-  $('.recent-ticket-list__body').slimScroll({
-    height: '295px'
-  });
-});
-
-$(function () {
-  $('[data-bs-toggle="tooltip"]').tooltip()
+  document.getElementById("scrollbar").classList.add("h-100")
+  new SimpleBar(document.getElementById('scrollbar'));
 })
-
-// responsive sidebar expand js
-$('.res-sidebar-open-btn').on('click', function () {
-  $('.sidebar').addClass('open');
-});
-
-$('.res-sidebar-close-btn').on('click', function () {
-  $('.sidebar').removeClass('open');
-});
-
-/* Get the documentElement (<html>) to display the page in fullscreen */
-let elem = document.documentElement;
-
-$('.sidebar-dropdown > a').on('click', function () {
-  if ($(this).parent().find('.sidebar-submenu').length) {
-    if ($(this).parent().find('.sidebar-submenu').first().is(':visible')) {
-      $(this).find('.side-menu__sub-icon').removeClass('transform rotate-180');
-      $(this).removeClass('side-menu--open');
-      $(this).parent().find('.sidebar-submenu').first().slideUp({
-        done: function done() {
-          $(this).removeClass('sidebar-submenu__open');
-        }
-      });
-    } else {
-      $(this).find('.side-menu__sub-icon').addClass('transform rotate-180');
-      $(this).addClass('side-menu--open');
-      $(this).parent().find('.sidebar-submenu').first().slideDown({
-        done: function done() {
-          $(this).addClass('sidebar-submenu__open');
-        }
-      });
-    }
-  }
-});
 
 // select-2 init
 $('.select2-basic').select2();
@@ -81,90 +13,44 @@ $(".select2-auto-tokenize").select2({
   tokenSeparators: [',']
 });
 
-function setMenuNotified(item, parent, count = 0) {
-  const notifyParent = document.querySelector(`.nav-parent-${parent}`);
-  const notifyItem = document.querySelector(`.nav-item-${item}`);
-  if (notifyParent)
-    notifyParent.insertAdjacentHTML("beforeend", '<span class="menu-badge pill bg--danger ms-auto"><i class="fa fa-exclamation"></i></span>')
-  if (notifyItem)
-    notifyItem.insertAdjacentHTML("beforeend", `<span class="menu-badge pill bg--danger ms-auto">${count}</span>`)
+
+var mybutton = document.getElementById("back-to-top");
+
+function scrollFunction() {
+  100 < document.body.scrollTop || 100 < document.documentElement.scrollTop ? mybutton.style.display = "block" : mybutton.style.display = "none"
 }
 
-function proPicURL(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      var preview = $(input).parents('.thumb').find('.profilePicPreview');
-      $(preview).css('background-image', 'url(' + e.target.result + ')');
-      $(preview).addClass('has-image');
-      $(preview).hide();
-      $(preview).fadeIn(650);
+function topFunction() {
+  document.body.scrollTop = 0, document.documentElement.scrollTop = 0
+}
+
+mybutton && (window.onscroll = function () {
+  scrollFunction()
+});
+
+
+function fillForm(el, cb) {
+  const target = el.dataset.target;
+  const objId = document.querySelector(el.dataset.form);
+  const obj = JSON.parse(objId.innerText);
+
+  for (const key in obj) {
+    const input = document.querySelector(`${target} [name="${key}"]`);
+    const select = document.querySelector(`${target} [name="${key}"], ${target} [name="${key}[]"]`);
+    if (input) input.value = obj[key];
+    if (select) {
+      $(select).val(obj[key]).trigger('change');
     }
-    reader.readAsDataURL(input.files[0]);
   }
+  cb(obj);
 }
 
-$(".profilePicUpload").on('change', function () {
-  proPicURL(this);
-});
+document.getElementById("topnav-hamburger-icon").addEventListener("click", toggleMenu)
 
-$(".remove-image").on('click', function () {
-  $(this).parents(".profilePicPreview").css('background-image', 'none');
-  $(this).parents(".profilePicPreview").removeClass('has-image');
-  $(this).parents(".thumb").find('input[type=file]').val('');
-});
-
-$("form").on("change", ".file-upload-field", function () {
-  $(this).parent(".file-upload-wrapper").attr("data-text", $(this).val().replace(/.*(\/|\\)/, ''));
-});
-
-
-var inputElements = $('input,select,textarea');
-
-$.each(inputElements, function (index, element) {
-  element = $(element);
-  if (!element.hasClass('profilePicUpload') && (!element.attr('id')) && element.attr('type') != 'hidden') {
-    element.closest('.form-group').find('label').attr('for', element.attr('name'));
-    element.attr('id', element.attr('name'))
-  }
-});
-
-
-var tooltipTriggerList = [].slice.call(document.querySelectorAll('[title], [data-title], [data-bs-title]'))
-tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl)
-});
-
-$.each($('input, select, textarea'), function (i, element) {
-
-  if (element.hasAttribute('required')) {
-    $(element).closest('.form-group').find('label').first().addClass('required');
-  }
-
-});
-
-
-//Custom Data Table
-$('.custom-data-table').closest('.card').find('.card-body').attr('style', 'padding-top:0px');
-var tr_elements = $('.custom-data-table tbody tr');
-$(document).on('input', 'input[name=search_table]', function () {
-  var search = $(this).val().toUpperCase();
-  var match = tr_elements.filter(function (idx, elem) {
-    return $(elem).text().trim().toUpperCase().indexOf(search) >= 0 ? elem : null;
-  }).sort();
-  var table_content = $('.custom-data-table tbody');
-  if (match.length == 0) {
-    table_content.html('<tr><td colspan="100%" class="text-center">Data Not Found</td></tr>');
-  } else {
-    table_content.html(match);
-  }
-});
-
-$('.pagination').closest('nav').addClass('d-flex justify-content-end');
-
-$('.showFilterBtn').on('click', function () {
-  $('.responsive-filter-card').slideToggle();
-});
+function toggleMenu() {
+  var e = document.documentElement.clientWidth;
+  767 < e && document.querySelector(".hamburger-icon").classList.toggle("open"), "horizontal" === document.documentElement.getAttribute("data-layout") && (document.body.classList.contains("menu") ? document.body.classList.remove("menu") : document.body.classList.add("menu")), "vertical" === document.documentElement.getAttribute("data-layout") && (e <= 1025 && 767 < e ? (document.body.classList.remove("vertical-sidebar-enable"), "sm" == document.documentElement.getAttribute("data-sidebar-size") ? document.documentElement.setAttribute("data-sidebar-size", "") : document.documentElement.setAttribute("data-sidebar-size", "sm")) : 1025 < e ? (document.body.classList.remove("vertical-sidebar-enable"), "lg" == document.documentElement.getAttribute("data-sidebar-size") ? document.documentElement.setAttribute("data-sidebar-size", "sm") : document.documentElement.setAttribute("data-sidebar-size", "lg")) : e <= 767 && (document.body.classList.add("vertical-sidebar-enable"), document.documentElement.setAttribute("data-sidebar-size", "lg"))), "semibox" === document.documentElement.getAttribute("data-layout") && (767 < e ? "show" == document.documentElement.getAttribute("data-sidebar-visibility") ? "lg" == document.documentElement.getAttribute("data-sidebar-size") ? document.documentElement.setAttribute("data-sidebar-size", "sm") : document.documentElement.setAttribute("data-sidebar-size", "lg") : (document.getElementById("sidebar-visibility-show").click(), document.documentElement.setAttribute("data-sidebar-size", document.documentElement.getAttribute("data-sidebar-size"))) : e <= 767 && (document.body.classList.add("vertical-sidebar-enable"), document.documentElement.setAttribute("data-sidebar-size", "lg"))), "twocolumn" == document.documentElement.getAttribute("data-layout") && (document.body.classList.contains("twocolumn-panel") ? document.body.classList.remove("twocolumn-panel") : document.body.classList.add("twocolumn-panel"))
+}
 
 $(document).on('click', '.short-codes', function () {
   var text = $(this).text();
@@ -179,13 +65,3 @@ $(document).on('click', '.short-codes', function () {
     $(this).removeClass('copied');
   }, 1000);
 });
-
-Array.from(document.querySelectorAll('table')).forEach(table => {
-  let heading = table.querySelectorAll('thead tr th');
-  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
-    Array.from(row.querySelectorAll('td')).forEach((colum, i) => {
-      colum.setAttribute('data-label', heading[i].innerText)
-    });
-  });
-});
-

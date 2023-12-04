@@ -132,11 +132,11 @@ function titleToKey($text)
 function menuActive($routeName, $type = null, $param = null)
 {
   if ($type == 3) {
-    $class = 'side-menu--open';
+    $class = 'active';
   } elseif ($type == 2) {
     $class = 'sidebar-submenu__open';
   } elseif ($type == 4) {
-    $class = 'open';
+    $class = 'show';
   } else {
     $class = 'active';
   }
