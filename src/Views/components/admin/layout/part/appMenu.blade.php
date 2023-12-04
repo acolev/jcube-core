@@ -7,18 +7,18 @@
   <div class="navbar-brand-box">
     <a href="{{route('admin.dashboard')}}" class="logo logo-dark">
       <span class="logo-sm">
-        <img src="{{getImage(getFilePath('logoIcon') .'/favicon.png')}}" alt="">
+        <img src="{{getImage(getFilePath('logoIcon') .'/favicon.png')}}" alt="" class="logo-img">
       </span>
       <span class="logo-lg">
-        <img src="{{getImage(getFilePath('logoIcon') .'/logo_dark.png')}}" alt="">
+        <img src="{{getImage(getFilePath('logoIcon') .'/logo_dark.png')}}" alt="" class="logo-img">
       </span>
     </a>
     <a href="{{route('admin.dashboard')}}" class="logo logo-light">
       <span class="logo-sm">
-        <img src="{{getImage(getFilePath('logoIcon') .'/favicon.png')}}" alt="">
+        <img src="{{getImage(getFilePath('logoIcon') .'/favicon.png')}}" alt="" class="logo-img">
       </span>
       <span class="logo-lg">
-        <img src="{{getImage(getFilePath('logoIcon') .'/logo.png')}}" alt="">
+        <img src="{{getImage(getFilePath('logoIcon') .'/logo.png')}}" alt="" class="logo-img">
       </span>
     </a>
     <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
