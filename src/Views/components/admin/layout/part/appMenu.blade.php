@@ -7,7 +7,7 @@
   <div class="navbar-brand-box">
     <a href="{{route('admin.dashboard')}}" class="logo logo-dark">
       <span class="logo-sm">
-        <img src="{{getImage(getFilePath('logoIcon') .'/favicon.png')}}" alt="" class="logo-img">
+        <img src="{{getImage(getFilePath('logoIcon') .'/favicon.png')}}" alt="" height="22">
       </span>
       <span class="logo-lg">
         <img src="{{getImage(getFilePath('logoIcon') .'/logo_dark.png')}}" alt="" class="logo-img">
@@ -15,7 +15,7 @@
     </a>
     <a href="{{route('admin.dashboard')}}" class="logo logo-light">
       <span class="logo-sm">
-        <img src="{{getImage(getFilePath('logoIcon') .'/favicon.png')}}" alt="" class="logo-img">
+        <img src="{{getImage(getFilePath('logoIcon') .'/favicon.png')}}" alt="" height="22">
       </span>
       <span class="logo-lg">
         <img src="{{getImage(getFilePath('logoIcon') .'/logo.png')}}" alt="" class="logo-img">
