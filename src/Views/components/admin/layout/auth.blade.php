@@ -15,7 +15,7 @@
           <div class="text-center mt-sm-5 mb-4 text-white-50">
             <div>
               <a href="/" class="d-inline-block auth-logo">
-                <img src="{{getImage(getFilePath('logoIcon') .'/logo.png')}}" alt="" height="20">
+                <img src="{{getImage(getFilePath('logoIcon') .'/logo.png')}}" alt="">
               </a>
             </div>
           </div>

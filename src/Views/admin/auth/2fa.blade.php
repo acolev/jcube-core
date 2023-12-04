@@ -1,22 +1,32 @@
-<x-dynamic-component :component="$layoutComponent" :page-title="@$pageTitle">
-    <section class="pt-50 pb-50 section--bg">
-        <div class="container">
-            <div class="d-flex justify-content-center">
-                <div class="verification-code-wrapper">
-                    <div class="verification-area">
-                        <h5 class="pb-3 text-center border-bottom">@lang('2FA Verification')</h5>
-                        <form action="{{route('admin.go2fa.verify')}}" method="POST" class="submit-form">
-                            @csrf
+<x-dynamic-component variant="Auth" :component="$layoutComponent" :page-title="@$pageTitle">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6 col-xl-5">
+      <div class="card mt-4">
 
-                            @include('admin::partials.verification_code')
-
-                            <div class="form--group">
-                                <button type="submit" class="btn btn--primary w-100">@lang('Submit')</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        <div class="card-body p-4">
+          <div class="mb-4">
+            <div class="avatar-lg mx-auto">
+              <div class="avatar-title bg-light text-primary display-5 rounded-circle">
+                <i class="ri-qr-code-fill"></i>
+              </div>
             </div>
+          </div>
+
+          <div class="p-2 mt-4">
+            <div class="text-muted text-center mb-4 mx-lg-3">
+              <h4>{{ __('2FA Verification') }}</h4>
+            </div>
+
+            <form action="{{route('admin.go2fa.verify')}}" method="POST" class="submit-form">
+              @csrf
+              @include('admin::partials.verification_code')
+            </form>
+            <div class="mt-3">
+              <button type="button" class="btn btn-success w-100">Confirm</button>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
 </x-dynamic-component>
