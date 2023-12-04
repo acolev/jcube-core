@@ -13,7 +13,7 @@ class Permission extends \Spatie\Permission\Middleware\PermissionMiddleware
   public function handle($request, Closure $next, $permission, $guard = 'admin')
   {
     $user = Auth::guard($guard)->user();
-    if ($user->status) return $next($request);
+    if ($user->root) return $next($request);
     return parent::handle($request, $next, $permission, $guard);
   }
 }
