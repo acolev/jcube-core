@@ -29,6 +29,7 @@
   <link rel="shortcut icon" type="image/png" href="{{getImage(getFilePath('logoIcon') .'/favicon.png')}}">
 
   <script src="{{ asset('admin_assets/js/layout.js') }}"></script>
+  <script src="{{asset('admin_assets/js/theme.js')}}"></script>
 
   <link rel="stylesheet" href="{{ asset('admin_assets/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{asset('admin_assets/libs/select2/css/select2.min.css')}}">
