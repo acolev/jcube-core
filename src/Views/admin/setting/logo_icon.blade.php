@@ -41,7 +41,7 @@
             <div class="image-upload">
               <div class="thumb">
                 <div class="avatar-preview">
-                  <div class="profilePicPreview logoPicPrev"
+                  <div class="profilePicPreview logoPicPrev bg-white"
                        style="background-image: url({{ getImage(getFilePath('logoIcon').'/logo_dark.png', '?'.time()) }})">
                     <button type="button" class="remove-image"><i class="fa fa-times"></i>
                     </button>
