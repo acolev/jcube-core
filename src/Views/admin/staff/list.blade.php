@@ -63,7 +63,12 @@
                     <td class="job_title">{{ $staff->job_title ?: '---' }}</td>
                     <td class="email">{{ $staff->email }}</td>
                     <td class="phone">{{ $staff->phone ?: '---' }}</td>
-                    <td class="date">{{ showDateTime($staff->created_at) }}</td>
+                    <td class="date">
+                      <div class="text-nowrap">
+                        <span class="d-block small text-secondary">{{ showDateTime($staff->created_at) }}</span>
+                        <span>{{ diffForHumans($staff->created_at) }}</span>
+                      </div>
+                    </td>
                     <td>
                       <ul class="list-inline hstack gap-2 mb-0">
                         @if(false)

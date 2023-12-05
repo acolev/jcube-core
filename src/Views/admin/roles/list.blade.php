@@ -45,13 +45,13 @@
                     <td>{{ $role->name }}</td>
                     <td>{{ $role->guard_name }}</td>
                     <td>
-                      <div>
+                      <div class="text-nowrap">
                         <span class="d-block small text-secondary">{{ showDateTime($role->created_at) }}</span>
                         <span>{{ diffForHumans($role->created_at) }}</span>
                       </div>
                     </td>
                     <td>
-                      <div>
+                      <div class="text-nowrap">
                         <span class="d-block small text-secondary">{{ showDateTime($role->updated_at) }}</span>
                         <span>{{ diffForHumans($role->updated_at) }}</span>
                       </div>
