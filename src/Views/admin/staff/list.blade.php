@@ -37,7 +37,7 @@
                     {{__('Id')}}
                   </th>
 
-                  <th>{{_('Name')}}</th>
+                  <th>{{__('Name')}}</th>
                   <th>{{__('Job Title')}}</th>
                   <th>{{__('Email')}}</th>
                   <th>{{('Phone')}}</th>
