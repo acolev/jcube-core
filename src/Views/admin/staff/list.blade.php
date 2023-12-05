@@ -13,7 +13,7 @@
           <div class="row g-4 align-items-center">
             <div class="col-sm-3">
               <div class="search-box">
-                <x-form.input class="search" placeholder="Search for..." />
+                <x-form.input class="search" placeholder="Search for..."/>
                 <i class="ri-search-line search-icon"></i>
               </div>
             </div>
@@ -88,6 +88,7 @@
                               "job_title": "{{$staff->job_title}}",
                               "phone": "{{$staff->phone}}",
                               "email": "{{$staff->email}}",
+                              "status": "{{$staff->status}}",
                               "roles": @json($staff->roles)
                             }
                           </script>
@@ -137,7 +138,8 @@
     </div>
   </div>
   <x-admin::modal id="userForm" title="Edit Staff">
-    <form method="POST" action="{{ route('admin.staff.save') }}" class="text-start" autocomplete="one-time-code" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.staff.save') }}" class="text-start" autocomplete="one-time-code"
+          enctype="multipart/form-data">
       @csrf
       <input type="hidden" id="id" name="id"/>
       <div class="modal-body">
@@ -156,54 +158,60 @@
           </div>
         </div>
         <div class="row g-3">
-          <div class="col-lg-6">
+          <div class="col-6">
             <div class="form-group">
               <label class="form-label">{{ __('Name') }}</label>
               <x-form.input type="string" required name="name" :value="old('name')"/>
             </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-6">
             <div class="form-group">
               <label class="form-label">{{ __('Last Name') }}</label>
               <x-form.input type="string" name="last_name" :value="old('last_name')"/>
             </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-6">
             <div class="form-group">
               <label class="form-label">{{ __('Phone') }}</label>
-              <x-form.input type="string"  name="phone" :value="old('phone')"/>
+              <x-form.input type="string" name="phone" :value="old('phone')"/>
             </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-6">
             <div class="form-group">
               <label class="form-label">{{ __('Email') }}</label>
               <x-form.input type="email" required name="email" :value="old('email')"/>
             </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-6">
             <div class="form-group">
               <label class="form-label">{{ __('Username') }}</label>
               <x-form.input type="string" required name="username" :value="old('username')"/>
             </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-6">
             <div class="form-group">
               <label class="form-label">{{ __('Job Title') }}</label>
-              <x-form.select type="auto" required name="job_title" :value="old('job_title') ?: []" :variants="$jobTitles" multiple :max-items="1"/>
+              <x-form.select type="auto" required name="job_title" :value="old('job_title') ?: []"
+                             :variants="$jobTitles" multiple :max-items="1"/>
             </div>
           </div>
-          <div class="col-lg-12">
+          <div class="col-12">
             <div class="form-group">
               <label class="form-label">{{ __('Password') }}</label>
               <x-form.input type="password" required name="password" :value="old('password')" autocomplete="one-time-code"/>
             </div>
           </div>
-          <div class="col-lg-12">
+          <div class="col-12">
             <div class="form-group">
               <label class="form-label">{{ __('Roles') }}</label>
               <div class="row">
                 <x-form.select name="roles[]" multiple :value="old('roles') ?: []" :variants="$roles"/>
               </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <x-form.input type="toggle" name="status" label="Active" :value="old('status') ?: []"/>
             </div>
           </div>
         </div>
@@ -225,7 +233,7 @@
         $(target + ' .user-profile-image').attr('src', '{{ getImage(null,getFileSize('adminProfile')) }}');
 
         fillForm(el, function (el) {
-          if(el.avatar){
+          if (el.avatar) {
             $(target + ' .user-profile-image').attr('src', '/assets/admin/images/profile/' + el.avatar);
           }
           $(target).modal('show')

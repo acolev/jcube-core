@@ -67,6 +67,7 @@ class StaffController extends Controller
     $admin->phone = $request->phone;
     $admin->username = $request->username;
     $admin->job_title = $request->job_title;
+    $admin->status = $request->status;
     $admin->syncRoles(...$request->roles ?: []);
     
     $admin->save();

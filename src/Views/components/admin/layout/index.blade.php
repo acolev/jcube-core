@@ -86,7 +86,6 @@
 
 </x-dynamic-component>
 
-
 @stack('modal-place')
 
 <script src="{{asset('admin_assets/libs/jquery/jquery-3.6.0.min.js')}}"></script>

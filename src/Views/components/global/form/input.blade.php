@@ -33,7 +33,7 @@
             @endif id="{{ $id }}" {{ $attributes }}>@php echo $value @endphp</textarea>
 @elseif($type === 'toggle')
   <div class="form-check form-switch">
-    <input type="hidden" name="{{$name}}" value="0">
+    <input type="hidden" name="{{$name}}" value="0" data-fill="none">
     <input class="form-check-input"
            type="checkbox"
            role="switch"
