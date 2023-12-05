@@ -7,7 +7,7 @@
       </div>
       <div class="col-sm-6">
         <div class="text-sm-end d-none d-sm-block">
-          Design & Develop by <a href="https://jcubegroup.com" target="_blank">jCube Group</a>
+          @php echo env('APP_COPYRIGHT') @endphp
         </div>
       </div>
     </div>
