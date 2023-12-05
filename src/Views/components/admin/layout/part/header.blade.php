@@ -35,7 +35,7 @@
           </span>
         </button>
 
-        <x-admin::layout.part.appSearch/>
+        <x-admin::layout.part.appSearch :menu="$menu"/>
         @if(isset($topBarLeft)) {{ $topBarLeft }} @endif
       </div>
 

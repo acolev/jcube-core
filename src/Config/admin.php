@@ -1,10 +1,6 @@
 <?php
 
 return [
-  'permission' => [
-    'Manage Dashboard',
-    'Manage Staff',
-  ],
   'fileInfo' => [
     'logoIcon' => [
       'path' => 'assets/images/logoIcon',

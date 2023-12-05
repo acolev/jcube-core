@@ -2,7 +2,7 @@
 	'menu' => [],
 	'noBody' => false
 ])
-<x-admin::layout.part.header>
+<x-admin::layout.part.header :menu="$menu">
   @if(isset($headerLeft))
     <x-slot name="headerLeft">{{ $headerLeft }}</x-slot>
   @endif
