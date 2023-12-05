@@ -40,7 +40,7 @@
                   <th>{{__('Name')}}</th>
                   <th>{{__('Job Title')}}</th>
                   <th>{{__('Email')}}</th>
-                  <th>{{('Phone')}}</th>
+                  <th>{{__('Phone')}}</th>
                   <th>{{__('Create at')}}</th>
                   <th style="width: 1%;">{{__('Action')}}</th>
                 </tr>
