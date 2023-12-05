@@ -34,7 +34,7 @@
                 <thead class="table-light">
                 <tr>
                   <th scope="col" style="width: 50px;">
-                    {{_('Id')}}
+                    {{__('Id')}}
                   </th>
 
                   <th>{{_('Name')}}</th>
