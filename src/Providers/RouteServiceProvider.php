@@ -20,7 +20,7 @@ class RouteServiceProvider extends ServiceProvider
         ->group(dirname(__DIR__) . '/Routes/admin.php');
       
       if (file_exists(base_path('routes/admin.php')))
-        Route::middleware(['web', 'admin', '2fa:admin'])
+        Route::middleware(['web', 'admin', '2fa:admin', 'active.admin'])
           ->namespace('\App\Http\Controllers\Admin')
           ->prefix(env('ADMIN_PREFIX') ?: 'admin')
           ->name('admin.')

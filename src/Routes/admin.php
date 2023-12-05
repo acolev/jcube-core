@@ -14,7 +14,7 @@ Route::namespace('Auth')->group(function () {
   Route::post('password/reset/change', 'ResetPasswordController@reset')->name('password.change');
 });
 
-Route::middleware('admin')->group(function () {
+Route::middleware(['admin','active.admin'])->group(function () {
   Route::controller('AdminController')->group(function () {
     Route::middleware('permission:Dashboard:Read')->group(function () {
       Route::get('dashboard', 'dashboard')->name('dashboard');

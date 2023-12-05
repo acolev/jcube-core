@@ -17852,7 +17852,9 @@ span.flatpickr-weekday {
 .short-codes:hover:before {
     height: 100%;
 }
-
+.auth-logo{
+    max-height: 35px;
+}
 .logo-img{
     max-width: 80%;
 }

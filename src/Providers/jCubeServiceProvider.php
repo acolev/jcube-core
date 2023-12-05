@@ -12,6 +12,7 @@ use jCube\Console\Commands\AdminCommand;
 use jCube\Console\Commands\InstallCommand;
 use jCube\Console\Commands\LayoutCommand;
 use jCube\Console\Commands\NotifyCommand;
+use jCube\Http\Middleware\ActiveAdmin;
 use jCube\Http\Middleware\Check2fa;
 use jCube\Http\Middleware\Permission;
 use jCube\Http\Middleware\RedirectIfAdmin;
@@ -51,6 +52,7 @@ class jCubeServiceProvider extends ServiceProvider
 		app('router')->aliasMiddleware('admin', RedirectIfNotAdmin::class);
 		app('router')->aliasMiddleware('admin.guest', RedirectIfAdmin::class);
 		app('router')->aliasMiddleware('2fa', Check2fa::class);
+		app('router')->aliasMiddleware('active.admin', ActiveAdmin::class);
 	}
 
 	protected function registerConfig()
