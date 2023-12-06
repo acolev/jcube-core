@@ -17,6 +17,9 @@ class Admin extends Authenticatable
   protected $casts = [
     'access_permissions' => 'array',
   ];
+  protected $appends = [
+    'full_name',
+  ];
   
   //    use GlobalStatus;
   
