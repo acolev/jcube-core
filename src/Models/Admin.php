@@ -18,12 +18,12 @@ class Admin extends Authenticatable
     'access_permissions' => 'array',
   ];
   protected $appends = [
-    'full_name',
+    'fullName',
   ];
   
   //    use GlobalStatus;
   
-  public function full_name(): Attribute
+  public function fullName(): Attribute
   {
     return new Attribute(
       get: fn() => implode(' ', [$this->name, $this->last_name ?: $this->uaername])
