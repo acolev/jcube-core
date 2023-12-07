@@ -3,7 +3,7 @@
 @endphp
 
 <div class="tabs">
-    <ul class="nav nav-tabs" id="{{ $id }}" role="tablist">
+    <ul class="nav nav-tabs nav-primary" id="{{ $id }}" role="tablist">
         @stack('tabs-buttons')
         @if(isset($actions))
             <li class="col"></li>
