@@ -16,8 +16,8 @@
 <textarea class="codemirror" name="{{ $name }}" id="{{$id}}" {{ $attributes }}>{{ $value }}</textarea>
 
 @pushonce('style-lib')
-    <link rel="stylesheet" href="{{asset('admin_assets/vendor/codemirror/css/codemirror.min.css')}}">
-    <link rel="stylesheet" href="{{asset('admin_assets/vendor/codemirror/css/monokai.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin_assets/libs/codemirror/css/codemirror.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin_assets/libs/codemirror/css/monokai.min.css')}}">
 @endpushonce
 @pushonce('style')
     <style>

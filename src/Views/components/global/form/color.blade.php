@@ -19,12 +19,12 @@
 </div>
 
 @pushonce('style-lib')
-    <link rel="stylesheet" href="{{ asset('admin_assets/vendor/spectrum/spectrum.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin_assets/libs/spectrum/spectrum.css') }}">
 @endpushonce
 
 
 @pushonce('script-lib')
-    <script src="{{ asset('admin_assets/vendor/spectrum/spectrum.js') }}"></script>
+    <script src="{{ asset('admin_assets/libs/spectrum/spectrum.js') }}"></script>
 @endpushonce
 
 @pushonce('script')
