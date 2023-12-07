@@ -1,4 +1,4 @@
-<x-admin::layout :page-title="@$pageTitle" :menus="config('adminMenu')" {{ $attributes }}>
+<x-admin::layout :page-title="@$pageTitle" :menu="config('adminMenu')" {{ $attributes }}>
     <x-slot name="topBarRight">
         @if(Route::has('home'))
             <li class="nav-item d-none d-lg-block">
