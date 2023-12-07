@@ -1,7 +1,14 @@
 @props([
 	"pageTitle" => 'jCube Admin',
 	"variant" => 'classic',
-	'menu' => []
+	'menu' => [],
+	'layoutType' => null,
+	'topbarColor' => null,
+	'sidebarColor' => null,
+	'sidebarSize' => null,
+	'sidebarImage' => null,
+	'preloader' => false,
+	'layoutWidth' => null,
 ])
 {{-- data-layout =  vertical | default | semibox | twocolumn --}}
 {{-- data-topbar = dark | light --}}
