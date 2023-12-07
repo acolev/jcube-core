@@ -14,12 +14,14 @@
 {{-- data-layout-width =  boxed | fluid --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-      data-layout="vertical"
-      data-topbar="light"
-      data-sidebar="dark"
-      data-sidebar-size="lg"
-      data-sidebar-image="none"
-      data-preloader="disable">
+      data-layout="{{ $layoutType ?: 'vertical' }}"
+      data-topbar="{{ $topbarColor ?: 'light' }}"
+      data-sidebar="{{ $sidebarColor ?: 'dark' }}"
+      data-sidebar-size="{{ $sidebarSize ?: 'lg' }}"
+      data-sidebar-image="{{ $sidebarImage ?: 'none' }}"
+      data-preloader="{{ $preloader ? "enable" : 'disable' }}"
+      data-layout-width="{{ $layoutWidth  ?: 'fluid' }}"
+>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

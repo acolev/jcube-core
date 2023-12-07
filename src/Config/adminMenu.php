@@ -142,12 +142,12 @@ return [
 			],
 		],
 	],
-	[
-		"name" => "Others",
-		"link" => [
-			"type" => "title",
-		],
-		"children" => [
+  [
+    "name" => "Others",
+    "link" => [
+      "type" => "title",
+    ],
+    "children" => [
       [
         "name" => "Cache",
         "link" => [
@@ -160,7 +160,8 @@ return [
           "title" => "Clear Cache",
           "group" => "Others"
         ],
+        "icon" => 'mdi mdi-cached',
       ],
-		],
-	],
+    ],
+  ],
 ];
