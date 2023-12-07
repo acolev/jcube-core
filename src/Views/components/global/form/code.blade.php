@@ -45,9 +45,9 @@
 @endpushonce
 
 @pushonce('script-lib')
-    <script src="{{asset('admin_assets/vendor/codemirror/js/codemirror.min.js')}}"></script>
-    <script src="{{asset('admin_assets/vendor/codemirror/js/css.min.js')}}"></script>
-    <script src="{{asset('admin_assets/vendor/codemirror/js/sublime.min.js')}}"></script>
+    <script src="{{asset('admin_assets/libs/codemirror/js/codemirror.min.js')}}"></script>
+    <script src="{{asset('admin_assets/libs/codemirror/js/css.min.js')}}"></script>
+    <script src="{{asset('admin_assets/libs/codemirror/js/sublime.min.js')}}"></script>
 @endpushonce
 
 @pushonce('script')
