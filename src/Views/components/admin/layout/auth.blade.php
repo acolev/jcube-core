@@ -32,7 +32,7 @@
           <div class="text-center">
             <p class="mb-0 text-muted">&copy;
               <script>document.write(new Date().getFullYear())</script>
-              {{__(gs()->site_name ?: env('APP_NAME'))}}. Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://jcubegroup.com" target="_blank">jCube Group</a>
+              {{__(gs()->site_name ?: env('APP_NAME'))}}. @php echo env('APP_COPYRIGHT') @endphp
             </p>
           </div>
         </div>

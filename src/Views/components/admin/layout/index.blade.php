@@ -3,7 +3,6 @@
 	"variant" => 'classic',
 	'menu' => []
 ])
-    <!DOCTYPE html>
 {{-- data-layout =  vertical | default | semibox | twocolumn --}}
 {{-- data-topbar = dark | light --}}
 {{-- data-sidebar = dark | light | gradient | gradient-$n (1-4) --}}
@@ -13,7 +12,7 @@
 {{-- data-layout-style = detached | default --}}
 {{-- data-preloader = disable | enable --}}
 {{-- data-layout-width =  boxed | fluid --}}
-
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
       data-layout="vertical"
       data-topbar="light"
