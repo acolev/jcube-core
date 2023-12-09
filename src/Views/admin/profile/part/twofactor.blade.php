@@ -35,10 +35,7 @@
           <div class="form-group mb-3">
             <x-form.input name="code" value="" label="Google Authenticatior OTP" required/>
           </div>
-          <div class="hstack gap-2 justify-content-end">
-            <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-            <button type="reset" class="btn btn-soft-success">{{__('Cancel')}}</button>
-          </div>
+          <x-admin::submit/>
         </div>
       </form>
     @else
@@ -49,10 +46,7 @@
         <div class="form-group mb-3">
           <x-form.input name="code" value="" label="Google Authenticatior OTP" required/>
         </div>
-        <div class="hstack gap-2 justify-content-end">
-          <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-          <button type="reset" class="btn btn-soft-success">{{__('Cancel')}}</button>
-        </div>
+        <x-admin::submit/>
       </form>
     @endif
   </div>
