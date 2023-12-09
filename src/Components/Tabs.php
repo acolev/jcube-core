@@ -7,7 +7,7 @@ use Illuminate\View\Component;
 class Tabs extends Component
 {
   public string $tabs;
-  public string $active;
+  public mixed $active;
   
   public function __construct($active = null)
   {
