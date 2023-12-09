@@ -1,4 +1,4 @@
-<div class="{{ @$btnWrapperCls }}">
+<div class="{{ @$classes['wrapper'] }}">
   <ul class="nav nav-tabs nav-primary {{ @$navCls }}" id="{{ $id }}" role="tablist" {{ $attributes }}>
     @stack($tabs)
     @if(isset($actions))

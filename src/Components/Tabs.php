@@ -9,12 +9,14 @@ class Tabs extends Component
   public string $id;
   public string $tabs;
   public mixed $active;
+  public string $classes;
   
-  public function __construct($active)
+  public function __construct($active, $classes = [])
   {
     $this->tabs = \uniqid('tabs');
     $this->active = $active;
     $this->id = $this->tabs;
+    $this->classes = $classes;
 
     view()->composer('components::tabs.item', function ($view) {
       $view->with([
