@@ -1,5 +1,5 @@
 @if($parent->cols <= $parent->max)
-  <div class="row row-cols-{{ $parent->cols }}">
+  <div>
     {{ $slot }}
   </div>
 @else
