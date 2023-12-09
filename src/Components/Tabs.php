@@ -9,7 +9,7 @@ class Tabs extends Component
   public string $tabs;
   public string $active;
   
-  public function __construct(string $active)
+  public function __construct($active = null)
   {
     $this->tabs = \uniqid('tabs');
     $this->active = $active;
