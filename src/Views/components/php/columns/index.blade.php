@@ -4,7 +4,7 @@
   </div>
 @else
   <div>
-    <ul class="nav nav-tabs nav-primary" id="{{ $id }}" role="tablist" {{ $attributes }}>
+    <ul class="arrow-navtabs bg-light mb-3 nav nav-pills nav-primary" id="{{ $id }}" role="tablist" {{ $attributes }}>
       @stack($columns)
     </ul>
   </div>
