@@ -9,7 +9,7 @@ class Tabs extends Component
   public string $id;
   public string $tabs;
   public mixed $active;
-  public string $classes;
+  public object $classes;
   
   public function __construct($active, $classes = [])
   {
