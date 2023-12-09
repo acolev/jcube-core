@@ -4,7 +4,7 @@ namespace jCube\Components;
 
 use Illuminate\View\Component;
 
-class TabItem extends Component
+class ColumnItem extends Component
 {
   public string $name;
   
@@ -15,6 +15,6 @@ class TabItem extends Component
   
   public function render()
   {
-    return view('components::tabs.item');
+    return view('components::columns.item');
   }
 }

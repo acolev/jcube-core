@@ -2,6 +2,33 @@
   <x-admin::breadcrumb :page-title="$pageTitle">
 
   </x-admin::breadcrumb>
+  <div class="my-5">
+    <x-tabs :active="request()->query('tab') ?: 'Test'">
+      <x-tab-item name="Test">
+        <x-columns-or-tabs active="Русский" :cols="2" :max="1">
+          <x-column-item name="Romana">
+            1
+          </x-column-item>
+          <x-column-item name="Русский">
+            3
+          </x-column-item>
+        </x-columns-or-tabs>
+      </x-tab-item>
+      <x-tab-item name="Run">
+        Run
+      </x-tab-item>
+    </x-tabs>
+  </div>
+  <div class="my-5">
+    <x-tabs :active="request()->query('tab')">
+      <x-tab-item name="Rush">
+        Ok
+      </x-tab-item>
+      <x-tab-item name="Ok">
+        Run
+      </x-tab-item>
+    </x-tabs>
+  </div>
   <div class="row mt-4">
     <div class="col"></div>
     <div class="col-lg-6">

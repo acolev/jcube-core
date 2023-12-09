@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use jCube\Components\ColumnItem;
+use jCube\Components\ColumnsOrTabs;
 use jCube\Console\Commands\AdminCommand;
 use jCube\Console\Commands\InstallCommand;
 use jCube\Console\Commands\LayoutCommand;
@@ -100,7 +102,9 @@ class jCubeServiceProvider extends ServiceProvider
     $this->loadViewsFrom(dirname(__DIR__) . '/Views/components/php', 'components');
     $this->loadViewComponentsAs(null, [
       Tabs::class,
-      TabItem::class
+      TabItem::class,
+      ColumnsOrTabs::class,
+      ColumnItem::class
     ]);
   }
   

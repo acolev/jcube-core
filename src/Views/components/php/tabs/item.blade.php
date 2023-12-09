@@ -1,4 +1,5 @@
-@push(\view()->shared('tabs'))
+@php $is_active =   titleToKey($active) === titleToKey($name)@endphp
+@push($tabs)
   <li class="nav-item @if($is_active) active @endif" role="presentation">
     <button class="nav-link @if($is_active) active @endif" id="{{ $name }}-tab" data-bs-toggle="tab"
             data-bs-target="#{{ titleToKey($name) }}" type="button"

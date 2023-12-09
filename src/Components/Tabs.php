@@ -6,6 +6,7 @@ use Illuminate\View\Component;
 
 class Tabs extends Component
 {
+  public string $id;
   public string $tabs;
   public mixed $active;
   
@@ -13,9 +14,14 @@ class Tabs extends Component
   {
     $this->tabs = \uniqid('tabs');
     $this->active = $active;
-    
-    view()->share('tabs', $this->tabs);
-    view()->share('active', $this->active);
+    $this->id = $this->tabs;
+
+    view()->composer('components::tabs.item', function ($view) {
+      $view->with([
+        'tabs' => $this->tabs,
+        'active' => $this->active,
+      ]);
+    });
   }
   
   public function render()
