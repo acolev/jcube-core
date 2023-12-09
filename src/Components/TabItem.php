@@ -6,9 +6,13 @@ use Illuminate\View\Component;
 
 class TabItem extends Component
 {
-  public function __construct()
-  {
+  public bool $is_active;
+  public string $name;
   
+  public function __construct($name = '')
+  {
+    $this->name = $name;
+    $this->is_active = view()->shared('active') === $name;
   }
   
   public function render()

@@ -9,12 +9,13 @@ class Tabs extends Component
   public string $tabs;
   public mixed $active;
   
-  public function __construct($active = null)
+  public function __construct($active)
   {
     $this->tabs = \uniqid('tabs');
     $this->active = $active;
     
-    \view()->share('tabs', $this->tabs);
+    view()->share('tabs', $this->tabs);
+    view()->share('active', $this->active);
   }
   
   public function render()

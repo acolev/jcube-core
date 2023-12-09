@@ -4,7 +4,6 @@
 
 <div class="{{ @$btnWrapperCls }}">
   <ul class="nav nav-tabs nav-primary {{ @$navCls }}" id="{{ $id }}" role="tablist" {{ $attributes }}>
-    @stack('tabs-buttons')
     @stack($tabs)
     @if(isset($actions))
       <li class="col"></li>
