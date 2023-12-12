@@ -87,7 +87,7 @@ $(".select2-auto-tokenize").select2({
 });
 
 
-function getTrx(length = 12) {
+function genTrx(length = 12) {
   const characters = 'ABCDEFGHJKMNOPQRSTUVWXYZ123456789';
   const charactersLength = characters.length;
   let randomString = '';

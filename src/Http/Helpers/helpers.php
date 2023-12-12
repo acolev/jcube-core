@@ -919,7 +919,7 @@ if (!function_exists('is_json')) {
   }
 }
 
-function getTrx($length = 12)
+function genTrx($length = 12)
 {
   $characters       = 'ABCDEFGHJKMNOPQRSTUVWXYZ123456789';
   $charactersLength = strlen($characters);
