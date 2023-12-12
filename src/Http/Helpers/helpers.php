@@ -918,3 +918,16 @@ if (!function_exists('is_json')) {
     return json_last_error() === JSON_ERROR_NONE;
   }
 }
+
+function getTrx($length = 12)
+{
+  $characters       = 'ABCDEFGHJKMNOPQRSTUVWXYZ123456789';
+  $charactersLength = strlen($characters);
+  $randomString     = '';
+  
+  for ($i = 0; $i < $length; $i++) {
+    $randomString .= $characters[rand(0, $charactersLength - 1)];
+  }
+  
+  return $randomString;
+}
