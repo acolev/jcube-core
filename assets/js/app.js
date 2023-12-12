@@ -87,16 +87,8 @@ $(".select2-auto-tokenize").select2({
 });
 
 
-function genTrx(length = 12) {
-  const characters = 'ABCDEFGHJKMNOPQRSTUVWXYZ123456789';
-  const charactersLength = characters.length;
-  let randomString = '';
-
-  for (let i = 0; i < length; i++) {
-    randomString += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-
-  return randomString;
+function genTrx(length = 12, characters = 'ABCDEFGHJKMNOPQRSTUVWXYZ123456789') {
+  return Array.from({ length }, () => characters.charAt(Math.floor(Math.random() * characters.length))).join('');
 }
 
 

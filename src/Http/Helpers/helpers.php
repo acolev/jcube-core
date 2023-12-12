@@ -919,15 +919,10 @@ if (!function_exists('is_json')) {
   }
 }
 
-function genTrx($length = 12)
-{
-  $characters       = 'ABCDEFGHJKMNOPQRSTUVWXYZ123456789';
-  $charactersLength = strlen($characters);
-  $randomString     = '';
+function genTrx($length = 12, $characters = 'ABCDEFGHJKMNOPQRSTUVWXYZ123456789') {
+  $randomStringArray = array_map(function () use ($characters) {
+    return $characters[random_int(0, strlen($characters) - 1)];
+  }, range(1, $length));
   
-  for ($i = 0; $i < $length; $i++) {
-    $randomString .= $characters[rand(0, $charactersLength - 1)];
-  }
-  
-  return $randomString;
+  return implode('', $randomStringArray);
 }
