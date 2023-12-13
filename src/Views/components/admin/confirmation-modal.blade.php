@@ -12,7 +12,6 @@
                    colors="primary:#405189,secondary:#f06548" style="width:90px;height:90px"></lord-icon>
         <div class="mt-4 text-center">
           <h4 class="fs-semibold question"></h4>
-          <p class="text-muted fs-14 mb-4 pt-1 text"></p>
           <div class="hstack gap-2 justify-content-center remove">
             <form action="" method="POST">
               @csrf
@@ -37,7 +36,6 @@
         var modal = $('#confirmationModal');
         let data = $(this).data();
         modal.find('.question').text(`${data.question}`);
-        modal.find('.text').text(`${data.text}`);
         modal.find('form').attr('action', `${data.action}`);
         modal.modal('show');
       });
