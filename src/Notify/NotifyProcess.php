@@ -240,7 +240,7 @@ class NotifyProcess
 	protected function setSetting()
 	{
 		if (!$this->setting) {
-			$this->setting = getConfig(['general', 'notify']);
+			$this->setting = getConfig(['general', 'system', 'notify']);
 		}
 	}
 

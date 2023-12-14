@@ -223,7 +223,7 @@ class NotificationController extends Controller
 	public function smsTest(Request $request)
 	{
 		$request->validate(['mobile' => 'required']);
-		$general = getConfig('notify');
+		$general = getConfig(['general', 'system', 'notify']);
 		if ($general->sn == 1) {
 			$sendSms = new Sms;
 			$sendSms->mobile = $request->mobile;
