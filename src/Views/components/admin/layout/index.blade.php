@@ -46,7 +46,7 @@
   @stack('style-lib')
 
   <link rel="stylesheet" href="{{ asset('admin_assets/css/app.css') }}">
-  @if(file_exists('assets/css/custom.css'))
+  @if(file_exists('assets/admin/css/custom.css'))
     <link rel="stylesheet" href="{{ asset('assets/admin/css/custom.css') }}">
   @endif
 
