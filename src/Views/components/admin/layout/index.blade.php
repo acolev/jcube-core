@@ -10,15 +10,6 @@
 	'preloader' => false,
 	'layoutWidth' => null,
 ])
-{{-- data-layout =  vertical | default | semibox | twocolumn --}}
-{{-- data-topbar = dark | light --}}
-{{-- data-sidebar = dark | light | gradient | gradient-$n (1-4) --}}
-{{-- data-sidebar-size = sm | md | lg | sm-hover --}}
-{{-- data-sidebar-image = none | img-$n  (1-4) --}}
-{{-- data-layout-position = fixed | scrollable --}}
-{{-- data-layout-style = detached | default --}}
-{{-- data-preloader = disable | enable --}}
-{{-- data-layout-width =  boxed | fluid --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
       data-layout="{{ $layoutType ?: 'vertical' }}"
