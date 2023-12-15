@@ -36,6 +36,7 @@ class jCubeServiceProvider extends ServiceProvider
     
     view()->share([
       'layoutComponent' => View::exists('components.admin.layout') ? 'admin.layout' : 'admin::layout',
+      'global_components_path' => dirname(__DIR__) . '/Views/components/global/',
     ]);
     
     view()->composer('*', function ($view) {
