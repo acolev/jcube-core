@@ -87,6 +87,7 @@
 <script src="{{asset('admin_assets/libs/node-waves/waves.min.js')}}"></script>
 <script src="{{asset('admin_assets/libs/feather-icons/feather.min.js')}}"></script>
 <script src="{{asset('admin_assets/js/pages/plugins/lord-icon-2.1.0.js')}}"></script>
+<script src="{{asset('admin_assets/js/rhm.js')}}"></script>
 <script src="{{asset('admin_assets/js/plugins.js')}}"></script>
 @stack('script-lib')
 

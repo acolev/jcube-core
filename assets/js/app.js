@@ -1067,6 +1067,9 @@ File: Main Js File
 	}
 
 	function updateHorizontalMenus() {
+		document.querySelector('.navbar-nav')?.RHM('More', 'lg')
+	}
+	function updateHorizontalMenus2() {
 		document.getElementById("two-column-menu").innerHTML = "";
 		if (document.querySelector(".navbar-menu")) {
 			document.querySelector(".navbar-menu").innerHTML = navbarMenuHTML;
