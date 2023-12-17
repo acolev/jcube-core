@@ -29,63 +29,51 @@
         </div>
         <div class="card-body">
           <div>
-            <div class="table-responsive table-card">
-              <table class="table align-middle">
-                <thead class="table-light">
-                <tr>
-                  <th scope="col" style="width: 50px;">
-                    {{__('Id')}}
-                  </th>
 
-                  <th>{{__('Name')}}</th>
-                  <th>{{__('Job Title')}}</th>
-                  <th>{{__('Email')}}</th>
-                  <th>{{__('Phone')}}</th>
-                  <th>{{__('Create at')}}</th>
-                  <th style="width: 1%;">{{__('Action')}}</th>
-                </tr>
-                </thead>
-                <tbody class="list form-check-all">
-                @forelse($staffs as $staff)
-                  <tr>
-                    <th scope="row">
-                      {{ $staff->id }}
-                    </th>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                          <img src="{{ getImage('assets/admin/images/profile/'.$staff->image, '400x400') }}" alt=""
-                               class="avatar-xxs rounded-circle image_src object-fit-cover">
-                        </div>
-                        <div class="flex-grow-1 ms-2 name">{{ $staff->name }} {{ $staff->last_name }}</div>
+            <x-table :fields="['id', 'name', 'job_title', 'email', 'phone', 'created_at', 'actions']" card>
+              <x-slot name="head_id">ID</x-slot>
+
+              @foreach($staffs as $staff)
+                <x-table-item :cols="$staff">
+
+                  <x-slot name="cell_name">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0">
+                        <img src="{{ getImage('assets/admin/images/profile/'.$staff->image, '400x400') }}" alt=""
+                             class="avatar-xxs rounded-circle image_src object-fit-cover">
                       </div>
-                    </td>
-                    <td class="job_title">{{ $staff->job_title ?: '---' }}</td>
-                    <td class="email">{{ $staff->email }}</td>
-                    <td class="phone">{{ $staff->phone ?: '---' }}</td>
-                    <td class="date">
-                      <div class="text-nowrap">
-                        <span class="d-block small text-secondary">{{ showDateTime($staff->created_at) }}</span>
-                        <span>{{ diffForHumans($staff->created_at) }}</span>
-                      </div>
-                    </td>
-                    <td>
-                      <ul class="list-inline hstack gap-2 mb-0">
-                        @if(false)
-                          <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                              data-bs-placement="top" title="{{__('View')}}">
-                            <a href="javascript:void(0);"><i class="ri-eye-fill align-bottom text-muted"></i></a>
-                          </li>
-                        @endif
+                      <div class="flex-grow-1 ms-2 name">{{ $staff->name }} {{ $staff->last_name }}</div>
+                    </div>
+                  </x-slot>
+
+                  <x-slot name="cell_phone">
+                    {{ $staff->phone ?: '---' }}
+                  </x-slot>
+
+                  <x-slot name="cell_created_at">
+                    <div class="text-nowrap">
+                      <span class="d-block small text-secondary">{{ showDateTime($staff->created_at) }}</span>
+                      <span>{{ diffForHumans($staff->created_at) }}</span>
+                    </div>
+                  </x-slot>
+
+                  <x-slot name="cell_actions">
+                    <ul class="list-inline hstack gap-2 mb-0">
+                      @if(false)
                         <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                            data-bs-placement="top" title="{{__('Edit')}}">
-                          <a href="#" data-target="#userForm" data-form="#user-{{$staff->id}}"
-                             onclick="editUser(this, {{$staff->id}})">
-                            <i class="ri-pencil-fill align-bottom text-muted"></i>
-                          </a>
-                          <script type="application/json" id="user-{{$staff->id}}">
-                            {
-                              "id": "{{$staff->id}}",
+                            data-bs-placement="top" title="{{__('View')}}">
+                          <a href="javascript:void(0);"><i class="ri-eye-fill align-bottom text-muted"></i></a>
+                        </li>
+                      @endif
+                      <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                          data-bs-placement="top" title="{{__('Edit')}}">
+                        <a href="#" data-target="#userForm" data-form="#user-{{$staff->id}}"
+                           onclick="editUser(this, {{$staff->id}})">
+                          <i class="ri-pencil-fill align-bottom text-muted"></i>
+                        </a>
+                        <script type="application/json" id="user-{{$staff->id}}">
+                          {
+                            "id": "{{$staff->id}}",
                               "avatar": "{{$staff->image}}",
                               "name": "{{$staff->name}}",
                               "last_name": "{{$staff->last_name}}",
@@ -95,41 +83,29 @@
                               "email": "{{$staff->email}}",
                               "status": "{{$staff->status}}",
                               "roles": @json($staff->roles)
-                            }
-                          </script>
+                          }
+                        </script>
+                      </li>
+                      @if ($staff->root!==1)
+                        <li class="list-inline-item">
+                          <button type="button" class="btn p-0 remove-item-btn confirmationBtn"
+                                  data-action="{{ route('admin.staff.remove',$staff->id) }}"
+                                  data-question="@lang('Are you sure to remove this staff')?"
+                                  data-text="@lang('Deleting your staff will remove all of your information from our database.')?"
+                                  data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top"
+                                  title="{{__('Delete')}}">
+                            <i class="ri-delete-bin-fill align-bottom text-muted"></i>
+                          </button>
                         </li>
-                        @if ($staff->root!==1)
-                          <li class="list-inline-item">
-                            <button type="button" class="btn p-0 remove-item-btn confirmationBtn"
-                                    data-action="{{ route('admin.staff.remove',$staff->id) }}"
-                                    data-question="@lang('Are you sure to remove this staff')?"
-                                    data-text="@lang('Deleting your staff will remove all of your information from our database.')?"
-                                    data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top"
-                                    title="{{__('Delete')}}">
-                              <i class="ri-delete-bin-fill align-bottom text-muted"></i>
-                            </button>
-                          </li>
-                        @endif
-                      </ul>
-                    </td>
-                  </tr>
-                @empty
-                  <tr>
-                    <td>11</td>
-                  </tr>
-                @endforelse
-                </tbody>
-              </table>
-              <div class="noresult" style="display: none">
-                <div class="text-center">
-                  <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
-                             colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px"></lord-icon>
-                  <h5 class="mt-2">Sorry! No Result Found</h5>
-                  <p class="text-muted mb-0">We've searched more than 150+ leads We did not find any leads for you
-                    search.</p>
-                </div>
-              </div>
-            </div>
+                      @endif
+                    </ul>
+                  </x-slot>
+
+                </x-table-item>
+              @endforeach
+
+            </x-table>
+
             @if ($staffs->hasPages())
               <div class="d-flex justify-content-end mt-3">
                 <div class="pagination-wrap hstack gap-2" style="display: flex;">
@@ -142,6 +118,7 @@
       </div>
     </div>
   </div>
+
   <x-admin::modal id="userForm" title="Edit Staff">
     <form method="POST" action="{{ route('admin.staff.save') }}" class="text-start" autocomplete="one-time-code"
           enctype="multipart/form-data">
@@ -203,7 +180,8 @@
           <div class="col-12">
             <div class="form-group">
               <label class="form-label">{{ __('Password') }}</label>
-              <x-form.input type="password" required name="password" :value="old('password')" autocomplete="one-time-code"/>
+              <x-form.input type="password" required name="password" :value="old('password')"
+                            autocomplete="one-time-code"/>
             </div>
           </div>
           <div class="col-12">

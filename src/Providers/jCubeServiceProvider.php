@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use jCube\Components\ColumnItem;
 use jCube\Components\ColumnsOrTabs;
+use jCube\Components\DataTable;
+use jCube\Components\Table;
+use jCube\Components\TableItem;
 use jCube\Console\Commands\AdminCommand;
 use jCube\Console\Commands\InstallCommand;
 use jCube\Console\Commands\LayoutCommand;
@@ -104,8 +107,13 @@ class jCubeServiceProvider extends ServiceProvider
     $this->loadViewComponentsAs(null, [
       Tabs::class,
       TabItem::class,
+      
       ColumnsOrTabs::class,
-      ColumnItem::class
+      ColumnItem::class,
+      
+      Table::class,
+      TableItem::class,
+      DataTable::class,
     ]);
   }
   

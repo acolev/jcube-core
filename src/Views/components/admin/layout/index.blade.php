@@ -44,7 +44,6 @@
   @stack('style')
 </head>
 <body>
-
 <x-dynamic-component :component="'admin::layout.' . strtolower($variant)"
                      :page-title="$pageTitle"
                      :menu="$menu" {{ $attributes }}>

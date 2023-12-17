@@ -28,6 +28,9 @@
 />
 
 
+@pushonce('style-lib')
+  <link rel="stylesheet" href="{{ asset('admin_assets/libs/flatpickr/css/flatpickr.min.css') }}">
+@endpushonce
 @pushonce('script-lib')
   <script src="{{ asset('admin_assets/libs/flatpickr/flatpickr.min.js') }}"></script>
 @endpushonce

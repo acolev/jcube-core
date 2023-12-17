@@ -29,17 +29,12 @@
             line-height: 1.3;
             height: 500px;
         }
-
         .CodeMirror-linenumbers {
             padding: 0 8px;
         }
-
-        ​
         .custom-css p, .custom-css li, .custom-css span {
             color: white;
         }
-
-        ​
         .cm-s-monokai span.cm-tag {
             margin-left: 15px;
         }

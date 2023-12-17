@@ -19,9 +19,9 @@
 @endif
 <textarea class="tinymce" name="{{ $name }}" id="{{ $id }}">{{ $value }}</textarea>
 
-@push('script-lib')
+@pushonce('script-lib')
   <script src="{{asset('admin_assets/libs/tinymce/tinymce.min.js')}}"></script>
-@endpush
+@endpushonce
 @push('script')
   <script>
     (function () {
