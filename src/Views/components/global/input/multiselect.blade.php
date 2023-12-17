@@ -10,10 +10,13 @@
 	"search" => false,
 ])
 
-@if($label)
-  <label class="@if(!!$required) required @endif" for="{{ $id }}">{{ __($label) }}</label>
-@endif
-<x-input type="select" multiple="multiple" :id="$id" :variants="$variants" {{ $attributes }} />
+<x-input type="select" multiple
+         :label="$label"
+         :placeholder="$placeholder"
+         :value="$value"
+         :required="$required"
+         :id="$id"
+         :variants="$variants" {{ $attributes }} />
 
 @pushonce('style-lib')
   <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/libs/multi.js/multi.min.css') }}"/>

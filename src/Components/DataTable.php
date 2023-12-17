@@ -21,7 +21,7 @@ class DataTable extends Component
   public bool $card;
   
   public function __construct(
-    $perPage = 20,
+    $perPage = 25,
     $page = 1,
     $dark = false,
     $responsive = true,
