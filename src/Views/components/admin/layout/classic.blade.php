@@ -1,14 +1,15 @@
 @props([
 	'menu' => [],
-	'noBody' => false
+	'noBody' => false,
+	'search' => false,
 ])
-<x-admin::layout.part.header :menu="$menu">
-  @if(isset($headerLeft))
+<x-admin::layout.part.header :menu="$menu" :search="$search">
+  @isset($headerLeft)
     <x-slot name="headerLeft">{{ $headerLeft }}</x-slot>
-  @endif
-  @if(isset($headerRight))
+  @endisset
+  @isset($headerRight)
     <x-slot name="headerRight">{{ $headerRight }}</x-slot>
-  @endif
+  @endisset
 </x-admin::layout.part.header>
 @if(count($menu))
   <x-admin::layout.part.appMenu :menu="$menu"/>

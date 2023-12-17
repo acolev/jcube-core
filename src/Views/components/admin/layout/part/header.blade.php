@@ -36,17 +36,16 @@
           </span>
         </button>
 
-        <x-admin::layout.part.appSearch :menu="$menu"/>
-        @if(isset($topBarLeft))
-          {{ $topBarLeft }}
+        @if($search)
+          <x-admin::layout.part.appSearch :menu="$menu"/>
         @endif
+
+        @isset($headerLeft) {{ $headerLeft }} @endisset
       </div>
 
       <div class="d-flex align-items-center">
 
-        @if(isset($topBarRight))
-          {{ $topBarRight }}
-        @endif
+        @isset($headerRight) {{ $headerRight }} @endisset
 
         <div class="dropdown d-md-none topbar-head-dropdown header-item">
           <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"

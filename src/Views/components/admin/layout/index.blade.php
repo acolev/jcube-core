@@ -9,6 +9,7 @@
 	'sidebarImage' => null,
 	'preloader' => false,
 	'layoutWidth' => null,
+	'search' => false,
 ])
     <!DOCTYPE html>
 <x-admin::layout.part.settings :layout="strtolower($variant)" :topbar-color="$topbarColor" :sidebar-color="$sidebarColor"
@@ -43,11 +44,11 @@
   @if(isset($topBarOverride))
     <x-slot name="topBarOverride">{{ $topBarOverride }}</x-slot>
   @endif
-  @if(isset($topBarLeft))
-    <x-slot name="topBarLeft">{{ $topBarLeft }}</x-slot>
+  @if(isset($headerLeft))
+    <x-slot name="headerLeft">{{ $headerLeft }}</x-slot>
   @endif
-  @if(isset($topBarRight))
-    <x-slot name="topBarRight">{{ $topBarRight }}</x-slot>
+  @if(isset($headerRight))
+    <x-slot name="headerRight">{{ $headerRight }}</x-slot>
   @endif
   @if(isset($mainMenu))
     <x-slot name="mainMenu">{{ $mainMenu }}</x-slot>
