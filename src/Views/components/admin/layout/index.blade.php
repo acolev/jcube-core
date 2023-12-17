@@ -12,8 +12,10 @@
 	'search' => false,
 ])
     <!DOCTYPE html>
-<x-admin::layout.part.settings :layout="strtolower($variant)" :topbar-color="$topbarColor" :sidebar-color="$sidebarColor"
-                               :sidebar-size="$sidebarSize" :sidebar-image="$sidebarImage" :layout-width="$layoutWidth" :preloader="$preloader"/>
+<x-admin::layout.part.settings :layout="strtolower($variant)" :topbar-color="$topbarColor"
+                               :sidebar-color="$sidebarColor"
+                               :sidebar-size="$sidebarSize" :sidebar-image="$sidebarImage" :layout-width="$layoutWidth"
+                               :preloader="$preloader"/>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +42,8 @@
 <body>
 <x-dynamic-component :component="'admin::layout.classic'"
                      :page-title="$pageTitle"
-                     :menu="$menu" {{ $attributes }}>
+                     :menu="$menu"
+                     :search="$search" {{ $attributes }}>
   @if(isset($topBarOverride))
     <x-slot name="topBarOverride">{{ $topBarOverride }}</x-slot>
   @endif
