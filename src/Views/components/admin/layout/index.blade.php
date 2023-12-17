@@ -10,16 +10,9 @@
 	'preloader' => false,
 	'layoutWidth' => null,
 ])
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-      data-layout="{{ $layoutType ?: 'vertical' }}"
-      data-topbar="{{ $topbarColor ?: 'light' }}"
-      data-sidebar="{{ $sidebarColor ?: 'dark' }}"
-      data-sidebar-size="{{ $sidebarSize ?: 'lg' }}"
-      data-sidebar-image="{{ $sidebarImage ?: 'none' }}"
-      data-preloader="{{ $preloader ? "enable" : 'disable' }}"
-      data-layout-width="{{ $layoutWidth  ?: 'fluid' }}"
->
+    <!DOCTYPE html>
+<x-admin::layout.part.settings :layout="strtolower($variant)" :topbar-color="$topbarColor" :sidebar-color="$sidebarColor"
+                               :sidebar-size="$sidebarSize" :sidebar-image="$sidebarImage" :layout-width="$layoutWidth" :preloader="$preloader"/>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,7 +37,7 @@
   @stack('style')
 </head>
 <body>
-<x-dynamic-component :component="'admin::layout.' . strtolower($variant)"
+<x-dynamic-component :component="'admin::layout.classic'"
                      :page-title="$pageTitle"
                      :menu="$menu" {{ $attributes }}>
   @if(isset($topBarOverride))
