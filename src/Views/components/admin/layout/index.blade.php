@@ -40,7 +40,20 @@
   @stack('style')
 </head>
 <body>
-<x-dynamic-component :component="'admin::layout.classic'"
+
+@switch (strtolower($variant))
+  @case('empty')
+    @php($layout = 'empty')
+  @break
+  @case('auth')
+    @php($layout = 'auth')
+  @break
+  @default
+    @php($layout = 'classic')
+  @break
+@endswitch
+
+<x-dynamic-component :component="'admin::layout.'.$layout"
                      :page-title="$pageTitle"
                      :menu="$menu"
                      :search="$search" {{ $attributes }}>
