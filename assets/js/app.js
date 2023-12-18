@@ -1979,3 +1979,51 @@ if (mybutton) {
 		document.documentElement.scrollTop = 0;
 	}
 }
+
+
+
+function fillForm(el, cb) {
+	const target = el.dataset.target;
+	const objId = document.querySelector(el.dataset.form);
+	const obj = JSON.parse(objId.innerText);
+
+	for (const key in obj) {
+		const input = document.querySelectorAll(`${target} [name="${key}"],  ${target} [name="${key}[]"]`);
+		input.forEach(elm => {
+			switch (elm.tagName) {
+				case "SELECT":
+					$(elm).val(obj[key]).trigger('change');
+					break
+				case "INPUT":
+					if (elm.getAttribute('type') === 'checkbox') {
+						elm.checked = +obj[key] === 1;
+					} else {
+						if (elm.dataset.fill !== 'none')
+							elm.value = obj[key];
+					}
+					break
+			}
+		})
+	}
+	cb(obj);
+}
+
+$(document).on('click', '.short-codes', function () {
+	var text = $(this).text();
+	var vInput = document.createElement("input");
+	vInput.value = text;
+	document.body.appendChild(vInput);
+	vInput.select();
+	document.execCommand("copy");
+	document.body.removeChild(vInput);
+	$(this).addClass('copied');
+	setTimeout(() => {
+		$(this).removeClass('copied');
+	}, 1000);
+});
+
+function genTrx(length = 12, characters = 'ABCDEFGHJKMNOPQRSTUVWXYZ123456789') {
+	return Array.from({ length }, () => characters.charAt(Math.floor(Math.random() * characters.length))).join('');
+}
+
+
