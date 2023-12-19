@@ -32,6 +32,6 @@ class Admin extends Authenticatable
   
   public function access($permission)
   {
-    return $this->status || $this->can($permission);
+    return $this->root || $this->can($permission);
   }
 }

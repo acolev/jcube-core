@@ -79,6 +79,7 @@
     <x-slot name="asideOverride">{{ $asideOverride }}</x-slot>
   @endif
   {{ $slot }}
+
   <x-notify/>
 
   <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
