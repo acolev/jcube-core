@@ -58,7 +58,7 @@
                               :value="$general->email_from" required/>
               </div>
               <div class="col-md-12">
-                <x-form.html type="full" label="Email Body" name="email_template" :value="$general->email_template"/>
+                <x-input type="html" type="full" label="Email Body" name="email_template" :value="$general->email_template"/>
               </div>
               <div class="col-md-12">
                 <x-form.input placeholder="SMS Sent From" label="SMS Sent From" name="sms_from" :value="$general->sms_from" required />

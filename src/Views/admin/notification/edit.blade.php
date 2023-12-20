@@ -69,7 +69,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>@lang('Message') <span class="text-danger">*</span></label>
-                      <x-form.html name="email_body" :value="$template->email_body" type="short"/>
+                      <x-input type="html" name="email_body" :value="$template->email_body" type="short"/>
                     </div>
                   </div>
                 </div>
