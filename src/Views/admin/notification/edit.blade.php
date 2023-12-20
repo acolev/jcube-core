@@ -55,7 +55,7 @@
                 <div class="row g-3">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <x-input type="toggle" label="Send Email" name="email_status" :value="$template->email_status" />
+                      <x-input type="toggle" label="Send Email" name="email_status" :value="$template->email_status"/>
                     </div>
                   </div>
                   <div class="col-md-12">
@@ -86,15 +86,16 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <x-input type="toggle" label="Send SMS" name="sms_status" :value="$template->sms_status" />
+                      <x-input type="toggle" label="Send SMS" name="sms_status" :value="$template->sms_status"/>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label>@lang('Message')</label>
-                      <textarea name="sms_body" rows="10" class="form-control"
-                                placeholder="@lang('Your message using short-codes')"
-                                required>{{ $template->sms_body }}</textarea>
+                      <x-input type="textarea" name="sms_body" rows="10"
+                               label="Message"
+                               placeholder="Your message using short-codes"
+                               :value="$template->sms_body"
+                               required/>
                     </div>
                   </div>
                 </div>
