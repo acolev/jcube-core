@@ -75,7 +75,7 @@ class Notify
 	public function __construct($sendVia = null)
 	{
 		$this->sendVia = $sendVia;
-		$this->setting = getConfig(['general', 'system']);
+		$this->setting = getConfig(['general', 'system', 'notify']);
 	}
 
 	/**
