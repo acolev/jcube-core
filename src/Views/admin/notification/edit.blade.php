@@ -55,7 +55,7 @@
                 <div class="row g-3">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <x-form.input type="toggle" label="Send Email" name="email_status" :value="$template->email_status" />
+                      <x-input type="toggle" label="Send Email" name="email_status" :value="$template->email_status" />
                     </div>
                   </div>
                   <div class="col-md-12">
@@ -69,7 +69,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>@lang('Message') <span class="text-danger">*</span></label>
-                      <x-input type="html" name="email_body" :value="$template->email_body" type="short"/>
+                      <x-input type="html" name="email_body" :value="$template->email_body"/>
                     </div>
                   </div>
                 </div>
@@ -86,7 +86,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <x-form.input type="toggle" label="Send SMS" name="sms_status" :value="$template->sms_status" />
+                      <x-input type="toggle" label="Send SMS" name="sms_status" :value="$template->sms_status" />
                     </div>
                   </div>
                   <div class="col-md-12">
