@@ -32,7 +32,7 @@
       <div id="two-column-menu">
       </div>
       <ul class="navbar-nav" id="navbar-nav">
-        <li class="menu-title"><span data-key="t-menu">{{ __('Menu') }}</span></li>
+        <li class="menu-title"><span>{{ __('Menu') }}</span></li>
         @foreach($menu as $item)
           <x-admin::menu :item="$item" :admin="$admin"/>
         @endforeach
