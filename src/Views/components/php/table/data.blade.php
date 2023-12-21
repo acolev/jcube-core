@@ -60,7 +60,6 @@
   <script>
     (function () {
       const table = new DataTable('#{{ $id }}', {
-        scrollY: "210px",
         scrollCollapse: !0,
         paging: true,
         responsive: @json($responsive),
