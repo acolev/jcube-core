@@ -1,7 +1,15 @@
 $(function () {
   $('[data-bs-toggle="tooltip"]').tooltip();
-  document.getElementById("scrollbar").classList.add("h-100")
-  new SimpleBar(document.getElementById('scrollbar'));
+  switch (document.querySelector('html').dataset.layout) {
+    case 'horizontal':
+
+      break;
+    default:
+
+      document.getElementById("scrollbar").classList.add("h-100")
+      new SimpleBar(document.getElementById('scrollbar'));
+      break;
+  }
 
   window.onscroll = function () {
     const mybutton = document.getElementById("back-to-top");
@@ -34,7 +42,7 @@ $(function () {
   }
 
   function init() {
-      document.querySelector('#preloader').remove();
+    document.querySelector('#preloader').remove();
   }
 
   init();
