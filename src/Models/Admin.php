@@ -14,9 +14,6 @@ class Admin extends Authenticatable
     'password', 'remember_token',
   ];
   
-  protected $casts = [
-    'access_permissions' => 'array',
-  ];
   protected $appends = [
     'fullName',
   ];
