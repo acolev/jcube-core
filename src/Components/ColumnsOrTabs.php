@@ -12,13 +12,13 @@ class ColumnsOrTabs extends Component
   public mixed $cols;
   public mixed $max;
   
-  public function __construct(mixed $active, int $max = 2, int $cols = 1)
+  public function __construct(mixed $active, int $max = 2, int $cols = 1, $id = null)
   {
     $this->columns = \uniqid('columns');
     $this->active = $active;
     $this->cols = $cols;
     $this->max = $max;
-    $this->id = $this->columns;
+    $this->id = $id ?: genTrx();
     
     
     view()->composer('components::columns.item', function ($view) {
