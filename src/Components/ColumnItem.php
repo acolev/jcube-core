@@ -7,10 +7,12 @@ use Illuminate\View\Component;
 class ColumnItem extends Component
 {
   public string $name;
+  public string $id;
   
   public function __construct($name = '')
   {
     $this->name = $name;
+    $this->id = genTrx(4, 'qwertyuiopasdfghjklxcvbnm');
   }
   
   public function render()
