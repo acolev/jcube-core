@@ -15,7 +15,7 @@
 @if($label)
   <label class="@if(!!$required) required @endif" for="{{ $id }}">{{ __($label) }}</label>
 @endif
-<textarea class="codemirror" name="{{ $name }}" id="{{$id}}" {{ $attributes }}>{{ $value }}</textarea>
+<textarea class="codemirror" name="{{ $name }}" id="{{$id}}" {{ $attributes }}>@php echo $value @endphp</textarea>
 
 @pushonce('style-lib')
     <link rel="stylesheet" href="{{asset('admin_assets/libs/codemirror/css/codemirror.min.css')}}">

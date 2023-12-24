@@ -17,7 +17,7 @@
 @if($label)
   <label for="{{ $id }}" class="@if(!!$required) required @endif">{{ __($label) }}</label>
 @endif
-<textarea class="tinymce" name="{{ $name }}" id="{{ $id }}">{{ $value }}</textarea>
+<textarea class="tinymce" name="{{ $name }}" id="{{ $id }}">@php echo $value @endphp</textarea>
 
 @pushonce('script-lib')
   <script src="{{asset('admin_assets/libs/tinymce/tinymce.min.js')}}"></script>
