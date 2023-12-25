@@ -26,6 +26,7 @@ class AdminCommand extends Command
             $staff->password = Hash::make($this->argument('password') ?? $this->secret('What is the password?'));
             $staff->email = $this->argument('email') ?? $this->ask('What is your email?', 'admin@admin.com');
             //			$staff->email_verified_at = time();
+            $staff->status = 1;
             $staff->root = 1;
 
             $staff->save();
