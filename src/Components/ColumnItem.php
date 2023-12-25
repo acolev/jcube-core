@@ -12,7 +12,7 @@ class ColumnItem extends Component
   public function __construct($name = '')
   {
     $this->name = $name;
-    $this->id = genTrx(4, 'qwertyuiopasdfghjklxcvbnm');
+    $this->id = genTrx(3, 'qwertyuiopasdfghjklxcvbnm');
   }
   
   public function render()
