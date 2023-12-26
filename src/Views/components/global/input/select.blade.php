@@ -23,9 +23,9 @@
   @if(isset($variants))
     @foreach($variants as $v => $variant)
       @if(@is_array($value))
-        <option value="{{$v}}"@selected(@in_array($v, $value) || @in_array($variant, $value))>{{ __(keyToTitle($variant)) }}</option>
+        <option value="{{$v}}"@selected(@in_array($v, $value) || @in_array($variant, $value))>{{ __($variant) }}</option>
       @else
-        <option value="{{ $simple ? $variant : $v}}" @selected($value == $v)>{{ __(keyToTitle($variant)) }}</option>
+        <option value="{{ $simple ? $variant : $v}}" @selected($value == $v)>{{ __($variant) }}</option>
       @endif
     @endforeach
   @endif

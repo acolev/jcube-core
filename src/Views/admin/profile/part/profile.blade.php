@@ -28,7 +28,7 @@
     @if(count($languages))
       <div class="col-lg-12">
         <div class="mb-3">
-          <x-form.select name="lang" value="{{@$admin->lang}}" label="Language" :variants="$languages"/>
+          <x-input type="select" name="lang" value="{{@$admin->lang}}" label="Language" :variants="$languages"/>
         </div>
       </div>
     @endif
