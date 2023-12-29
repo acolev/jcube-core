@@ -12,12 +12,12 @@
              href="#sidebar{{titleToKey($item["name"])}}"
              data-bs-toggle="collapse"
              role="button"
-             aria-expanded="true"
+             aria-expanded="false"
              aria-controls="sidebar{{titleToKey($item["name"])}}">
             <i class="{{ @$item['icon'] ?: 'la la-circle' }}"></i>
             <span>{{ __(@$item['name']) }}</span>
           </a>
-          <div class="collapse menu-dropdown {{ menuActive(@$item["link"]['active'], 4) }}"  id="sidebar{{titleToKey($item["name"])}}">
+          <div class="collapse menu-dropdown {{ menuActive(@$item["link"]['active'], 4) }}" id="sidebar{{titleToKey($item["name"])}}">
             <ul class="nav nav-sm flex-column">
               @foreach($item['children'] as $menu)
                 @php $menu['icon'] = null @endphp
@@ -28,25 +28,22 @@
         @else
           <a href="{{ isset($item["link"]['name']) ? route(@$item["link"]['name'], @$item["link"]['params']) : 'javascript:void(0)'}}"
              class="nav-link @if(!$level) menu-link @endif  {{ menuActive($item["link"]['active'], null, @$item["link"]['params']) }}">
-            @isset($item['icon'])
-              <i class="{{ @$item['icon'] }}"></i>
-            @endif
+            @isset($item['icon']) <i class="{{ @$item['icon'] }}"></i> @endif
             <span>{{ __(@$item['name']) }}</span>
           </a>
         @endif
       </li>
-
     @endif
     @break
   @case('title')
-      @if(isset($item['children']))
-        <li class="menu-title">
-          <i class="ri-more-fill"></i>
-          <span>{{ __($item['name']) }}</span>
-        </li>
-        @foreach($item['children'] as $menu)
-          <x-admin::menu :item="$menu" :admin="@$admin"/>
-        @endforeach
-      @endif
+    @if(isset($item['children']))
+      <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">{{ __($item['name']) }}</span>
+      </li>
+    @endif
+    @if(isset($item['children']))
+      @foreach($item['children'] as $menu)
+        <x-admin::menu :item="$menu" :admin="@$admin"/>
+      @endforeach
+    @endif
     @break
 @endswitch
