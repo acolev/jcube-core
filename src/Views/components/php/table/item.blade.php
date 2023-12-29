@@ -5,7 +5,7 @@
         @if(isset(${"cell_" . $field}))
         <td {{ ${"cell_" . $field}->attributes }}>{{ ${"cell_" . $field} }}</td>
         @else
-          <td>{{ @$cols->$field }}</td>
+          <td>@php echo @$cols->$field @endphp</td>
         @endif
     @endforeach
   </tr>
