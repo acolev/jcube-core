@@ -14,7 +14,7 @@
     $id = \Str::random(8)
 @endphp
 
-<label for="{{ $id }}" class="@if(!!$required) required @endif">{{ __($label) }}</label>
+<label for="{{ $id }}" class="@if(!!$required) required @endif">{!! __($label) !!}</label>
 <div class="input-group">
     <span class="input-group-text p-0 border-0">
         <input type='text' class="form-control colorPicker" value="{{ $value }}"/>

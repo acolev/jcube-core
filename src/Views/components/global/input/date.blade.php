@@ -13,7 +13,7 @@
 ])
 
 @if($label)
-  <label class="@if(!!$required) required @endif" for="{{ $id }}">{{ __($label) }}</label>
+  <label class="@if(!!$required) required @endif" for="{{ $id }}">{!! __($label) !!}</label>
 @endif
 <input type="text"
        class="form-control flatpickr-input"

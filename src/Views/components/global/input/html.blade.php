@@ -15,7 +15,7 @@
 ])
 
 @if($label)
-  <label for="{{ $id }}" class="@if(!!$required) required @endif">{{ __($label) }}</label>
+  <label for="{{ $id }}" class="@if(!!$required) required @endif">{!! __($label) !!}</label>
 @endif
 <textarea class="tinymce" name="{{ $name }}" id="{{ $id }}">@php echo $value @endphp</textarea>
 

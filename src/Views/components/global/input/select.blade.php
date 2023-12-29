@@ -14,7 +14,7 @@
 	"multiple" => false,
 ])
 @if($label)
-  <label class="@if(!!$required) required @endif" for="{{ $id }}">{{ __($label) }}</label>
+  <label class="@if(!!$required) required @endif" for="{{ $id }}">{!! __($label) !!}</label>
 @endif
 <select class="form-control" @if($multiple) multiple @endif name="{{ $name }}" id="{{ $id }}" @required($required) {{ $attributes }}>
   @if($placeholder)

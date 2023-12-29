@@ -16,7 +16,7 @@
 ])
 
 @if($label)
-  <label class="@if(!!$required) required @endif" for="{{ $id }}">{{ __($label) }}</label>
+  <label class="@if(!!$required) required @endif" for="{{ $id }}">{!! __($label) !!}</label>
 @endif
 <div>
   <div @class(['input-step', 'step-'.$color => $color, 'full-width' => $full])>

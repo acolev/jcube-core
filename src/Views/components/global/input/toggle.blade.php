@@ -22,6 +22,6 @@
       @checked(!!$value)
       {{ $attributes }}>
   @isset($label)
-    <label for="{{ $id }}" class="@required(!!$required)">{{ __($label) }}</label>
+    <label for="{{ $id }}" class="@required(!!$required)">{!! __($label) !!}</label>
   @endisset
 </div>
