@@ -8,10 +8,15 @@
 	"variants" => [],
 	"id" => null,
 	"search" => false,
+	"search_placeholder" => '',
+	"non_selected_header" => '',
+	"selected_header" => '',
+	"limit" => '-1',
 ])
 
 <x-input type="select" multiple
          :label="$label"
+         :name="$name"
          :placeholder="$placeholder"
          :value="$value"
          :required="$required"
@@ -28,8 +33,16 @@
 
 @push('script')
   <script>
-    multi( document.getElementById("{{ $id }}"), {
-      enable_search: @json($search)
+    multi(document.getElementById("{{ $id }}"), {
+      enable_search: @json($search),
+      search_placeholder: @json($search_placeholder),
+      non_selected_header: @json($non_selected_header),
+      selected_header: @json($selected_header),
+      limit_reached: function () {
+        console.log(1)
+      },
+      hide_empty_groups: false,
+      limit: @json($limit)
     });
   </script>
 @endpush
