@@ -12,9 +12,11 @@
   @if($header)
     <thead @class(['table-light' => !$dark])>
     <tr>
-      @foreach($fields as $field)
+      @foreach($fields as $key=>$field)
         @if(isset(${"head_" . $field}))
           <th scope="row" {{ ${"head_" . $field}->attributes }}>{{ ${"head_" . $field} }}</th>
+        @elseif(isset(${"head_" . $key}))
+          <th scope="row" {{ ${"head_" . $key}->attributes }}>{!! ${"head_" . $key} !!}</th>
         @else
           <th scope="row">{{ __(keyToTitle($field)) }} </th>
         @endif
