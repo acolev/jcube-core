@@ -21,6 +21,6 @@
     @endisset
   </div>
   <div class="form-group">
-    <x-form.input type="toggle" :name="$name" :value="$value"/>
+    <x-input type="toggle" :name="$name" :value="$value"/>
   </div>
 </div>
