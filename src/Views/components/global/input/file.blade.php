@@ -11,7 +11,6 @@
 	"id" => genTrx(6, 'qwertyuiopasdfghjklzxcvbnm'),
 ])
 
-
 @if($label)
     <label class="@if(!!$required) required @endif" for="{{ $id }}">{!! __($label) !!}</label>
 @endif
