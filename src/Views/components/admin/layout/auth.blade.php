@@ -15,7 +15,7 @@
           <div class="text-center mt-sm-5 mb-4 text-white-50">
             <div>
               <a href="/" class="d-inline-block auth-logo">
-                <img src="{{getImage(getFilePath('logoIcon') .'/logo.png')}}" alt="">
+                <img src="{{ storage_asset(getConfig('logos')->logo_dark, '100x17') }}" alt="">
               </a>
             </div>
           </div>
