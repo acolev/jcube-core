@@ -173,8 +173,8 @@
           <div class="col-6">
             <div class="form-group">
               <label class="form-label">{{ __('Job Title') }}</label>
-              <x-form.select type="auto" required name="job_title" :value="old('job_title') ?: []"
-                             :variants="$jobTitles" multiple :max-items="1"/>
+              <x-input type="select" required name="job_title" :value="old('job_title') ?: []"
+                             :variants="$jobTitles" multiple :max-items="1" provider="select2" auto/>
             </div>
           </div>
           <div class="col-12">
@@ -188,7 +188,7 @@
             <div class="form-group">
               <label class="form-label">{{ __('Roles') }}</label>
               <div class="row">
-                <x-form.select name="roles[]" multiple :value="old('roles') ?: []" :variants="$roles"/>
+                <x-input type="select" name="roles[]" multiple :value="old('roles') ?: []" :variants="$roles" provider="select2"/>
               </div>
             </div>
           </div>
