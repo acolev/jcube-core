@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use jCube\Lib\ClientInfo;
 use jCube\Lib\FileManager;
 use jCube\Lib\GoogleAuthenticator;
@@ -919,10 +920,23 @@ if (!function_exists('is_json')) {
   }
 }
 
-function genTrx($length = 12, $characters = 'ABCDEFGHJKMNOPQRSTUVWXYZ123456789') {
+function genTrx($length = 12, $characters = 'ABCDEFGHJKMNOPQRSTUVWXYZ123456789')
+{
   $randomStringArray = array_map(function () use ($characters) {
     return $characters[random_int(0, strlen($characters) - 1)];
   }, range(1, $length));
   
   return implode('', $randomStringArray);
+}
+
+function storage_asset($path, $size)
+{
+  $path = explode('/', $path);
+  unset($path[0]);
+  $path = implode('/', ['storage', ...$path]);
+
+  if(!file_exists($path) || !is_file($path)){
+    return placeholderImage($size);
+  }
+  return asset($path);
 }

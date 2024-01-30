@@ -23,7 +23,7 @@ class Admin extends Authenticatable
   public function fullName(): Attribute
   {
     return new Attribute(
-      get: fn() => implode(' ', [$this->name, $this->last_name ?: $this->uaername])
+      get: fn () => implode(' ', [$this->name, $this->last_name ?: $this->uaername])
     );
   }
   

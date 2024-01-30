@@ -4,6 +4,7 @@ namespace jCube\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 use Image;
 use jCube\Http\Controllers\Controller;
 use jCube\Models\Config;
@@ -22,7 +23,7 @@ class ConfigController extends Controller
     $viewFile = 'admin::config.' . $category->slug;
     $viewFileAlt = 'admin.config.' . $category->slug;
     $configs = Config::where('category', $category->slug)->get();
- 
+    
     
     if (!view()->exists($viewFile)) {
       if (view()->exists($viewFileAlt)) {
@@ -44,7 +45,13 @@ class ConfigController extends Controller
   {
     try {
       $history_array = [];
-      foreach ($request->getPayload() as $k => $v) {
+      
+      foreach ($request->all() as $k => $v) {
+        if ($request->hasFile($k)) {
+          $path = $request->$k->storeAs('public', 'config/'.implode('.', [$k, $request->file($k)->extension()]));
+          $v = $path;
+        }
+        
         if ($k !== '_token') {
           $config = Config::where('category', $category)
             ->where('slug', $k)->first();

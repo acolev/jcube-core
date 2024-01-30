@@ -13,7 +13,7 @@
           @include('admin::config.part.aside')
         </div>
         <div class="col-lg-9">
-          <form action="{{ route('admin.config.update', $category->slug) }}" method="post">
+          <form action="{{ route('admin.config.update', $category->slug) }}" method="post" enctype="multipart/form-data">
             @csrf
             @forelse($configs as $config)
               <div class="mb-3">

@@ -77,21 +77,6 @@ return [
         "icon" => 'las la-cog',
       ],
       [
-        "name" => "Logo & Favicon",
-        "access" => "Logo:Read",
-        "link" => [
-          "type" => "link",
-          "name" => "admin.setting.logo.icon",
-          "active" => ['admin.setting.logo.icon'],
-        ],
-        "search" => [
-          "query" => "logo, favicon",
-          "title" => "Logo & Favicon",
-          "group" => "Settings"
-        ],
-        "icon" => 'las la-images',
-      ],
-      [
         "name" => "Notification Settings",
         "access" => "Notification Settings:Edit",
         "link" => [

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use jCube\Http\Controllers\Controller;
 use jCube\Lib\GoogleAuthenticator;
-use jCube\Models\AdminNotification;
 use App\Models\Language;
 use jCube\Rules\FileTypeValidate;
 
@@ -166,34 +165,6 @@ class AdminController extends Controller
     $notify[] = ['success', 'Password changed successfully.'];
     
     return redirect()->route('admin.password')->with('notify', $notify);
-  }
-  
-  public function notifications()
-  {
-    $notifications = AdminNotification::orderBy('id', 'desc')->paginate();
-    $pageTitle = 'Notifications';
-    
-    return view('admin::notifications', compact('pageTitle', 'notifications'));
-  }
-  
-  public function notificationRead($id)
-  {
-    $notification = AdminNotification::findOrFail($id);
-    $notification->is_read = 1;
-    $notification->save();
-    
-    return redirect($notification->click_url);
-  }
-  
-  public function readAll()
-  {
-    $notify = [];
-    AdminNotification::where('is_read', 0)->update([
-      'is_read' => 1,
-    ]);
-    $notify[] = ['success', 'Notifications read successfully'];
-    
-    return back()->with('notify', $notify);
   }
   
   public function optimize()

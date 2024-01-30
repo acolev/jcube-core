@@ -6,7 +6,7 @@
             <div class="me-3 mt-1">
                 <i class="la-2x {{$item->icon}}"></i>
             </div>
-            <div>
+            <div class="text-start">
                 <b>{{ __($item->title) }}</b>
                 <p class="small">{{ __($item->description) }}</p>
             </div>

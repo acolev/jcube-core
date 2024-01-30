@@ -40,14 +40,6 @@ Route::middleware(['admin','active.admin'])->group(function () {
         Route::post('remove/{id}', 'remove')->middleware('permission:Role:Drop')->name('remove');
       });
       
-      Route::controller('GeneralSettingController')->group(function () {
-        // Logo-Icon
-        Route::middleware('permission:Logo:Edit')->group(function () {
-          Route::get('configuration/logo-icon', 'logoIcon')->name('setting.logo.icon');
-          Route::post('configuration/logo-icon', 'logoIconUpdate')->name('setting.logo.icon');
-        });
-      });
-      
       Route::controller('ConfigController')->group(function () {
         Route::get('configuration/{category}', 'index')->middleware('permission:System Configuration:Read')->name('config.view');
         Route::post('configuration/{category}', 'update')->middleware('permission:System Configuration:Edit')->name('config.update');

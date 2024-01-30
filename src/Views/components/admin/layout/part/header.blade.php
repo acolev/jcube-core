@@ -11,19 +11,19 @@
         <div class="navbar-brand-box horizontal-logo">
           <a href="{{route('admin.dashboard')}}" class="logo logo-dark">
             <span class="logo-sm">
-              <img src="{{getImage(getFilePath('logoIcon') .'/favicon.png')}}" alt="" height="22">
+               <img src="{{ storage_asset(getConfig('logos')->favicon, '22x22') }}" alt="" height="22">
             </span>
             <span class="logo-lg">
-              <img src="{{getImage(getFilePath('logoIcon') .'/logo_dark.png')}}" alt="" height="17">
+              <img src="{{ storage_asset(getConfig('logos')->logo_dark, '100x17') }}" alt="" height="17">
             </span>
           </a>
 
           <a href="{{route('admin.dashboard')}}" class="logo logo-light">
             <span class="logo-sm">
-              <img src="{{getImage(getFilePath('logoIcon') .'/favicon.png')}}" alt="" height="22">
+               <img src="{{ storage_asset(getConfig('logos')->favicon, '22x22') }}" alt="" height="22">
             </span>
             <span class="logo-lg">
-              <img src="{{getImage(getFilePath('logoIcon') .'/logo.png')}}" alt="" height="17">
+                <img src="{{ storage_asset(getConfig('logos')->logo, '100x17') }}" alt="" height="17">
             </span>
           </a>
         </div>
@@ -77,7 +77,7 @@
             <i class='bx bx-moon fs-22'></i>
           </button>
         </div>
-        <x-admin::layout.part.notify/>
+
         @if(isset($user))
           <div class="dropdown ms-sm-3 header-item topbar-user">
             <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
