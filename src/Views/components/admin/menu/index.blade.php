@@ -30,7 +30,7 @@
                id="sidebar{{titleToKey($item["name"])}}">
             <ul class="nav nav-sm flex-column">
               @foreach($item['children'] as $menu)
-                <x-menu :item="$menu" :user="$admin" :level="$level+1"/>
+                <x-menu :item="$menu" :admin="$admin" :level="$level+1"/>
               @endforeach
             </ul>
           </div>
@@ -52,7 +52,7 @@
     @if($hasChildren)
       <div class="menu-header" data-header="{{ __($item['name']) }}">
         @foreach($item['children'] as $menu)
-          <x-menu :item="$menu" :admin="$admin" :level="$level+1"/>
+          <x-menu :item="$menu" :admin="$admin" :level="$level"/>
         @endforeach
       </div>
     @endif
