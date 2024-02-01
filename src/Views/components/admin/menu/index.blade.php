@@ -1,49 +1,60 @@
 @props([
-	"item" => [],
-	"admin" => null,
-	"level" => 0,
+    "item" => [],
+    "admin" => null,
+    "level" => 0,
 ])
-@switch($item["link"]['type'])
+
+@switch($item["link"]['type'] ?? 'link')
   @case('link')
-    @if((!isset($item["link"]['name']) || Route::has($item["link"]['name'])) && (!isset($item['access']) || @$admin?->access($item['access'])) )
+    @php
+      $hasRoute = isset($item["link"]['name']) && Route::has($item["link"]['name']);
+      $hasAccess = !isset($item['access']) || @$admin?->access($item['access']);
+      $hasChildren = isset($item['children']) && count($item['children']) > 0;
+    @endphp
+
+    @if($hasAccess)
       <li class="nav-item">
-        @if(isset($item['children']))
-          <a class="nav-link @if(!$level) menu-link @endif {{ menuActive(@$item["link"]['active'], 3) }}"
+        @if($hasChildren)
+          <a class="nav-link @if(!$level) menu-link @endif {{ menuActive($item["link"]['active'] ?? '', 3) }}"
              href="#sidebar{{titleToKey($item["name"])}}"
              data-bs-toggle="collapse"
              role="button"
              aria-expanded="false"
              aria-controls="sidebar{{titleToKey($item["name"])}}">
-            <i class="{{ @$item['icon'] ?: 'la la-circle' }}"></i>
-            <span>{{ __(@$item['name']) }}</span>
+            @if($level == 0)
+              <i class="{{ $item['icon'] ?? 'la la-circle' }}"></i>
+            @endif
+            <span>{{ __($item['name']) }}</span>
           </a>
-          <div class="collapse menu-dropdown {{ menuActive(@$item["link"]['active'], 4) }}" id="sidebar{{titleToKey($item["name"])}}">
+          <div class="collapse menu-dropdown {{ menuActive($item["link"]['active'] ?? '', 4) }}"
+               id="sidebar{{titleToKey($item["name"])}}">
             <ul class="nav nav-sm flex-column">
               @foreach($item['children'] as $menu)
-                @php $menu['icon'] = null @endphp
-                <x-admin::menu :item="$menu" :admin="@$admin" :level="$level+1"/>
+                <x-menu :item="$menu" :user="$admin" :level="$level+1"/>
               @endforeach
             </ul>
           </div>
         @else
-          <a href="{{ isset($item["link"]['name']) ? route(@$item["link"]['name'], @$item["link"]['params']) : 'javascript:void(0)'}}"
-             class="nav-link @if(!$level) menu-link @endif  {{ menuActive($item["link"]['active'], null, @$item["link"]['params']) }}">
-            @isset($item['icon']) <i class="{{ @$item['icon'] }}"></i> @endif
-            <span>{{ __(@$item['name']) }}</span>
+          <a href="{{ $hasRoute ? route($item["link"]['name'], $item["link"]['params'] ?? []) : '#' }}"
+             class="nav-link @if(!$level) menu-link @endif  {{ menuActive($item["link"]['active'] ?? '', null, $item["link"]['params'] ?? []) }}">
+            @if($level == 0)
+              <i class="{{ $item['icon'] ?? 'la la-circle' }}"></i>
+            @endif
+            <span>{{ __($item['name']) }}</span>
           </a>
         @endif
       </li>
     @endif
     @break
+
   @case('title')
-    @if(isset($item['children']))
-      <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">{{ __($item['name']) }}</span>
-      </li>
-    @endif
-    @if(isset($item['children']))
-      @foreach($item['children'] as $menu)
-        <x-admin::menu :item="$menu" :admin="@$admin"/>
-      @endforeach
+    @php $hasChildren = isset($item['children']) && count($item['children']) > 0; @endphp
+    @if($hasChildren)
+      <div class="menu-header" data-header="{{ __($item['name']) }}">
+        @foreach($item['children'] as $menu)
+          <x-menu :item="$menu" :user="$admin" :level="$level+1"/>
+        @endforeach
+      </div>
     @endif
     @break
 @endswitch

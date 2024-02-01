@@ -1074,6 +1074,18 @@
   display: none;
 }
 
+.menu-header:has(*):before {
+  content: attr(data-header);
+  letter-spacing: 0.05em;
+  cursor: default;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--vz-vertical-menu-title-color);
+  font-weight: 600;
+  padding: 12px 20px;
+  display: inline-block;
+}
+
 .vertical-overlay {
   position: fixed;
   top: 0;
