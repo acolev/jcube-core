@@ -14515,7 +14515,9 @@ div.dtr-modal div.dtr-modal-close:hover {
 }
 
 .logo-img {
+  height: 100%;
   max-width: 80%;
+  max-height: 80px;
 }
 
 .image-upload .thumb .profilePicPreview {
