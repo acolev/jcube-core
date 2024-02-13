@@ -54,6 +54,7 @@
   @endpush
 @elseif($provider === 'tom')
   @pushonce(@'style-lib')
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
   @endpushonce
   @pushonce('script-lib')
@@ -63,7 +64,7 @@
     <script>
       new TomSelect("#{{$id}}", {
         @switch($auto)
-        @case('auto')
+            @case('auto')
         create: true,
         createOnBlur: true,
         @break
