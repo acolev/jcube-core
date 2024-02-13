@@ -52,4 +52,23 @@
       @endswitch
     </script>
   @endpush
+@elseif($provider === 'tom')
+  @pushonce(@'style-lib')
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+  @endpushonce
+  @pushonce('script-lib')
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+  @endpushonce
+  @push('script')
+    <script>
+      new TomSelect("#{{$id}}", {
+        @switch($auto)
+        @case('auto')
+        create: true,
+        createOnBlur: true,
+        @break
+        @endswitch
+      });
+    </script>
+  @endpush
 @endif

@@ -30,8 +30,8 @@
         <div class="card-body">
           <div>
 
-            <x-table :fields="['id', 'name', 'job_title', 'email', 'phone', 'created_at', 'actions']" card>
-              <x-slot name="head_id">ID</x-slot>
+            <x-table :fields="['id' => 'ID', 'name', 'job_title', 'email', 'phone', 'created_at', 'actions']" card>
+{{--              <x-slot name="head_id">ID</x-slot>--}}
 
               @foreach($staffs as $staff)
                 <x-table-item :cols="$staff">
