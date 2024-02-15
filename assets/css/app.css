@@ -2727,8 +2727,8 @@ code {
 
 #back-to-top {
   position: fixed;
-  bottom: 100px;
-  right: 28px;
+  bottom: 20px;
+  right: 20px;
   transition: all 0.5s ease;
   display: none;
   z-index: 1000;

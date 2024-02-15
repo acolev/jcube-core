@@ -20,10 +20,10 @@ $border-style-mixing: double, dashed, groove, outset, ridge, dotted, inset;
     .border-start-#{$border-style-mixing} {
         border-left-style: #{$border-style-mixing} !important;
     }
-    
+
     // List Group Flush Style
     .list-group-flush {
-        &.border-#{$border-style-mixing} { 
+        &.border-#{$border-style-mixing} {
             border: none !important;
             .list-group-item {
                 border-style: #{$border-style-mixing} !important;
@@ -113,7 +113,7 @@ $value in $theme-colors {
     }
 }
 
-// Search 
+// Search
 .search-box{
     position: relative;
     .form-control{
@@ -155,7 +155,7 @@ $value in $theme-colors {
     z-index: 1000;
 }
 
-// 
+//
 code {
     user-select: all;
 }
@@ -169,7 +169,7 @@ code {
 
 .layout-rightside-col {
 
-    @media (max-width: 1699.98px) { 
+    @media (max-width: 1699.98px) {
         display: none;
         position: fixed !important;
         height: 100vh;
@@ -184,7 +184,7 @@ code {
             bottom: 0px;
             left: 0px;
             background-color: rgba($dark, 0.2);
-           
+
         }
         .layout-rightside {
             margin-top: 0px;
@@ -224,7 +224,7 @@ code {
     white-space: normal;
 }
 
-// Favorite button 
+// Favorite button
 .favourite-btn{
     border-color: transparent;
     .ri-star-fill{
@@ -234,7 +234,7 @@ code {
         border-color: transparent;
         .ri-star-fill{
             color: $warning;
-            
+
             &:before{
                 content: "\f186";
             }
@@ -252,8 +252,8 @@ code {
 
 #back-to-top {
     position: fixed;
-    bottom: 100px;
-    right: 28px;
+    bottom: 20px;
+    right: 20px;
     transition: all 0.5s ease;
     display: none;
     z-index: 1000;
