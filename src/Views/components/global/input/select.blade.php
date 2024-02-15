@@ -37,19 +37,23 @@
 @if($provider === 'select2')
   @push('script')
     <script>
-      @switch($auto)
-      @case('auto')
-      $("#{{$id}}").select2({
-        tags: true,
-        @if($maxItems)
-        maximumSelectionLength: {{ $maxItems }}
-            @endif
-      });
-      @break
-      @default
-      $("#{{$id}}").select2();
-      @break
-      @endswitch
+      function init_select_{{$id}}() {
+        @switch($auto)
+        @case('auto')
+        $("#{{$id}}").select2({
+          tags: true,
+          @if($maxItems)
+          maximumSelectionLength: {{ $maxItems }}
+              @endif
+        });
+        @break
+        @default
+        $("#{{$id}}").select2();
+        @break
+        @endswitch
+      }
+
+      init_select_{{$id}}();
     </script>
   @endpush
 @elseif($provider === 'tom')
@@ -62,14 +66,17 @@
   @endpushonce
   @push('script')
     <script>
-      new TomSelect("#{{$id}}", {
-        @switch($auto)
-            @case('auto')
-        create: true,
-        createOnBlur: true,
-        @break
-        @endswitch
-      });
+      function init_select_{{$id}}() {
+        new TomSelect("#{{$id}}", {
+          @switch($auto)
+              @case('auto')
+          create: true,
+          createOnBlur: true,
+          @break
+          @endswitch
+        });
+      }
+      init_select_{{$id}}();
     </script>
   @endpush
 @endif

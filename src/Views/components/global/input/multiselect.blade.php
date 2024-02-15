@@ -33,16 +33,19 @@
 
 @push('script')
   <script>
-    multi(document.getElementById("{{ $id }}"), {
-      enable_search: @json($search),
-      search_placeholder: @json($search_placeholder),
-      non_selected_header: @json($non_selected_header),
-      selected_header: @json($selected_header),
-      limit_reached: function () {
-        console.log(1)
-      },
-      hide_empty_groups: false,
-      limit: @json($limit)
-    });
+    function init_multi_{{ $id }} () {
+      multi(document.getElementById("{{ $id }}"), {
+        enable_search: @json($search),
+        search_placeholder: @json($search_placeholder),
+        non_selected_header: @json($non_selected_header),
+        selected_header: @json($selected_header),
+        limit_reached: function () {
+          console.log(1)
+        },
+        hide_empty_groups: false,
+        limit: @json($limit)
+      });
+    }
+    init_multi_{{ $id }}();
   </script>
 @endpush
