@@ -65,7 +65,8 @@ function getMetaTitle($title)
 function replaceShortCode($message, $shorts = [])
 {
   foreach ($shorts as $k => $short) {
-    $message = str_replace("{{" . $k . "}}", $short, $message);
+    if ($short)
+      $message = str_replace("{{" . $k . "}}", $short, $message);
   }
   return $message;
 }
@@ -931,10 +932,10 @@ function genTrx($length = 12, $characters = 'ABCDEFGHJKMNOPQRSTUVWXYZ123456789')
 
 function storage_asset($path, $size)
 {
-  $path = explode('/', $path);
+  $path = $path ? explode('/', $path) : [];
   unset($path[0]);
   $path = implode('/', ['storage', ...$path]);
-
+  
   if(!file_exists($path) || !is_file($path)){
     return placeholderImage($size);
   }
