@@ -10,6 +10,7 @@
 	'layoutWidth' => null,
 	'search' => false,
 	'user' => auth('admin')->user(),
+	'pageTitle' => '',
 ])
 
 @extends('ui::layouts.vertical', [
