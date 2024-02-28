@@ -9,18 +9,6 @@ use jCube\Lib\GoogleAuthenticator;
 use jCube\Models\Config;
 use jCube\Notify\Notify;
 
-function systemDetails()
-{
-  $def = [];
-  if (function_exists('mySystemDetails')) {
-    $def = mySystemDetails();
-  }
-  
-  $system['name'] = 'Core';
-  $system['version'] = '1.0';
-  
-  return array_merge($system, $def);
-}
 
 function gs()
 {
@@ -31,7 +19,7 @@ function getConfig($cat)
 {
   $key = !is_array($cat) ? $cat . 'Setting' : implode('_', $cat) . 'Setting';
   $cached = Cache::get($key);
-  
+
   if (!$cached) {
     $raw = collect(Config::whereIn('category', is_array($cat) ? $cat : [$cat])->orderBy('slug')->get());
     $obj = (object)$raw->flatMap(function ($item) {
@@ -44,7 +32,7 @@ function getConfig($cat)
     Cache::put($key, $obj);
     return $obj;
   }
-  
+
   return $cached;
 }
 
@@ -62,24 +50,7 @@ function getMetaTitle($title)
   ]);
 }
 
-function replaceShortCode($message, $shorts = [])
-{
-  foreach ($shorts as $k => $short) {
-    $message = str_replace("{{" . $k . "}}", $short ?: '', $message);
-  }
-  return $message;
-}
 
-
-function getImage($image, $size = '200x200')
-{
-  $clean = '';
-  if (file_exists($image) && is_file($image)) {
-    return asset($image) . $clean;
-  }
-  
-  return route('placeholder.image', $size);
-}
 
 function getFilePath($key)
 {
@@ -111,58 +82,6 @@ function getFileSize($key)
   }
 }
 
-function placeholderImage()
-{
-  $args = func_get_args();
-  if (!count($args)) {
-    $args[] = '300x250';
-  }
-  
-  return route('placeholder.image', $args);
-}
-
-function keyToTitle($text)
-{
-  return ucfirst(preg_replace('/[^A-Za-z0-9 ]/', ' ', $text));
-}
-
-function titleToKey($text)
-{
-  return strtolower(str_replace(' ', '_', $text));
-}
-
-function menuActive($routeName, $type = null, $param = null)
-{
-  if ($type == 3) {
-    $class = 'active';
-  } elseif ($type == 2) {
-    $class = 'sidebar-submenu__open';
-  } elseif ($type == 4) {
-    $class = 'show';
-  } else {
-    $class = 'active';
-  }
-  
-  if (is_array($routeName)) {
-    foreach ($routeName as $key => $value) {
-      if (request()->routeIs($value)) {
-        return $class;
-      }
-    }
-  } elseif (request()->routeIs($routeName)) {
-    if ($param) {
-      $routeParam = array_values(@request()->route()->parameters ?? []);
-      if (strtolower(@$routeParam[0]) == strtolower($param)) {
-        return $class;
-      } else {
-        return;
-      }
-    }
-    
-    return $class;
-  }
-}
-
 if (!function_exists('getPaginate')) {
   function getPaginate($paginate = 20)
   {
@@ -174,7 +93,7 @@ function diffForHumans($date)
 {
   $lang = session()->get('lang');
   Carbon::setlocale($lang);
-  
+
   return Carbon::parse($date)->diffForHumans();
 }
 
@@ -182,7 +101,7 @@ function showDateTime($date, $format = 'Y-m-d h:i A')
 {
   $lang = session()->get('lang');
   Carbon::setlocale($lang);
-  
+
   return Carbon::parse($date)->translatedFormat($format);
 }
 
@@ -194,7 +113,7 @@ function dateSort($a, $b)
 function dateSorting($arr)
 {
   usort($arr, 'dateSort');
-  
+
   return $arr;
 }
 
@@ -223,7 +142,7 @@ function getRealIP()
   if ($ip == '::1') {
     $ip = '127.0.0.1';
   }
-  
+
   return $ip;
 }
 
@@ -851,7 +770,7 @@ function camelCaseToNormal($str)
 
 function fileUploader($file, $location, $size = null, $old = null, $thumb = null)
 {
-  
+
   $fileManager = new FileManager($file);
   $fileManager->path = $location;
   $fileManager->size = $size;
@@ -872,7 +791,7 @@ function verifyG2fa($user, $code, $secret = null)
   if ($oneCode == $userCode) {
     $user->tv = 1;
     $user->save();
-    
+
     return true;
   } else {
     return false;
@@ -893,17 +812,17 @@ function notify($user, $templateName, $shortCodes = null, $sendVia = null, $crea
   $globalShortCodes = [
     'site_name' => $general->site_name,
   ];
-  
+
   if (function_exists('notifyShortCodes')) {
     $globalShortCodes = array_merge($globalShortCodes, notifyShortCodes());
   }
-  
+
   if (gettype($user) == 'array') {
     $user = (object)$user;
   }
-  
+
   $shortCodes = array_merge($shortCodes ?? [], $globalShortCodes);
-  
+
   $notify = new Notify($sendVia ?: ['email']);
   $notify->templateName = $templateName;
   $notify->shortCodes = $shortCodes;
@@ -921,21 +840,12 @@ if (!function_exists('is_json')) {
   }
 }
 
-function genTrx($length = 12, $characters = 'ABCDEFGHJKMNOPQRSTUVWXYZ123456789')
-{
-  $randomStringArray = array_map(function () use ($characters) {
-    return $characters[random_int(0, strlen($characters) - 1)];
-  }, range(1, $length));
-  
-  return implode('', $randomStringArray);
-}
-
 function storage_asset($path, $size)
 {
   $path = $path ? explode('/', $path) : [];
   unset($path[0]);
   $path = implode('/', ['storage', ...$path]);
-  
+
   if (!file_exists($path) || !is_file($path)) {
     return placeholderImage($size);
   }

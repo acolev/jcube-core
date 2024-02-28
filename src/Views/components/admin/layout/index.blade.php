@@ -1,6 +1,5 @@
 @props([
-	"pageTitle" => 'jCube Admin',
-	"variant" => 'classic',
+	"variant" => null,
 	'menu' => [],
 	'layoutType' => null,
 	'topbarColor' => null,
@@ -10,108 +9,64 @@
 	'preloader' => false,
 	'layoutWidth' => null,
 	'search' => false,
+	'user' => auth('admin')->user(),
 ])
-    <!DOCTYPE html>
-<x-admin::layout.part.settings :layout="strtolower($variant)" :topbar-color="$topbarColor"
-                               :sidebar-color="$sidebarColor"
-                               :sidebar-size="$sidebarSize" :sidebar-image="$sidebarImage" :layout-width="$layoutWidth"
-                               :preloader="$preloader"/>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ getMetaTitle($pageTitle) }}</title>
 
-  <link rel="shortcut icon" type="image/png" href="{{getImage(getFilePath('logoIcon') .'/favicon.png')}}">
+@extends('ui::layouts.vertical', [
+    'layout' => $variant,
+    'topbarColor' => $topbarColor,
+    'sidebarColor' => $sidebarColor,
+    'sidebarSize' => $sidebarSize,
+    'layoutWidth' => $layoutWidth,
+    'preloader' => $preloader,
+    'sidebarImage' => $sidebarImage,
+])
 
-  <script src="{{ asset('admin_assets/js/layout.js') }}"></script>
-  <script src="{{asset('admin_assets/js/theme.js')}}"></script>
+@section('content', $slot)
 
-  <link rel="stylesheet" href="{{ asset('admin_assets/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{asset('admin_assets/libs/select2/css/select2.min.css')}}">
-  <link rel="stylesheet" href="{{ asset('admin_assets/css/icons.min.css') }}">
+@section('aside-menu')
+    <ul class="navbar-nav" id="navbar-nav">
+        @foreach(config('adminMenu') as $item)
+            <x-menu :item="$item" :admin="$user"/>
+        @endforeach
+    </ul>
+@endsection
 
-  @stack('style-lib')
-
-  <link rel="stylesheet" href="{{ asset('admin_assets/css/app.css') }}">
-  @if(file_exists('assets/admin/css/custom.css'))
-    <link rel="stylesheet" href="{{ asset('assets/admin/css/custom.css') }}">
-  @endif
-
-  @stack('style')
-</head>
-<body>
-
-@switch (strtolower($variant))
-  @case('empty')
-    @php($layout = 'empty')
-  @break
-  @case('auth')
-    @php($layout = 'auth')
-  @break
-  @default
-    @php($layout = 'classic')
-  @break
-@endswitch
-
-<x-dynamic-component :component="'admin::layout.'.$layout"
-                     :page-title="$pageTitle"
-                     :menu="$menu"
-                     :search="$search" {{ $attributes }}>
-  @if(isset($topBarOverride))
-    <x-slot name="topBarOverride">{{ $topBarOverride }}</x-slot>
-  @endif
-  @if(isset($headerLeft))
-    <x-slot name="headerLeft">{{ $headerLeft }}</x-slot>
-  @endif
-  @if(isset($headerRight))
-    <x-slot name="headerRight">{{ $headerRight }}</x-slot>
-  @endif
-  @if(isset($mainMenu))
-    <x-slot name="mainMenu">{{ $mainMenu }}</x-slot>
-  @endif
-  @if(isset($asidePre))
-    <x-slot name="asidePre">{{ $asidePre }}</x-slot>
-  @endif
-  @if(isset($asidePost))
-    <x-slot name="asidePost">{{ $asidePost }}</x-slot>
-  @endif
-  @if(isset($asideOverride))
-    <x-slot name="asideOverride">{{ $asideOverride }}</x-slot>
-  @endif
-  {{ $slot }}
-
-  <x-notify/>
-
-  <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
-    <i class="ri-arrow-up-line"></i>
-  </button>
-  <div id="preloader">
-    <div id="status">
-      <div class="spinner-border text-primary avatar-sm" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
-  </div>
-
-
-</x-dynamic-component>
-
-@stack('modal-place')
-
-<script src="{{asset('admin_assets/libs/jquery/jquery-3.6.0.min.js')}}"></script>
-<script src="{{asset('admin_assets/libs/select2/js/select2.min.js')}}"></script>
-<script src="{{asset('admin_assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('admin_assets/libs/simplebar/simplebar.min.js')}}"></script>
-<script src="{{asset('admin_assets/libs/node-waves/waves.min.js')}}"></script>
-<script src="{{asset('admin_assets/libs/feather-icons/feather.min.js')}}"></script>
-<script src="{{asset('admin_assets/js/pages/plugins/lord-icon-2.1.0.js')}}"></script>
-<script src="{{asset('admin_assets/js/rhm.js')}}"></script>
-<script src="{{asset('admin_assets/js/plugins.js')}}"></script>
-@stack('script-lib')
-
-
-<script src="{{asset('admin_assets/js/app.js')}}"></script>
-
-@stack('script')
-</body>
-</html>
+@section('topbar-right')
+    @if($user)
+        <div class="dropdown ms-sm-3 header-item topbar-user">
+            <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+              <span class="d-flex align-items-center">
+                <img class="rounded-circle header-profile-user"
+                     src="{{ getImage('assets/admin/images/profile/'.$user->image, '400x400') }}" alt="Header Avatar">
+                <span class="text-start ms-xl-2">
+                  <span
+                      class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ implode(' ', [$user->name, $user->last_name]) }}</span>
+                  <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">{{ $user->job_title }}</span>
+                </span>
+              </span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end">
+                <!-- item-->
+                <h6 class="dropdown-header">{{ __('Welcome') }} {{ $user->name }}</h6>
+                <a class="dropdown-item" href="{{ route('admin.profile') }}">
+                    <i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i>
+                    <span class="align-middle">{{__('Profile')}}</span>
+                </a>
+                <a class="dropdown-item" href="{{ route('admin.password') }}">
+                    <i class="mdi mdi-key text-muted fs-16 align-middle me-1"></i>
+                    <span class="align-middle">{{__('Password')}}</span>
+                </a>
+                <a class="dropdown-item" href="{{ route('admin.twofactor') }}">
+                    <i class="mdi mdi-shield-account text-muted fs-16 align-middle me-1"></i>
+                    <span class="align-middle">{{__('2FA Security')}}</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ route('admin.logout') }}">
+                    <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
+                    <span class="align-middle" data-key="t-logout">{{__('Logout')}}</span></a>
+            </div>
+        </div>
+    @endif
+@endsection

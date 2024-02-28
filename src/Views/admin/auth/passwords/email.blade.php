@@ -17,7 +17,7 @@
             <form action="{{ route('admin.password.reset') }}" method="POST">
               @csrf
               <div class="mb-4">
-                <x-form.input type="email" name="email" label="Email" :placeholder="__('Enter Email')"/>
+                <x-input type="email" name="email" label="Email" :placeholder="__('Enter Email')"/>
               </div>
 
               <div class="text-center mt-4">

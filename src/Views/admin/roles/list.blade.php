@@ -13,7 +13,7 @@
           <div class="row g-4 align-items-center">
             <div class="col-sm-3">
               <div class="search-box">
-                <x-form.input class="search" placeholder="Search for..." />
+                <x-input class="search" placeholder="Search for..." />
                 <i class="ri-search-line search-icon"></i>
               </div>
             </div>

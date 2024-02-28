@@ -4,24 +4,24 @@
   <div class="row">
     <div class="col-lg-6">
       <div class="mb-3">
-        <x-form.input name="name" value="{{$admin->name}}" label="First Name" placeholder="Enter your firstname"/>
+        <x-input name="name" value="{{$admin->name}}" label="First Name" placeholder="Enter your firstname"/>
       </div>
     </div>
     <div class="col-lg-6">
       <div class="mb-3">
-        <x-form.input name="last_name" value="{{@$admin->last_name}}" label="Last Name"
+        <x-input name="last_name" value="{{@$admin->last_name}}" label="Last Name"
                       placeholder="Enter your lastname"/>
       </div>
     </div>
     <div class="col-lg-6">
       <div class="mb-3">
-        <x-form.input name="phone" value="{{@$admin->phone}}" label="Phone Number"
+        <x-input name="phone" value="{{@$admin->phone}}" label="Phone Number"
                       placeholder="Enter your phone number"/>
       </div>
     </div>
     <div class="col-lg-6">
       <div class="mb-3">
-        <x-form.input type="email" name="email" value="{{@$admin->email}}" label="Email Address"
+        <x-input type="email" name="email" value="{{@$admin->email}}" label="Email Address"
                       placeholder="Enter your email"/>
       </div>
     </div>

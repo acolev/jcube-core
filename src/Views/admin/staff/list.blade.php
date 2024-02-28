@@ -13,7 +13,7 @@
           <div class="row g-4 align-items-center">
             <div class="col-sm-3">
               <div class="search-box">
-                <x-form.input class="search" placeholder="Search for..."/>
+                <x-input class="search" placeholder="Search for..."/>
                 <i class="ri-search-line search-icon"></i>
               </div>
             </div>
@@ -143,31 +143,31 @@
           <div class="col-6">
             <div class="form-group">
               <label class="form-label">{{ __('Name') }}</label>
-              <x-form.input type="string" required name="name" :value="old('name')"/>
+              <x-input type="text" required name="name" :value="old('name')"/>
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
               <label class="form-label">{{ __('Last Name') }}</label>
-              <x-form.input type="string" name="last_name" :value="old('last_name')"/>
+              <x-input type="text" name="last_name" :value="old('last_name')"/>
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
               <label class="form-label">{{ __('Phone') }}</label>
-              <x-form.input type="string" name="phone" :value="old('phone')"/>
+              <x-input type="text" name="phone" :value="old('phone')"/>
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
               <label class="form-label">{{ __('Email') }}</label>
-              <x-form.input type="email" required name="email" :value="old('email')"/>
+              <x-input type="email" required name="email" :value="old('email')"/>
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
               <label class="form-label">{{ __('Username') }}</label>
-              <x-form.input type="string" required name="username" :value="old('username')"/>
+              <x-input type="text" required name="username" :value="old('username')"/>
             </div>
           </div>
           <div class="col-6">
@@ -180,7 +180,7 @@
           <div class="col-12">
             <div class="form-group">
               <label class="form-label">{{ __('Password') }}</label>
-              <x-form.input type="password" required name="password" :value="old('password')"
+              <x-input type="password" required name="password" :value="old('password')"
                             autocomplete="one-time-code"/>
             </div>
           </div>
@@ -194,7 +194,7 @@
           </div>
           <div class="col-12">
             <div class="form-group">
-              <x-form.input type="toggle" name="status" label="Active" :value="old('status') ?: []"/>
+              <x-input type="toggle" name="status" label="Active" :value="old('status') ?: []"/>
             </div>
           </div>
         </div>

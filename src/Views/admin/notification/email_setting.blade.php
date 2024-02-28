@@ -35,11 +35,11 @@
                 <h6 class="mb-2">{{ __('SMTP Configuration') }}</h6>
               </div>
               <div class="col-md-4">
-                <x-form.input placeholder="e.g. smtp.google.com" label="Host" name="host"
+                <x-input placeholder="e.g. smtp.google.com" label="Host" name="host"
                               :value="$general->mail_config->host ?? ''"/>
               </div>
               <div class="col-md-4">
-                <x-form.input placeholder="Available port" name="port" label="Port"
+                <x-input placeholder="Available port" name="port" label="Port"
                               :value="$general->mail_config->port ?? ''"/>
               </div>
               <div class="col-md-4">
@@ -48,12 +48,12 @@
                                :variants="['ssl' => 'SSL', 'tls' => 'TLS']"/>
               </div>
               <div class="col-md-6">
-                <x-form.input placeholder="Normally your email address" label="Username" name="username"
+                <x-input placeholder="Normally your email address" label="Username" name="username"
                               :value="$general->mail_config->username ?? ''"/>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <x-form.input placeholder="Normally your email password" label="Password" name="password"
+                  <x-input placeholder="Normally your email password" label="Password" name="password"
                                 :value="$general->mail_config->password ?? ''"/>
                 </div>
               </div>
@@ -63,7 +63,7 @@
                 <h6 class="mb-2">{{ __('SendGrid API Configuration') }}</h6>
               </div>
               <div class="col-md-12">
-                <x-form.input placeholder="SendGrid App key" label="App Key" name="appkey"
+                <x-input placeholder="SendGrid App key" label="App Key" name="appkey"
                               :value="$general->mail_config->appkey ?? ''"/>
               </div>
             </div>
@@ -72,11 +72,11 @@
                 <h6 class="mb-2">@lang('Mailjet API Configuration')</h6>
               </div>
               <div class="col-md-6">
-                <x-form.input placeholder="Mailjet Api Public Key" label="Api Public Key" name="public_key"
+                <x-input placeholder="Mailjet Api Public Key" label="Api Public Key" name="public_key"
                               :value="$general->mail_config->public_key ?? ''"/>
               </div>
               <div class="col-md-6">
-                <x-form.input placeholder="Mailjet Api Secret Key" label="Api Secret Key" name="secret_key"
+                <x-input placeholder="Mailjet Api Secret Key" label="Api Secret Key" name="secret_key"
                               :value="$general->mail_config->secret_key ?? ''"/>
               </div>
             </div>
@@ -101,7 +101,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="form-group">
-              <x-form.input type="email" name="email" label="Sent to" class="form-control" placeholder="Email Address"/>
+              <x-input type="email" name="email" label="Sent to" class="form-control" placeholder="Email Address"/>
             </div>
           </div>
         </div>

@@ -12,16 +12,16 @@
                 <form action="{{ route('admin.login') }}" method="POST">
                   @csrf
                   <div class="mb-3">
-                    <x-form.input label="Username" name="username" :placeholder="__('Enter your username')"/>
+                    <x-input label="Username" name="username" :placeholder="__('Enter your username')"/>
                   </div>
                   <div class="mb-3">
                     <div class="float-end">
                       <a href="{{ route('admin.password.reset') }}" class="text-muted">{{ __('Forgot password?') }}</a>
                     </div>
-                    <x-form.input type="password" label="Password" name="password" :placeholder="__('Enter password')"/>
+                    <x-input type="password" label="Password" name="password" :placeholder="__('Enter password')"/>
                   </div>
                   <div class="form-check">
-                    <x-form.input type="checkbox" label="Remember me" name="remember" value="1" checked/>
+                    <x-input type="checkbox" label="Remember me" name="remember" value="1" checked/>
                   </div>
                   <div class="mt-4">
                     <button class="btn btn-success w-100" type="submit">{{ __('Sign In') }}</button>

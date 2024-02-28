@@ -309,7 +309,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12">
-              <x-form.input name="mobile" placeholder="Mobile" label="Sent to" />
+              <x-input name="mobile" placeholder="Mobile" label="Sent to" />
           </div>
         </div>
       </div>

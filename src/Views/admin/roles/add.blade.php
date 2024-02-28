@@ -13,7 +13,7 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-header">
-            <x-form.input name="name" label="Name" :value="old('name')"/>
+            <x-input name="name" label="Name" :value="old('name')"/>
           </div>
           <div class="card-body">
             <div class="table-responsive table-card">

@@ -33,7 +33,7 @@
           @csrf
           <input type="hidden" name="key" value="{{$secret}}">
           <div class="form-group mb-3">
-            <x-form.input name="code" value="" label="Google Authenticatior OTP" required/>
+            <x-input name="code" value="" label="Google Authenticatior OTP" required/>
           </div>
           <x-admin::submit/>
         </div>
@@ -44,7 +44,7 @@
         @csrf
         <input type="hidden" name="key" value="{{$secret}}">
         <div class="form-group mb-3">
-          <x-form.input name="code" value="" label="Google Authenticatior OTP" required/>
+          <x-input name="code" value="" label="Google Authenticatior OTP" required/>
         </div>
         <x-admin::submit/>
       </form>

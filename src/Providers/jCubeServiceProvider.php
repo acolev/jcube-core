@@ -37,15 +37,15 @@ class jCubeServiceProvider extends ServiceProvider
     $this->registerComponents();
     $this->registerLoads();
     $this->registerPublishes();
-    
+
     view()->share([
       'layoutComponent' => View::exists('components.admin.layout') ? 'admin.layout' : 'admin::layout',
       'global_components_path' => dirname(__DIR__) . '/Views/components/global/',
     ]);
-    
+
     Paginator::useBootstrap();
   }
-  
+
   protected function registerMiddleware()
   {
     app('router')->aliasMiddleware('permission', Permission::class);
@@ -54,14 +54,14 @@ class jCubeServiceProvider extends ServiceProvider
     app('router')->aliasMiddleware('2fa', Check2fa::class);
     app('router')->aliasMiddleware('active.admin', ActiveAdmin::class);
   }
-  
+
   protected function registerConfig()
   {
     Config::set('app.providers', [
       ...config('app.providers'),
       \Spatie\Permission\PermissionServiceProvider::class,
     ]);
-    
+
     Config::set('auth.guards.admin', [
       'driver' => 'session',
       'provider' => 'admins',
@@ -77,9 +77,9 @@ class jCubeServiceProvider extends ServiceProvider
       'throttle' => 60,
     ]);
     Config::set('filesystems.links.' . public_path('admin_assets'), dirname(__DIR__, 2) . '/assets');
-    
+
   }
-  
+
   protected function registerCommands()
   {
     if ($this->app->runningInConsole()) {
@@ -93,31 +93,18 @@ class jCubeServiceProvider extends ServiceProvider
       ]);
     }
   }
-  
+
   protected function registerComponents()
   {
     Blade::anonymousComponentPath(dirname(__DIR__) . '/Views/components/admin', 'admin');
-    Blade::anonymousComponentPath(dirname(__DIR__) . '/Views/components/global');
-    $this->loadViewsFrom(dirname(__DIR__) . '/Views/components/php', 'components');
-    $this->loadViewComponentsAs(null, [
-      Tabs::class,
-      TabItem::class,
-      
-      ColumnsOrTabs::class,
-      ColumnItem::class,
-      
-      Table::class,
-      TableItem::class,
-      DataTable::class,
-    ]);
   }
-  
+
   protected function registerLoads()
   {
     $this->loadMigrationsFrom(dirname(dirname(__DIR__)) . '/database/migrations');
     $this->loadViewsFrom(dirname(__DIR__) . '/Views/admin', 'admin');
   }
-  
+
   protected function registerPublishes()
   {
     $this->publishes([

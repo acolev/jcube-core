@@ -54,20 +54,20 @@
             @csrf
             <div class="row g-3">
               <div class="col-md-12">
-                <x-form.input placeholder="Email address" label="Email Sent From" name="email_from"
+                <x-input placeholder="Email address" label="Email Sent From" name="email_from"
                               :value="$general->email_from" required/>
               </div>
               <div class="col-md-12">
                 <x-input type="html" type="full" label="Email Body" name="email_template" :value="$general->email_template"/>
               </div>
               <div class="col-md-12">
-                <x-form.input placeholder="SMS Sent From" label="SMS Sent From" name="sms_from" :value="$general->sms_from" required />
+                <x-input placeholder="SMS Sent From" label="SMS Sent From" name="sms_from" :value="$general->sms_from" required />
               </div>
 
               <div class="col-md-12">
                 <div class="form-group">
                   <label>@lang('SMS Body') </label>
-                  <x-form.input type="text" :value="$general->sms_body" rows="4" placeholder="SMS Body" name="sms_body" required />
+                  <x-input type="text" :value="$general->sms_body" rows="4" placeholder="SMS Body" name="sms_body" required />
                 </div>
               </div>
             </div>
