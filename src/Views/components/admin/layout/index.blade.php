@@ -1,5 +1,5 @@
 @props([
-	"variant" => null,
+	"variant" => 'vertical',
 	'menu' => [],
 	'layoutType' => null,
 	'topbarColor' => null,
