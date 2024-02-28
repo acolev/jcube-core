@@ -14,7 +14,7 @@
           <div class="card-body">
             <div class="row align-items-end">
               <div class="col">
-                <x-form.select  name="sms_method"
+                <x-input type="select"  name="sms_method"
                                :value="@$general->sms_config->name ?: 'clickatell'"
                                label="Sms Send Method"
                                :variants="[

@@ -13,7 +13,7 @@
           <div class="card-body">
             <div class="row align-items-end">
               <div class="col">
-                <x-form.select name="email_method"
+                <x-input type="select" name="email_method"
                                :value="$general->mail_config?->name"
                                label="Email Send Method"
                                :variants="[
@@ -44,7 +44,7 @@
               </div>
               <div class="col-md-4">
                 <label>@lang('Encryption')</label>
-                <x-form.select name="enc" :value="@$general->mail_config->enc"
+                <x-input type="select" name="enc" :value="@$general->mail_config->enc"
                                :variants="['ssl' => 'SSL', 'tls' => 'TLS']"/>
               </div>
               <div class="col-md-6">
