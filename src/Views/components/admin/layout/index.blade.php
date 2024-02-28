@@ -22,6 +22,7 @@
     'sidebarImage' => $sidebarImage,
 ])
 
+@section('title', $pageTitle)
 @section('content', $slot)
 
 @section('aside-menu')
