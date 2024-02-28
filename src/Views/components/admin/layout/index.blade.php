@@ -13,8 +13,7 @@
 	'pageTitle' => '',
 ])
 
-@extends('ui::layouts.vertical', [
-    'layout' => $variant,
+@extends('ui::layouts.' .$variant, [
     'topbarColor' => $topbarColor,
     'sidebarColor' => $sidebarColor,
     'sidebarSize' => $sidebarSize,
