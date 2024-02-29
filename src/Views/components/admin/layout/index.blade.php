@@ -33,7 +33,7 @@
     </ul>
 @endsection
 
-@section('topbar-right')
+@push('topbar-right')
     @if($user)
         <div class="dropdown ms-sm-3 header-item topbar-user">
             <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
@@ -70,4 +70,4 @@
             </div>
         </div>
     @endif
-@endsection
+@endpush
