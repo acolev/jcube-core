@@ -27,7 +27,7 @@
 
 @section('aside-menu')
     <ul class="navbar-nav" id="navbar-nav">
-        @foreach(config('adminMenu') as $item)
+        @foreach(@$menu as $item)
             <x-menu :item="$item" :admin="$user"/>
         @endforeach
     </ul>
