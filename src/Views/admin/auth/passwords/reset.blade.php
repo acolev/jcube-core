@@ -1,4 +1,4 @@
-<x-admin::layout variant="Auth" :page-title="$pageTitle">
+<x-admin::layout variant="auth" :page-title="$pageTitle">
 </x-admin::layout>
 
 

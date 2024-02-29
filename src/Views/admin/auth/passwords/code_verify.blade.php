@@ -1,4 +1,4 @@
-<x-admin::layout variant="Empty" :page-title="$pageTitle">
+<x-admin::layout variant="empty" :page-title="$pageTitle">
     <div class="min-vh-100 bg-white">
         <div class="row min-vh-100 no-gutters g-0">
             <div class="col-md-5 col-lg-4">

@@ -1,4 +1,4 @@
-<x-admin::layout variant="Auth" :page-title="$pageTitle">
+<x-admin::layout variant="auth" :page-title="$pageTitle">
   <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6 col-xl-5">
       <div class="card mt-4">
