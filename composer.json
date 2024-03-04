@@ -1,7 +1,7 @@
 {
   "name": "jcube/core",
   "description": "Nothing",
-  "version": "2.6.11",
+  "version": "2.6.12",
   "autoload": {
     "psr-4": {
       "jCube\\": "src/"

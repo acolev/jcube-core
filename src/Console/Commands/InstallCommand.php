@@ -18,7 +18,6 @@ class InstallCommand extends Command
     intro('jCube Core: ' . $metadata->version);
     spin(function (): void {
       $this
-        ->executeCommand('storage:link')
         ->executeCommand('vendor:publish', ['--tag' => 'core-config'])
         ->executeCommand('vendor:publish', ['--provider' => 'Spatie\Permission\PermissionServiceProvider'])
         ->executeCommand('make:create-admin-layout', ['name' => 'layout'])

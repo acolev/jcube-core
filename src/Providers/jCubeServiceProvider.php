@@ -76,8 +76,6 @@ class jCubeServiceProvider extends ServiceProvider
       'expire' => 60,
       'throttle' => 60,
     ]);
-    Config::set('filesystems.links.' . public_path('admin_assets'), dirname(__DIR__, 2) . '/assets');
-
   }
 
   protected function registerCommands()
