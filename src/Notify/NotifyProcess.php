@@ -3,7 +3,6 @@
 namespace jCube\Notify;
 
 use jCube\Constants\Status;
-use jCube\Models\AdminNotification;
 use jCube\Models\NotificationLog;
 use jCube\Models\NotificationTemplate;
 
@@ -251,11 +250,6 @@ class NotifyProcess
    */
   public function createErrorLog($message)
   {
-    $adminNotification = new AdminNotification();
-    $adminNotification->user_id = 0;
-    $adminNotification->title = $message;
-    $adminNotification->click_url = '#';
-    $adminNotification->save();
   }
   
   

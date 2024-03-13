@@ -2,7 +2,6 @@
 
 namespace jCube\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\DB;
 use jCube\Constants\Status;
 use App\Http\Controllers\Controller;
 use jCube\Models\Config;
