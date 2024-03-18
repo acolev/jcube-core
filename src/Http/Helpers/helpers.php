@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Storage;
 use jCube\Lib\ClientInfo;
 use jCube\Lib\FileManager;
 use jCube\Lib\GoogleAuthenticator;
@@ -91,7 +90,7 @@ if (!function_exists('getPaginate')) {
 
 function diffForHumans($date)
 {
-  $lang = session()->get('lang');
+  $lang = app()->currentLocale();
   Carbon::setlocale($lang);
 
   return Carbon::parse($date)->diffForHumans();
@@ -99,7 +98,7 @@ function diffForHumans($date)
 
 function showDateTime($date, $format = 'Y-m-d h:i A')
 {
-  $lang = session()->get('lang');
+  $lang = app()->currentLocale();
   Carbon::setlocale($lang);
 
   return Carbon::parse($date)->translatedFormat($format);
