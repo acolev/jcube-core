@@ -25,15 +25,15 @@ class LanguageController extends Controller
       'code' => 'required|string|max:40|unique:languages',
     ]);
     
-    $data = [];
-    if (!file_exists($path_en = resource_path('lang/') . 'en.json')){
-      $data = file_get_contents($path_en);
+    $file = resource_path('lang/') . 'en.json';
+    if (!is_dir(resource_path('lang/'))) {
+      mkdir(resource_path('lang/'), 0755, true);
     }
-    $json_file = strtolower($request->code) . '.json';
-    $path = resource_path('lang/') . $json_file;
     
-    if (!file_exists($path))
-      File::put($path, $data);
+    if (!file_exists($file)) {
+      fopen($file, 'w');
+      File::put($file, '[]');
+    }
     
     $language = new Language();
     
