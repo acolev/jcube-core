@@ -8,7 +8,7 @@
 
   <div class="card">
     <div class="card-body">
-      <div class="row">
+      <div class="row g-3">
         <div class="col-lg-3">
           @include('admin::config.part.aside')
         </div>

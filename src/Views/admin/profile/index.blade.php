@@ -2,7 +2,7 @@
 
   <div class="position-relative mx-n4 mt-n4">
     <div class="profile-wid-bg profile-setting-img">
-      <img src="{{ asset('admin_assets/images/profile-bg.jpg') }}" class="profile-wid-img" alt="">
+      <img src="{{ Vite::asset('vendor/jcube/ui/src/Resources/images/profile-bg.jpg') }}" class="profile-wid-img" alt="">
       <div class="overlay-content">
         <div class="text-end p-3 d-none">
           <div class="p-0 ms-auto rounded-circle profile-photo-edit">

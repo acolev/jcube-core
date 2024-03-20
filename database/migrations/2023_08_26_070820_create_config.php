@@ -16,7 +16,7 @@ return new class extends Migration {
 			$table->string('slug');
 			$table->string('category');
 			$table->string('name');
-			$table->string('type')->default('string');
+			$table->string('type')->default('text');
 			$table->text('value')->nullable();
 			$table->text('default')->nullable();
 			$table->string('variants')->nullable();

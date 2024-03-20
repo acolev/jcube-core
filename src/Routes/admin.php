@@ -14,7 +14,7 @@ Route::namespace('Auth')->group(function () {
   Route::post('password/reset/change', 'ResetPasswordController@reset')->name('password.change');
 });
 
-Route::middleware(['admin','active.admin'])->group(function () {
+Route::middleware(['admin', 'active.admin'])->group(function () {
   Route::controller('AdminController')->group(function () {
     Route::middleware('permission:Dashboard:Read')->group(function () {
       Route::get('dashboard', 'dashboard')->name('dashboard');
@@ -88,6 +88,25 @@ Route::middleware(['admin','active.admin'])->group(function () {
     Route::get('notifications', 'notifications')->name('notifications');
     Route::get('notification/read/{id}', 'notificationRead')->name('notification.read');
     Route::get('notifications/read-all', 'readAll')->name('notifications.readAll');
+
+
+    // Language Manager
+    Route::controller('LanguageController')
+      ->prefix('language')->name('language.')
+      ->group(function () {
+        Route::get('/', 'langManage')->name('index');
+        Route::post('/', 'langStore')->name('store');
+        Route::post('delete/{id}', 'langDelete')->name('delete');
+        Route::post('update/{id}', 'langUpdate')->name('update');
+        Route::get('edit/{id}', 'langEdit')->name('key');
+        Route::post('import', 'langImport')->name('import.lang');
+        Route::post('store/key/{id}', 'storeLanguageJson')->name('store.key');
+        Route::post('delete/key/{id}', 'deleteLanguageJson')->name('delete.key');
+        Route::post('update/key/{id}', 'updateLanguageJson')->name('update.key');
+        
+        Route::get('change-edit-language/{lang}', 'changeEditLanguage')->name('change.editLanguage');
+        
+      });
     
     //System Information
     Route::get('optimize', 'optimize')->prefix('system')->name('system.optimize');
