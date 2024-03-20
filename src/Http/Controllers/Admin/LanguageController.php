@@ -25,7 +25,10 @@ class LanguageController extends Controller
       'code' => 'required|string|max:40|unique:languages',
     ]);
     
-    $data = file_get_contents(resource_path('lang/') . 'en.json');
+    $data = [];
+    if (!file_exists($path_en = resource_path('lang/') . 'en.json')){
+      $data = file_get_contents($path_en);
+    }
     $json_file = strtolower($request->code) . '.json';
     $path = resource_path('lang/') . $json_file;
     
