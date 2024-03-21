@@ -22,6 +22,7 @@ use jCube\Console\Commands\NotifyCommand;
 use jCube\Console\Commands\UpdateCommand;
 use jCube\Http\Middleware\ActiveAdmin;
 use jCube\Http\Middleware\Check2fa;
+use jCube\Http\Middleware\LanguageMiddleware;
 use jCube\Http\Middleware\Permission;
 use jCube\Http\Middleware\RedirectIfAdmin;
 use jCube\Http\Middleware\RedirectIfNotAdmin;
@@ -48,6 +49,7 @@ class jCubeServiceProvider extends ServiceProvider
 
   protected function registerMiddleware()
   {
+    app('router')->aliasMiddleware('language', LanguageMiddleware::class);
     app('router')->aliasMiddleware('permission', Permission::class);
     app('router')->aliasMiddleware('admin', RedirectIfNotAdmin::class);
     app('router')->aliasMiddleware('admin.guest', RedirectIfAdmin::class);
