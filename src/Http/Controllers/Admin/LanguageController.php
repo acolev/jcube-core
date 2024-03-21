@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use jCube\Constants\Status;
 use jCube\Http\Controllers\Controller;
+use jCube\Lib\FileManager;
 use jCube\Models\Language;
 
 class LanguageController extends Controller
@@ -91,7 +92,8 @@ class LanguageController extends Controller
   public function langDelete($id)
   {
     $lang = Language::find($id);
-    fileManager()->removeFile(resource_path('lang/') . $lang->code . '.json');
+    $fileManager = new FileManager();
+    $fileManager->removeFile(resource_path('lang/') . $lang->code . '.json');
     $lang->delete();
     $notify[] = ['success', 'Language deleted successfully'];
     
