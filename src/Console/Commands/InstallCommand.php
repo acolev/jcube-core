@@ -15,7 +15,6 @@ class InstallCommand extends Command
   public function handle()
   {
     $metadata = json_decode(file_get_contents(dirname(__DIR__, 3) . '/composer.json'));
-    intro('jCube Core: ' . $metadata->version);
     spin(function (): void {
       $this
         ->executeCommand('vendor:publish', ['--tag' => 'core-config'])

@@ -24,7 +24,6 @@ return new class extends Migration {
       'Role:Drop',
       'System Configuration:Read',
       'System Configuration:Edit',
-      'Logo:Edit',
       'Notification Settings:Edit',
     ];
     

@@ -16,7 +16,7 @@ return new class extends Migration {
                 'slug' => 'site_name',
                 'category' => 'general',
                 'name' => 'Site Name',
-                'type' => 'string',
+                'type' => 'text',
                 'value' => '',
                 'default' => 'My website'
             ],
@@ -24,7 +24,7 @@ return new class extends Migration {
                 'slug' => 'meta_title',
                 'category' => 'general',
                 'name' => 'Meta Title Rule',
-                'type' => 'string',
+                'type' => 'text',
                 'value' => '',
                 'default' => '{{title}} || {{site_name}}'
             ],
@@ -33,7 +33,7 @@ return new class extends Migration {
                 'slug' => 'email_from',
                 'category' => 'notify',
                 'name' => 'Email From',
-                'type' => 'string',
+                'type' => 'text',
                 'value' => '',
                 'default' => 'no-reply@example.com'
             ],
@@ -49,7 +49,7 @@ return new class extends Migration {
                 'slug' => 'sms_body',
                 'category' => 'notify',
                 'name' => 'SMS Body',
-                'type' => 'text',
+                'type' => 'textarea',
                 'value' => '',
                 'default' => '{{message}}'
             ],
@@ -57,7 +57,7 @@ return new class extends Migration {
                 'slug' => 'sms_from',
                 'category' => 'notify',
                 'name' => 'SMS From',
-                'type' => 'string',
+                'type' => 'text',
                 'value' => '',
                 'default' => 'Example'
             ],
