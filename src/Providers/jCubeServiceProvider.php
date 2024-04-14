@@ -7,17 +7,11 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use jCube\Components\ColumnItem;
-use jCube\Components\ColumnsOrTabs;
-use jCube\Components\DataTable;
-use jCube\Components\TabItem;
-use jCube\Components\Table;
-use jCube\Components\TableItem;
-use jCube\Components\Tabs;
 use jCube\Console\Commands\AdminCommand;
 use jCube\Console\Commands\InstallCommand;
 use jCube\Console\Commands\LayoutCommand;
 use jCube\Console\Commands\ModelCommand;
+use jCube\Console\Commands\ModuleCommand;
 use jCube\Console\Commands\NotifyCommand;
 use jCube\Console\Commands\UpdateCommand;
 use jCube\Http\Middleware\ActiveAdmin;
@@ -90,6 +84,7 @@ class jCubeServiceProvider extends ServiceProvider
         LayoutCommand::class,
         UpdateCommand::class,
         ModelCommand::class,
+        ModuleCommand::class,
       ]);
     }
   }
