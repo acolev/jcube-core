@@ -17,7 +17,8 @@ class ModuleCommand extends Command
   {
     $action = $this->argument('action');
     $name = $this->argument('name');
-    $folder = ucfirst($name);
+    $last_name = last(explode('/', $name));
+    $folder = ucfirst($last_name);
     switch ($action) {
       case "i":
       case "install":
