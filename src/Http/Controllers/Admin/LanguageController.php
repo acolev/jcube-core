@@ -73,6 +73,7 @@ class LanguageController extends Controller
     }
     
     $language->name = $request->name;
+    $language->code = strtolower($request->code);
     $language->is_default = $request->is_default ? Status::YES : Status::NO;
     $language->save();
     
