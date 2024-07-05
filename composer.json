@@ -20,7 +20,7 @@
     "php": "^8.1",
     "laravel/ui": "^4.2",
     "jcube/ui": "^1.0.0",
-    "intervention/image": "^2.7",
+    "intervention/image": "^3.7.1",
     "ezyang/htmlpurifier": "^4.16",
     "phpmailer/phpmailer": "^6.2",
     "sendgrid/sendgrid": "^7.6",
